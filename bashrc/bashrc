@@ -7,18 +7,6 @@ alias xo="xdg-open"
 alias grephs="grep --exclude-dir .stack-work --include '*.hs'"
 alias tmp='cd $(mktemp -d)'
 
-# GHC(i) with custom set of packages
-
-ghc-shell() {
-  nix-shell -p "haskellPackages.ghcWithPackages (ps: with ps; [ $* ])"
-}
-
-ghci-with() {
-  nix-shell \
-    -p "haskellPackages.ghcWithPackages (ps: with ps; [ $* ])" \
-    --run ghci
-}
-
 # Eternal bash history, found here: https://stackoverflow.com/questions/9457233/unlimited-bash-history
 # ---------------------
 # Undocumented feature which sets the size to "unlimited".
