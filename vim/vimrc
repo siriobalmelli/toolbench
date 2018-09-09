@@ -78,9 +78,9 @@ filetype indent on
 syntax on
 
 "specify indent settings for all languages
-autocmd filetype c,make,sh setlocal tabstop=8 shiftwidth=8 noexpandtab
+autocmd filetype c,cpp,make,sh setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd filetype go setlocal shiftwidth=4 tabstop=4 noexpandtab
-autocmd filetype python,javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent
+autocmd filetype conf,nix,javascript,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent
 autocmd filetype text,yaml,markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent
 
 let g:yankring_history_dir = "~/.vim"
