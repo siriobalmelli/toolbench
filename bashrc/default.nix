@@ -12,6 +12,7 @@ let
       ''
       source ${fzf}/share/fzf/completion.bash
       source ${fzf}/share/fzf/key-bindings.bash
+      source ${./pass.bash-completion}
       ''
     ]
     );

@@ -2,9 +2,6 @@
 stty -ixon
 
 alias gd="git diff"
-alias t="tmux -2"
-alias xo="xdg-open"
-alias grephs="grep --exclude-dir .stack-work --include '*.hs'"
 alias tmp='cd $(mktemp -d)'
 
 # Eternal bash history, found here: https://stackoverflow.com/questions/9457233/unlimited-bash-history
@@ -20,3 +17,18 @@ export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command.
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# allow coredumps
+ulimit -c unlimited >/dev/null 2>&1
+
+# TODO: add these utils as their own repo, reference with a derivation
+#export PYTHONPATH=/Users/siriobalmelli/c_toolchain/py_tools:$PYTHONPATH
+export EDITOR=vim
+
+# hack Python to see nix
+export PYTHONPATH=$(find -L ~/.nix-profile -path "*/python*/site-packages" -type d | tr '\n' ':')$PYTHONPATH
+
+if ! which pbcopy >/dev/null; then
+	alias pbcopy='xclip'
+	alias pbpaste='xclip -o'
+fi

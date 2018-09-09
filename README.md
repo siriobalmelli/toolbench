@@ -6,6 +6,15 @@ Reproducible set of dotfiles and packages for Linux and macOS
 
 ---
 
+Forked from <https://github.com/nmattia/homies> and then customized,
+many thanks to [Mr. Mattia](https://github.com/nmattia).
+
+TODO: write an installer which:
+- tests for Nix and if not installs it
+- updates hashes for nixpkgs and other referenced projects
+  (without requiring Nix tooling if possible)
+- runs garbage collection afterwards
+
 This is the setup I use on all my machines. The installation process is very
 simple and allows me to get up and running on any new machine in a matter of
 seconds. The following is run on a pristine Ubuntu machine with `curl`
