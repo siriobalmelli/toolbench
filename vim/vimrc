@@ -1,9 +1,46 @@
 let mapleader="\\"
 set encoding=utf-8
 
+"TODO:
+" - meson syntax
+" - no border for C files?
+" - eliminate half-tab for C
+" - replace syntastic
+" - YCM does not find system headers
+" - syntastic -> ale
+
 ""Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
 set nocompatible
+
+
+""
+"	formatting
+""
+set backspace=indent,eol,start  "backspace over everything in insert mode
+set background=dark
+
+"default indent settings
+"see <http://vim.wikia.com/wiki/Converting_tabs_to_spaces>
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set noexpandtab
+set noautoindent
+
+"load ftplugins and indent files
+filetype plugin on
+filetype indent on
+"turn on syntax highlighting
+syntax on
+
+"specify indent settings for all languages
+autocmd filetype c,cpp,make,sh setlocal shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab autoindent
+autocmd filetype go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent
+autocmd filetype conf,javascript,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent
+autocmd filetype nix,markdown,text,yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent
+
+let g:yankring_history_dir = "~/.vim"
 
 
 ""
@@ -16,16 +53,15 @@ set number  "show line numbers
 
 "display tabs and trailing spaces
 set list
-set listchars=tab:»\ ,trail:⋅,nbsp:⋅
-"»˙…⋅
-
-set hlsearch    "hilight searches by default
+set listchars=tab:⋅\ ,trail:⋅,nbsp:⋅
+"alternatives: » ˙ … ⋅
 
 "undo settings
 set undodir=~/.vim/undofiles
 set undofile
 
 " Set 80th column marker
+" TODO: doesn't work on C files?
 set cc=80
 set colorcolumn=+1 "mark the ideal max text width
 
@@ -58,35 +94,6 @@ set hidden
 
 
 ""
-"	formatting
-""
-set backspace=indent,eol,start  "backspace over everything in insert mode
-set background=dark
-
-"default indent settings
-"see <http://vim.wikia.com/wiki/Converting_tabs_to_spaces>
-set noexpandtab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
-set noautoindent
-
-"load ftplugins and indent files
-filetype plugin on
-filetype indent on
-"turn on syntax highlighting
-syntax on
-
-"specify indent settings for all languages
-autocmd filetype c,cpp,make,sh setlocal tabstop=8 shiftwidth=8 noexpandtab
-autocmd filetype go setlocal shiftwidth=4 tabstop=4 noexpandtab
-autocmd filetype conf,nix,javascript,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent
-autocmd filetype text,yaml,markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent
-
-let g:yankring_history_dir = "~/.vim"
-
-
-""
 "	per-plugin settings and keybindings
 ""
 
@@ -94,7 +101,7 @@ let g:yankring_history_dir = "~/.vim"
 nnoremap = ggVG=<C-o><C-o><CR>
 
 "make '=' reindent the whole file
-nnoremap <C-g> ggVG<CR>
+"nnoremap <C-g> ggVG<CR>
 
 "make 'X' delete the buffer
 nnoremap X :bdelete<CR>
@@ -176,14 +183,17 @@ let g:airline_powerline_fonts = 1
 let g:indent_guides_guide_size=1
 
 
-"syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+""syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+
+"ale (replace syntastic)
+"... no config
 
 
 " SEARCH - thank you Damian Conway

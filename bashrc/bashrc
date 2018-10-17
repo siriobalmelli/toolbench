@@ -1,8 +1,29 @@
+##
+#	always-section
+# is executed even when running non-interactively
+##
+
+# source nix
+source $HOME/.nix-profile/etc/profile.d/nix.sh
+
+# allow coredumps
+ulimit -c unlimited >/dev/null 2>&1
+
 # No locking on Ctrl-S
 stty -ixon
 
 alias gd="git diff"
 alias tmp='cd $(mktemp -d)'
+
+
+##
+#	interactive-section
+# skip these steps if running e.g. inside a script
+##
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
 # Eternal bash history, found here: https://stackoverflow.com/questions/9457233/unlimited-bash-history
 # ---------------------
@@ -18,17 +39,39 @@ export HISTFILE=~/.bash_eternal_history
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-# allow coredumps
-ulimit -c unlimited >/dev/null 2>&1
+# color support
+case "$TERM" in
+xterm-color|*-256color)
+	# color terminal
+	PS1='\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+	# enable color support of ls and also add handy aliases
+	if [ -x /usr/bin/dircolors ]; then
+	    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	    alias ls='ls --color=auto'
+	    #alias dir='dir --color=auto'
+	    #alias vdir='vdir --color=auto'
 
-# TODO: add these utils as their own repo, reference with a derivation
-#export PYTHONPATH=/Users/siriobalmelli/c_toolchain/py_tools:$PYTHONPATH
+	    alias grep='grep --color=auto'
+	    alias fgrep='fgrep --color=auto'
+	    alias egrep='egrep --color=auto'
+	fi
+	;;
+*)
+	# boring terminal
+	PS1='\u@\h:\w\$ '
+	;;
+esac
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 export EDITOR=vim
 
 # hack Python to see nix
 export PYTHONPATH=$(find -L ~/.nix-profile -path "*/python*/site-packages" -type d | tr '\n' ':')$PYTHONPATH
 
-if ! which pbcopy >/dev/null; then
-	alias pbcopy='xclip'
-	alias pbpaste='xclip -o'
-fi
+# a simple, workable, cross-platform clipboard
+CLIPBOARD=~/.clipboard
+alias yp='cat >"$CLIPBOARD"'
+alias pp='touch "$CLIPBOARD" && cat "$CLIPBOARD"'

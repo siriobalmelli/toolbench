@@ -6,12 +6,17 @@ let
   extraPackages = with vimPlugins;
     [
       # TODO: setup ultisnips and vim-snippets
+      UltiSnips
+
       # TODO: vim-beancount
       # TODO: SimplylFold (python folding for vim)
       gitgutter  # show diffs in status
       nerdcommenter  # comment manipulation
       surround  # delimiter (quote, brace, etc) manipulation
-      syntastic  # linting
+
+      # syntastic  # linting
+      ale  # better linting
+
       tabular  # format tables
       vim-easymotion  # upgraded search
       vim-indent-guides  # show indents visually

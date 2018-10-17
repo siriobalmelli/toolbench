@@ -14,11 +14,15 @@ let
       tmux
       vim
 
+      # compilers and environments
+      nixpkgs.clang_7
+      nixpkgs.llvm_7
+      nixpkgs.gcc8
+
       # standard packages - query with `nix-env -qaP`
       nixpkgs.avrbinutils
       nixpkgs.beancount
       nixpkgs.binutils-unwrapped
-      nixpkgs.clang_6
       nixpkgs.cscope
       nixpkgs.curl
       nixpkgs.dos2unix
@@ -34,7 +38,6 @@ let
       nixpkgs.imagemagickBig
       nixpkgs.jq
       nixpkgs.less
-      nixpkgs.llvm_6
       nixpkgs.meson
       nixpkgs.ncat
       nixpkgs.ninja
@@ -102,7 +105,7 @@ in
   then nixpkgs.mkShell
     { buildInputs = homies;
       shellHook = ''
-        $(bashrc)
+        $(homies-bashrc)
         '';
     }
   else homies

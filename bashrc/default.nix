@@ -1,10 +1,6 @@
-# Because the path of the bashrc changes upon rebuild, we cannot source it
-# directly from the (vanilla) ~/.bashrc. Instead this script is created, which
-# will source the latest bashrc.
-#
-# The bashrc script should be evaluated from the actual ~/.bashrc:
-#   if [ -x "$(command -v bashrc)" ]; then $(bashrc); fi
 { lib, writeText, writeScriptBin, fzf }:
+
+# compile a bashrc into /nix/store (path is unknowable)
 let
   bashrc = writeText "bashrc"
     (lib.concatStringsSep "\n"
@@ -16,7 +12,9 @@ let
       ''
     ]
     );
-in writeScriptBin "bashrc"
+
+# write a script that sources it
+in writeScriptBin "homies-bashrc"
   ''
-    echo ". ${bashrc}"
+  echo "source ${bashrc}"
   ''

@@ -1,36 +1,17 @@
 # Homies
 
-<img src="homies.png" alt="homies" style="width: 200px;"/>
+![homies](./homies.png)
 
-Reproducible set of dotfiles and packages for Linux and macOS
+The portable toolshed ... aka:
+reproducible set of dotfiles and packages for Linux and macOS
 
 ---
 
 Forked from <https://github.com/nmattia/homies> and then customized,
 many thanks to [Mr. Mattia](https://github.com/nmattia).
 
-TODO: write an installer which:
-- tests for Nix and if not installs it
-- updates hashes for nixpkgs and other referenced projects
-  (without requiring Nix tooling if possible)
-- runs garbage collection afterwards
-
-This is the setup I use on all my machines. The installation process is very
-simple and allows me to get up and running on any new machine in a matter of
-seconds. The following is run on a pristine Ubuntu machine with `curl`
-available:
-
-``` shell
-$ # install Nix
-$ curl https://nixos.org/nix/install | sh
-$ echo ". $HOME/.nix-profile/etc/profile.d/nix.sh" >> .bashrc # optional
-$ . $HOME/.nix-profile/etc/profile.d/nix.sh
-$ # pull the homies
-$ nix-shell -p git --run 'git clone http://github.com/nmattia/homies'
-$ # applying the config
-$ cd homies; nix-env -f default.nix -i --remove-all
-$ echo 'if [ -x "$(command -v bashrc)" ]; then $(bashrc); fi' >> .bashrc
-```
+To set up a new machine (or update an existing machine),
+run [script/install.sh](script/install.sh).
 
 The homies will be available in all subsequent shells, including the
 customizations (vim with my favorite plugins, tmux with my customized
@@ -43,35 +24,35 @@ configuration, etc). See the [introduction blog post][post] for an overview.
 Trying out the package set:
 
 ``` shell
-$ nix-shell --pure
+nix-shell --pure
 ```
 
 Installing the package set:
 
 ``` shell
-$ nix-env -f default.nix -i --remove-all
+nix-env -f default.nix -i --remove-all
 ```
 
 Listing the currently installed packages:
 
 ``` shell
-$ nix-env -q
+nix-env -q
 ```
 
 Listing the previous and current configurations:
 
 ``` shell
-$ nix-env --list-generations
+nix-env --list-generations
 ```
 
 Rolling back to the previous configuration:
 
 ``` shell
-$ nix-env --rollback
+nix-env --rollback
 ```
 
 Deleting old configurations:
 
 ``` shell
-$ nix-env --delete-generations [3 4 9 | old | 30d]
+nix-env --delete-generations [3 4 9 | old | 30d]
 ```
