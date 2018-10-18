@@ -193,7 +193,8 @@ let g:indent_guides_guide_size=1
 "let g:syntastic_check_on_wq = 0
 
 "ale (replace syntastic)
-"... no config
+" ale be all like "your C code doesn't comply with C++ .." TROLOLOL
+let b:ale_linters = {'c': ['ccls']}
 
 
 " SEARCH - thank you Damian Conway

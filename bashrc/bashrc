@@ -15,6 +15,12 @@ stty -ixon
 alias gd="git diff"
 alias tmp='cd $(mktemp -d)'
 
+# a simple, workable, cross-platform clipboard
+CLIPBOARD=~/.clipboard
+shopt -s expand_aliases  # that works even inside a vim '!'
+alias yp='cat >"$CLIPBOARD"'
+alias pp='touch "$CLIPBOARD" && cat "$CLIPBOARD"'
+
 
 ##
 #	interactive-section
@@ -66,12 +72,10 @@ esac
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+# non-interactive, non-login shell should still source ~/.bahsrc
+export BASH_ENV=~/.bashrc
 export EDITOR=vim
 
 # hack Python to see nix
 export PYTHONPATH=$(find -L ~/.nix-profile -path "*/python*/site-packages" -type d | tr '\n' ':')$PYTHONPATH
-
-# a simple, workable, cross-platform clipboard
-CLIPBOARD=~/.clipboard
-alias yp='cat >"$CLIPBOARD"'
-alias pp='touch "$CLIPBOARD" && cat "$CLIPBOARD"'

@@ -18,20 +18,18 @@ let
       # WARNING: bashrc/default.nix may separately reference these,
       # you cannot change them here and not there
       # (see that file for the horrible details)
-      nixpkgs.glibc
-      nixpkgs.glibc.dev
+      #nixpkgs.glibc
+      #nixpkgs.glibc.dev
       nixpkgs.gcc8
-      nixpkgs.clang_7
-      nixpkgs.llvm_7
+      #nixpkgs.clang_7
+      #nixpkgs.llvm_7
+      #nixpkgs.binutils-unwrapped
 
       # standard packages - query with `nix-env -qaP`
-      nixpkgs.avrbinutils
       nixpkgs.beancount
-      nixpkgs.binutils-unwrapped
       nixpkgs.cscope
       nixpkgs.curl
       nixpkgs.dos2unix
-      nixpkgs.emacs
       nixpkgs.fava
       nixpkgs.fdupes
       nixpkgs.ffmpeg
@@ -50,7 +48,6 @@ let
       nixpkgs.nmap
       nixpkgs.pandoc
       nixpkgs.pass
-      nixpkgs.pkgconfig
       nixpkgs.pwgen
       nixpkgs.python36Full
       nixpkgs.python36Packages.cycler
@@ -64,13 +61,11 @@ let
       nixpkgs.python36Packages.ruamel_yaml
       nixpkgs.python36Packages.six
       nixpkgs.python36Packages.tabulate
-      nixpkgs.source-code-pro
       nixpkgs.texlive.combined.scheme-full
       nixpkgs.tree
       nixpkgs.watch
       nixpkgs.wget
       nixpkgs.which
-      nixpkgs.xclip
       nixpkgs.xorriso
     ];
 
