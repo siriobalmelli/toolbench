@@ -1,5 +1,6 @@
 # recipe mode
 set -e
+pushd "$(dirname $0)/.."
 
 # install nix if necessary
 if ! command -v nix-env; then
@@ -11,7 +12,7 @@ fi
 nix-channel --update
 nix-env -qaP >nix_env_avail.txt  # easy grep of what packages are available
 
-$(dirname $0)/update-src.sh nixpkgs
+script/update-src.sh nixpkgs
 nix-env -f default.nix -i --remove-all
 # don't GC ... it removes GBs of things which are
 # re-downloaded if we are run again
@@ -20,3 +21,7 @@ nix-env -f default.nix -i --remove-all
 # clobber bashrc so it sources *only* our bash config
 # ... don't go *via* homies-bashrc - source directly!
 echo "$(homies-bashrc)" >~/.bashrc
+
+# brand new world
+popd
+source ~/.bashrc
