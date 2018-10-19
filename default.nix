@@ -18,12 +18,10 @@ let
       # WARNING: bashrc/default.nix may separately reference these,
       # you cannot change them here and not there
       # (see that file for the horrible details)
-      #nixpkgs.glibc
-      #nixpkgs.glibc.dev
       nixpkgs.gcc8
-      #nixpkgs.clang_7
-      #nixpkgs.llvm_7
-      #nixpkgs.binutils-unwrapped
+      nixpkgs.clang_7
+      nixpkgs.llvm_7
+      nixpkgs.binutils-unwrapped
 
       # standard packages - query with `nix-env -qaP`
       nixpkgs.beancount
@@ -48,14 +46,17 @@ let
       nixpkgs.nmap
       nixpkgs.pandoc
       nixpkgs.pass
+      nixpkgs.powerline-fonts
       nixpkgs.pwgen
       nixpkgs.python36Full
       nixpkgs.python36Packages.cycler
       nixpkgs.python36Packages.dateutil
       nixpkgs.python36Packages.jsonschema
       nixpkgs.python36Packages.matplotlib
+      nixpkgs.python36Packages.mypy
       nixpkgs.python36Packages.numpy
       nixpkgs.python36Packages.ply
+      nixpkgs.python36Packages.pylint
       nixpkgs.python36Packages.pyparsing
       nixpkgs.python36Packages.requests
       nixpkgs.python36Packages.ruamel_yaml
@@ -67,10 +68,11 @@ let
       nixpkgs.wget
       nixpkgs.which
       nixpkgs.xorriso
+      nixpkgs.ycmd
     ];
 
   # A custom '.bashrc' (see bashrc/default.nix for details)
-  bashrc = nixpkgs.callPackage ./bashrc { inherit nixpkgs; };
+  bashrc = nixpkgs.callPackage ./bashrc {};
 
   # Git with config baked in
   git = import ./git (

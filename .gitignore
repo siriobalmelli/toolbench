@@ -2,3 +2,4 @@ result
 .*.sw[op]
 nix_env_avail.txt
 .DS_Store
+.mypy_cache

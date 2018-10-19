@@ -8,9 +8,9 @@ let
       # TODO: setup ultisnips and vim-snippets
       UltiSnips
 
+      # TODO: meson syntax
       # TODO: vim-beancount
       # TODO: SimplylFold (python folding for vim)
-      gitgutter  # show diffs in status
       nerdcommenter  # comment manipulation
       surround  # delimiter (quote, brace, etc) manipulation
 

@@ -1,14 +1,6 @@
 let mapleader="\\"
 set encoding=utf-8
 
-"TODO:
-" - meson syntax
-" - no border for C files?
-" - eliminate half-tab for C
-" - replace syntastic
-" - YCM does not find system headers
-" - syntastic -> ale
-
 ""Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -27,6 +19,7 @@ set tabstop=4
 set softtabstop=4
 set noexpandtab
 set noautoindent
+set cc=80
 
 "load ftplugins and indent files
 filetype plugin on
@@ -35,10 +28,10 @@ filetype indent on
 syntax on
 
 "specify indent settings for all languages
-autocmd filetype c,cpp,make,sh setlocal shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab autoindent
-autocmd filetype go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent
-autocmd filetype conf,javascript,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent
-autocmd filetype nix,markdown,text,yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent
+autocmd filetype c,cpp,make,sh setlocal shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab autoindent cc=80
+autocmd filetype go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent cc=80
+autocmd filetype conf,javascript,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
+autocmd filetype nix,markdown,text,yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
 
 let g:yankring_history_dir = "~/.vim"
 
@@ -59,11 +52,6 @@ set listchars=tab:⋅\ ,trail:⋅,nbsp:⋅
 "undo settings
 set undodir=~/.vim/undofiles
 set undofile
-
-" Set 80th column marker
-" TODO: doesn't work on C files?
-set cc=80
-set colorcolumn=+1 "mark the ideal max text width
 
 set splitbelow
 
@@ -145,16 +133,15 @@ nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 map <Leader>t :YcmCompleter GetType<CR>
 map <Leader>f :YcmCompleter FixIt<CR>
+" go there, jump back
 map <Leader>g :YcmCompleter GoTo<CR>
+map <Leader>h <C-O>
 
-"
-" Jumplists (used by YCM GoTo)
-map <Leader>j :jumps<CR>
-map <Leader>0 <C-O>
-map <Leader>9 <C-I>
-
-"" set python2 interpreter path
-"let g:ycm_server_python_interpreter = '/usr/bin/python'
+" not actually using jumplists
+"" Jumplists (used by YCM GoTo)
+"map <Leader>j :jumps<CR>
+"map <Leader>0 <C-O>
+"map <Leader>9 <C-I>
 
 
 "UltiSnips
@@ -182,15 +169,6 @@ let g:airline_powerline_fonts = 1
 "indent_guides
 let g:indent_guides_guide_size=1
 
-
-""syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
 
 "ale (replace syntastic)
 " ale be all like "your C code doesn't comply with C++ .." TROLOLOL
