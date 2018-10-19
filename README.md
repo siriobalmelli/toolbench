@@ -2,7 +2,7 @@
 
 ![tool](./tool.gif)
 
-The portable toolshed: a reproducible specification for:
+The portable toolshed, a reproducible specification for:
 
 - packages (tools, utilities)
 - dotfiles (configuration of tools)
@@ -20,7 +20,7 @@ I recommend you fork unless you want my workflow preferences overriding yours.
 
 ## Why
 
-1. Homogenizes tool availability and behavior across systems,
+1. Homogenize tool availability and behavior across systems,
   normalize the entire work environment (or set up a blank machine) in one shot.
   No more:
     - checking what variant of `sed` you're running (GNU extensions?)
@@ -39,7 +39,7 @@ I recommend you fork unless you want my workflow preferences overriding yours.
     - installing [MacPorts](https://www.macports.org/) or [Homebrew](https://brew.sh/)
       on macOS.
 
-1. Makes workflow tweaks rewarding: fix it once and it's fixed everywhere;
+1. Make workflow tweaks rewarding: fix it once and it's fixed everywhere;
   rice your [vimrc](http://learnvimscriptthehardway.stevelosh.com/chapters/07.html)
   only once.
   No more:
@@ -52,11 +52,11 @@ I recommend you fork unless you want my workflow preferences overriding yours.
     - complex "toolchain set-up" shell scripts that break on every new OS release
 
 1. Reasonably future-proof:
-    - As [Nix](https://nixos.org/) continues growing, this approach will work
+    - As [Nix](https://nixos.org/) continues growing, this will work
       seamlessly on other POSIX systems, with no reconfiguration or fussing.
-    - Your worst-case scenario for moving to a new kernel+ABI is having to contribute
+    - Worst-case scenario for moving to a new kernel+ABI is having to contribute
       to the so-called [stdnev](https://nixos.org/nixos/nix-pills/fundamentals-of-stdenv.html)
-      port for that configuration.
+      port.
     - The GNU people are on board, with [guix](https://www.gnu.org/software/guix/).
 
 ## How-To
@@ -75,7 +75,7 @@ I recommend you fork unless you want my workflow preferences overriding yours.
     nix-shell --pure
     ```
 
-1. Tweaking/searching installed packages:
+1. Tweaking/searching/installing packages:
 
     ``` bash
     # get currently installed packages
@@ -138,13 +138,14 @@ I recommend you fork unless you want my workflow preferences overriding yours.
 
 ### A note on YouCompleteMe, Nix and "wrappers"
 
-I am big fan of [YCM](https://github.com/Valloric/YouCompleteMe) for Vim;
-getting it working with Nix required writing a new [.ycm_extra_conf.py][conf]
+I am big fan of [YCM](https://github.com/Valloric/YouCompleteMe) for Vim.
+
+Getting it working with Nix required writing a new [.ycm_extra_conf.py][conf]
 to use `nix-shell` as a way to descry the includes seen by clang/gcc
 at compile-time.
 
-YCM is already compiled into this toolchain, but you will need to manually
-copy [.ycm_extra_conf.py][conf] to the toplevel directory of your project:
+To use, you will need to manually copy [.ycm_extra_conf.py][conf]
+to the toplevel directory of your project:
 
 ```bash
 # note that YCM expects '.ycm_extra_conf.py' but we maintain it as
@@ -162,34 +163,38 @@ verbosely with some null input: `clang -E -Wp,-v - </dev/null`.
 This will print the list (and sequence) of locations where `clang` will look
 for header files:
 
-```bash
-# 1.) From my user environment:
-$ clang -E -Wp,-v - </dev/null
-  #include "..." search starts here:
-  #include <...> search starts here:
-  /nix/store/fs62wczaxm8svvhwqsyv9nz4cca44lxa-clang-wrapper-7.0.0/resource-root/include
-  /nix/store/kvdxajnlyisifi506ppbdpfycmcmsp6d-glibc-2.27-dev/include
-  End of search list.
+1. From my environment:
 
-# 2.) From inside `nix-shell` in some random project:
-$ clang -E -Wp,-v - </dev/null
-  #include "..." search starts here:
-  #include <...> search starts here:
-  /nix/store/6j3xhdki32ni2admf1dhzvb2dgz0hl4c-dpkg-1.19.0.5/include
-  /nix/store/8wg1n5bbhsv81wpyixcvxp547hz3q60x-libarchive-3.3.2-dev/include
-  /nix/store/i6a6g9iph5sh5nd5vqf0r6yg1gaxv5g8-libbfd-2.30-dev/include
-  /nix/store/dqr18y0x894fsrabwrlbrlhi870bnifc-elfutils-0.173/include
-  /nix/store/0hvbn69zcavh8810kzqs1phv1l5f0lnh-liburcu-0.10.1/include
-  /nix/store/n5qf4zfs6msxihh2xr8ndc7g9j8kc06v-compiler-rt-5.0.2-dev/include
-  /nix/store/sjai00nfvq786fhwi5i0fw5b3qlrx572-clang-wrapper-5.0.2/resource-root/include
-  /nix/store/kvdxajnlyisifi506ppbdpfycmcmsp6d-glibc-2.27-dev/include
-  End of search list.
-```
+    ```bash
+    $ clang -E -Wp,-v - </dev/null
+    #include "..." search starts here:
+    #include <...> search starts here:
+      /nix/store/fs62wczaxm8svvhwqsyv9nz4cca44lxa-clang-wrapper-7.0.0/resource-root/include
+      /nix/store/kvdxajnlyisifi506ppbdpfycmcmsp6d-glibc-2.27-dev/include
+    End of search list.
+    ```
+
+1. From inside `nix-shell` in some random project:
+
+    ```bash
+    $ nix-shell
+    [nix-shell]$ clang -E -Wp,-v - </dev/null
+    #include "..." search starts here:
+    #include <...> search starts here:
+      /nix/store/6j3xhdki32ni2admf1dhzvb2dgz0hl4c-dpkg-1.19.0.5/include
+      /nix/store/8wg1n5bbhsv81wpyixcvxp547hz3q60x-libarchive-3.3.2-dev/include
+      /nix/store/i6a6g9iph5sh5nd5vqf0r6yg1gaxv5g8-libbfd-2.30-dev/include
+      /nix/store/dqr18y0x894fsrabwrlbrlhi870bnifc-elfutils-0.173/include
+      /nix/store/0hvbn69zcavh8810kzqs1phv1l5f0lnh-liburcu-0.10.1/include
+      /nix/store/n5qf4zfs6msxihh2xr8ndc7g9j8kc06v-compiler-rt-5.0.2-dev/include
+      /nix/store/sjai00nfvq786fhwi5i0fw5b3qlrx572-clang-wrapper-5.0.2/resource-root/include
+      /nix/store/kvdxajnlyisifi506ppbdpfycmcmsp6d-glibc-2.27-dev/include
+    End of search list.
+    ```
 
 As you can see, the `clang` running inside `nix-shell` is not the same `clang`:
 it has been *wrapped* with the project dependencies.
-This is exactly the list we get by running `nix-shell`
-inside [.ycm_extra_conf.py][conf].
+This is exactly the list we get by running `nix-shell` inside [.ycm_extra_conf.py][conf].
 
 [conf]: vim/ycm_extra_conf.py
 
