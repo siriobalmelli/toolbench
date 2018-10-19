@@ -43,21 +43,21 @@ I recommend you fork unless you want my workflow preferences overriding yours.
   rice your [vimrc](http://learnvimscriptthehardway.stevelosh.com/chapters/07.html)
   only once.
   No more:
-  - separately tracking packages and versions for
-    [pip](https://pip.pypa.io/en/stable/installing/)
-    and [bundler](https://bundler.io/)
-    and [cabal](https://www.haskell.org/cabal/)
-    and [npm](https://www.npmjs.com/)
-    etc ... on each machine
-  - complex "toolchain set-up" shell scripts that break on every new OS release
+    - separately tracking packages and versions for
+      [pip](https://pip.pypa.io/en/stable/installing/)
+      and [bundler](https://bundler.io/)
+      and [cabal](https://www.haskell.org/cabal/)
+      and [npm](https://www.npmjs.com/)
+      etc ... on each machine
+    - complex "toolchain set-up" shell scripts that break on every new OS release
 
 1. Reasonably future-proof:
-  - As [Nix](https://nixos.org/) continues growing, this approach will work
-    seamlessly on other POSIX systems, with no reconfiguration or fussing.
-  - Your worst-case scenario for moving to a new kernel+ABI is having to contribute
-    to the so-called [stdnev](https://nixos.org/nixos/nix-pills/fundamentals-of-stdenv.html)
-    port for that configuration.
-  - The GNU people are on board, with [guix](https://www.gnu.org/software/guix/).
+    - As [Nix](https://nixos.org/) continues growing, this approach will work
+      seamlessly on other POSIX systems, with no reconfiguration or fussing.
+    - Your worst-case scenario for moving to a new kernel+ABI is having to contribute
+      to the so-called [stdnev](https://nixos.org/nixos/nix-pills/fundamentals-of-stdenv.html)
+      port for that configuration.
+    - The GNU people are on board, with [guix](https://www.gnu.org/software/guix/).
 
 ## How-To
 
