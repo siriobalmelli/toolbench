@@ -52,6 +52,7 @@ let
       nixpkgs.python36Packages.cycler
       nixpkgs.python36Packages.dateutil
       nixpkgs.python36Packages.jsonschema
+      nixpkgs.python36Packages.markdown
       nixpkgs.python36Packages.matplotlib
       nixpkgs.python36Packages.mypy
       nixpkgs.python36Packages.numpy
@@ -64,6 +65,7 @@ let
       nixpkgs.python36Packages.tabulate
       nixpkgs.texlive.combined.scheme-full
       nixpkgs.tree
+      nixpkgs.vale
       nixpkgs.watch
       nixpkgs.wget
       nixpkgs.which

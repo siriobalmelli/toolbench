@@ -16,6 +16,7 @@ let
 
       # syntastic  # linting
       ale  # better linting
+      # TODO: markdown linting in a Nix package?
 
       tabular  # format tables
       vim-easymotion  # upgraded search
