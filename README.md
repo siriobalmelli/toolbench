@@ -21,43 +21,43 @@ I recommend you fork unless you want my workflow preferences overriding yours.
 ## Why
 
 1. Homogenize tool availability and behavior across systems,
-  normalize the entire work environment (or set up a blank machine) in one shot.
-  No more:
-    - checking what variant of `sed` you're running (GNU extensions?)
-    - moving files around to certain systems because *x* tool is *only* installed
-      on that machine.
-    - sticking with e.g. an old Ubuntu 14.04 machine because it took you hours
-      to get the set-up just right.
+    normalize the entire work environment (or set up a blank machine) in one shot.
+    No more:
+        - checking what variant of `sed` you're running (GNU extensions?)
+        - moving files around to certain systems because *x* tool is *only* installed
+          on that machine.
+        - sticking with e.g. an old Ubuntu 14.04 machine because it took you hours
+          to get the set-up just right.
 
 1. No more dealing with distro-specific package managers:
-    - Remembering *what* was that package called in
-      [apt-get](https://help.ubuntu.com/community/AptGet/Howto)
-      or [yum](https://wiki.centos.org/PackageManagement/Yum)
-      or [pacman](https://wiki.archlinux.org/index.php/Pacman)
-      or [zypper](https://en.opensuse.org/Portal:Zypper)
-      or [portage](https://wiki.gentoo.org/wiki/Portage)
-    - installing [MacPorts](https://www.macports.org/) or [Homebrew](https://brew.sh/)
-      on macOS.
+        - Remembering *what* was that package called in
+          [apt-get](https://help.ubuntu.com/community/AptGet/Howto)
+          or [yum](https://wiki.centos.org/PackageManagement/Yum)
+          or [pacman](https://wiki.archlinux.org/index.php/Pacman)
+          or [zypper](https://en.opensuse.org/Portal:Zypper)
+          or [portage](https://wiki.gentoo.org/wiki/Portage)
+        - installing [MacPorts](https://www.macports.org/) or [Homebrew](https://brew.sh/)
+          on macOS.
 
 1. Make workflow tweaks rewarding: fix it once and it's fixed everywhere;
-  rice your [vimrc](http://learnvimscriptthehardway.stevelosh.com/chapters/07.html)
-  only once.
-  No more:
-    - separately tracking packages and versions for
-      [pip](https://pip.pypa.io/en/stable/installing/)
-      and [bundler](https://bundler.io/)
-      and [cabal](https://www.haskell.org/cabal/)
-      and [npm](https://www.npmjs.com/)
-      etc ... on each machine
-    - complex "toolchain set-up" shell scripts that break on every new OS release
+    rice your [vimrc](http://learnvimscriptthehardway.stevelosh.com/chapters/07.html)
+    only once.
+    No more:
+        - separately tracking packages and versions for
+          [pip](https://pip.pypa.io/en/stable/installing/)
+          and [bundler](https://bundler.io/)
+          and [cabal](https://www.haskell.org/cabal/)
+          and [npm](https://www.npmjs.com/)
+          etc ... on each machine
+        - complex "toolchain set-up" shell scripts that break on every new OS release
 
 1. Reasonably future-proof:
-    - As [Nix](https://nixos.org/) continues growing, this will work
-      seamlessly on other POSIX systems, with no reconfiguration or fussing.
-    - Worst-case scenario for moving to a new kernel+ABI is having to contribute
-      to the so-called [stdnev](https://nixos.org/nixos/nix-pills/fundamentals-of-stdenv.html)
-      port.
-    - The GNU people are on board, with [guix](https://www.gnu.org/software/guix/).
+        - As [Nix](https://nixos.org/) continues growing, this will work
+          seamlessly on other POSIX systems, with no reconfiguration or fussing.
+        - Worst-case scenario for moving to a new kernel+ABI is having to contribute
+          to the so-called [stdnev](https://nixos.org/nixos/nix-pills/fundamentals-of-stdenv.html)
+          port.
+        - The GNU people are on board, with [guix](https://www.gnu.org/software/guix/).
 
 ## How-To
 

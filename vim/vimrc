@@ -30,8 +30,8 @@ syntax on
 "specify indent settings for all languages
 autocmd filetype c,cpp,make,sh setlocal shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab autoindent cc=80
 autocmd filetype go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent cc=80
-autocmd filetype conf,javascript,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
-autocmd filetype nix,markdown,text,yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
+autocmd filetype markdown,conf,javascript,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
+autocmd filetype nix,text,yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
 
 let g:yankring_history_dir = "~/.vim"
 
