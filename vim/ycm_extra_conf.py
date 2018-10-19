@@ -29,9 +29,11 @@ DIR = os.path.dirname(os.path.abspath(__file__))
 def get_nix_flags():
     '''get_nix_flags()
     Try to run the preprocessor for both clang and gcc inside a nix-shell,
-        where they are properly wrapped to see include dirs for all build inputs.
+        where they are properly wrapped to see includes for all build inputs.
     Return a list of flags, which may be empty if nix-shell won't run, etc
     '''
+    # Run clang (or gcc if no clang) preprocessor with nothing,
+    #+ just to see where it might look for header files.
     cmd = r'''\
         cd {0} && \
         nix-shell --command \
@@ -39,13 +41,16 @@ def get_nix_flags():
             2>/dev/null \
         | sed -nE 's|\s*(/.*include)$|\1|p'
     '''.format(DIR)
-    lst = [p.strip() for p in
-           check_output(cmd, shell=True).split('\n')
-          ]
-    # prepend an '-isystem' to each path, discarding empty paths
-    # NOTE that '-isystem' means these includes will be used last
-    # (after flags and compilation db)
-    return [flat for p in lst for flat in ['-isystem', p] if p]
+    try:
+        lst = [p.strip() for p in
+               check_output(cmd, shell=True).split('\n')
+              ]
+        # prepend an '-isystem' to each path, discarding empty paths
+        # NOTE that '-isystem' means these includes will be used last
+        # (after flags and compilation db)
+        return [flat for p in lst for flat in ['-isystem', p] if p]
+    except Exception:  #pylint: disable=broad-except
+        return []
 
 def get_compile_db():
     '''get_compile_db()
@@ -57,10 +62,11 @@ def get_compile_db():
         find {0} -name compile_commands.json \
             | sort | head -n 1 | xargs dirname 2>/dev/null
     '''.format(DIR)
-    folder = check_output(cmd, shell=True).strip()
-    if folder:
+    try:
+        folder = check_output(cmd, shell=True).strip()
         return ycm_core.CompilationDatabase(folder)
-    return None
+    except Exception:  #pylint: disable=broad-except
+        return None
 
 def MakeRelativePathsInFlagsAbsolute(flags, working_directory):  # pylint: disable=invalid-name
     '''MakeRelativePathsInFlagsAbsolute()
@@ -135,6 +141,8 @@ def FlagsForFile(filename):  # pylint: disable=invalid-name
         final_flags = MakeRelativePathsInFlagsAbsolute(
             compilation_info.compiler_flags_,
             compilation_info.compiler_working_dir_)
+    else:
+        final_flags = []
 
     final_flags += get_nix_flags()
     final_flags += MakeRelativePathsInFlagsAbsolute(FLAGS, DIR)

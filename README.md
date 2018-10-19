@@ -1,9 +1,11 @@
-# Homies
+# Toolbench
 
-![homies](./homies.png)
+![tool](./tool.gif)
 
 The portable toolshed ... aka:
 reproducible set of dotfiles and packages for Linux and macOS
+
+I recommend you fork, not pull directly.
 
 ---
 
