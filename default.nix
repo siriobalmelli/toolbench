@@ -18,13 +18,15 @@ let
       # WARNING: bashrc/default.nix may separately reference these,
       # you cannot change them here and not there
       # (see that file for the horrible details)
-      nixpkgs.gcc8
-      nixpkgs.clang_7
-      nixpkgs.llvm_7
+      nixpkgs.gcc
+      nixpkgs.clang
+      nixpkgs.llvm
       nixpkgs.binutils-unwrapped
 
       # standard packages - query with `nix-env -qaP`
       nixpkgs.beancount
+      nixpkgs.cacert
+      nixpkgs.coreutils
       nixpkgs.cscope
       nixpkgs.curl
       nixpkgs.dos2unix
@@ -46,6 +48,7 @@ let
       nixpkgs.nmap
       nixpkgs.pandoc
       nixpkgs.pass
+      nixpkgs.pkgconfig
       nixpkgs.powerline-fonts
       nixpkgs.pwgen
       nixpkgs.python36Full

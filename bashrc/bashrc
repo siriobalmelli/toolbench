@@ -1,4 +1,9 @@
 ##
+#	do NOT poison a nix shell
+##
+if grep -q IN_NIX_SHELL <(env); then return; fi
+
+##
 #	always-section
 # is executed even when running non-interactively
 ##
