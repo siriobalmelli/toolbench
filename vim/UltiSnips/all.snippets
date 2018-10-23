@@ -1,0 +1,7 @@
+snippet '![.0-9(].*!' "shell out to python for math" r
+`!p
+import parser
+#strip all "non-math" characters from string; compile and evaluate
+snip.rv = eval(parser.expr(re.sub('[^-+*/.0-9()]', '', match.group(0))).compile())
+`
+endsnippet

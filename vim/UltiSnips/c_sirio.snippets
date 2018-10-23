@@ -1,0 +1,30 @@
+###
+#	c snippets
+#
+# (c) 2017 Sirio Balmelli; Balmelli Analog & Digital
+###
+
+priority 1
+
+snippet #ifn "include guard for a header file" !b
+`!p
+# 'fn' is filename
+incl = '%s_' % fn.replace('.', '_')
+snip.rv = '#ifndef %s\n' % incl
+snip.rv += '#define %s\n' % incl
+snip.rv += '#endif /* %s */' % incl
+`
+endsnippet
+
+snippet #i "include statement" b
+#include <${1}>
+endsnippet
+
+snippet #d "define statement" b
+#define ${1}
+endsnippet
+
+snippet #0 "#if 0 block" b
+#if 0
+#endif
+endsnippet
