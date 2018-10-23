@@ -43,8 +43,16 @@ let
       #vim-trailing-whitespace
       #vimproc
     ];
+  vimrc = writeText "vimrc"
+    (lib.concatStringsSep "\n"
+    [ (builtins.readFile ./vimrc)
+      ''
+      let g:UltiSnipsSnippetDirectories=['${./UltiSnips}']
+      ''
+    ]
+    );
   customRC = vimUtils.vimrcFile
-    { customRC = builtins.readFile ./vimrc;
+    { customRC = builtins.readFile vimrc;
       packages.mvc.start = extraPackages;
     };
 in
