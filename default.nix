@@ -98,14 +98,7 @@ let
   snack = (import ./snack).snack-exe;
 
   # Vim with a custom vimrc and set of packages
-  vim = import ./vim (with nixpkgs;
-    {inherit
-        symlinkJoin
-        makeWrapper
-        vim_configurable
-        vimUtils
-        vimPlugins;
-    });
+  vim = import ./vim { inherit nixpkgs; };
 
 in
   if nixpkgs.lib.inNixShell
