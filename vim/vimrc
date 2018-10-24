@@ -5,6 +5,14 @@ set encoding=utf-8
 "This must be first, because it changes other options as a side effect.
 set nocompatible
 
+"TODO: homogenize source navigation:
+" leader,g == YCM GoTo
+" leader,h == back
+" leader,l == forwards
+" ctrl+leader,g == cscope GoTo
+" ctrl+leader,s == cscope search
+" ctrl+leader,h == back (different jumplist?)
+" ctrl+leader,l == forwards
 
 ""
 "	formatting
