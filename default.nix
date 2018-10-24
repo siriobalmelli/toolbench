@@ -54,6 +54,7 @@ let
       nixpkgs.python36Full
       nixpkgs.python36Packages.cycler
       nixpkgs.python36Packages.dateutil
+      nixpkgs.python36Packages.flake8
       nixpkgs.python36Packages.jsonschema
       nixpkgs.python36Packages.markdown
       nixpkgs.python36Packages.matplotlib
@@ -66,6 +67,7 @@ let
       nixpkgs.python36Packages.ruamel_yaml
       nixpkgs.python36Packages.six
       nixpkgs.python36Packages.tabulate
+      nixpkgs.python36Packages.yamllint
       nixpkgs.texlive.combined.scheme-full
       nixpkgs.tree
       nixpkgs.vale

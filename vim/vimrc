@@ -180,7 +180,7 @@ let g:indent_guides_guide_size=1
 
 "ale (replace syntastic)
 " ale be all like "your C code doesn't comply with C++ .." TROLOLOL
-let b:ale_linters = {'c': ['ccls']}
+let b:ale_linters = {'c': ['ccls'], 'python': ['pylint']}
 
 
 " SEARCH - thank you Damian Conway
