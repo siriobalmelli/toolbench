@@ -46,6 +46,7 @@ let
       nixpkgs.ninja
       nixpkgs.nix
       nixpkgs.nmap
+      nixpkgs.p7zip
       nixpkgs.pandoc
       nixpkgs.pass
       nixpkgs.pkgconfig
