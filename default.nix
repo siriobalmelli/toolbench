@@ -60,13 +60,17 @@ let
       nixpkgs.python36Packages.matplotlib
       nixpkgs.python36Packages.mypy
       nixpkgs.python36Packages.numpy
+      nixpkgs.python36Packages.pip
       nixpkgs.python36Packages.ply
       nixpkgs.python36Packages.pylint
       nixpkgs.python36Packages.pyparsing
       nixpkgs.python36Packages.requests
       nixpkgs.python36Packages.ruamel_yaml
+      nixpkgs.python36Packages.setuptools
       nixpkgs.python36Packages.six
       nixpkgs.python36Packages.tabulate
+      nixpkgs.python36Packages.twine
+      nixpkgs.python36Packages.wheel
       nixpkgs.python36Packages.yamllint
       nixpkgs.texlive.combined.scheme-full
       nixpkgs.tree
