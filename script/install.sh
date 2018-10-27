@@ -8,12 +8,15 @@ if ! command -v nix-env; then
 	source $HOME/.nix-profile/etc/profile.d/nix.sh
 fi
 
-# keep nix-env packages in lockstep with this repo
-nix-channel --update
-nix-env -qaP >nix_env_avail.txt  # easy grep of what packages are available
-
-script/update-src.sh nixpkgs
+# allow caller to skip updating when testing many changes
+if [[ $1 != "-n" ]]; then
+	# keep nix-env packages in lockstep with this repo
+	nix-channel --update
+	nix-env -qaP >nix_env_avail.txt  # easy grep of what packages are available
+	script/update-src.sh nixpkgs
+fi
 nix-env -f default.nix -i --remove-all
+
 # don't GC ... it removes GBs of things which are
 # re-downloaded if we are run again
 #nix-store --gc

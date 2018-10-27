@@ -5,6 +5,13 @@ let
   # The (pinned) Nixpkgs where the original packages are sourced from
   nixpkgs = import ./nixpkgs {};
 
+  # single knob for python version everywhere
+  # ... there is also the wrapped 'python35.withPackages' approach (see <https://nixos.org/nixpkgs/manual/#python>)
+  # which would obviate having to set PYTHONPATH in bashrc,
+  # but would require explicitly reinstalling the wrapped python at every change,
+  # as opposed to quickly and painlessly testing things with 'nix-env --install'
+  python = nixpkgs.python36Full;
+
   # The list of packages to be installed
   homies = with nixpkgs;
     [
@@ -52,27 +59,29 @@ let
       nixpkgs.pkgconfig
       nixpkgs.powerline-fonts
       nixpkgs.pwgen
-      nixpkgs.python36Full
-      nixpkgs.python36Packages.cycler
-      nixpkgs.python36Packages.dateutil
-      nixpkgs.python36Packages.flake8
-      nixpkgs.python36Packages.jsonschema
-      nixpkgs.python36Packages.markdown
-      nixpkgs.python36Packages.matplotlib
-      nixpkgs.python36Packages.mypy
-      nixpkgs.python36Packages.numpy
-      nixpkgs.python36Packages.pip
-      nixpkgs.python36Packages.ply
-      nixpkgs.python36Packages.pylint
-      nixpkgs.python36Packages.pyparsing
-      nixpkgs.python36Packages.requests
-      nixpkgs.python36Packages.ruamel_yaml
-      nixpkgs.python36Packages.setuptools
-      nixpkgs.python36Packages.six
-      nixpkgs.python36Packages.tabulate
-      nixpkgs.python36Packages.twine
-      nixpkgs.python36Packages.wheel
-      nixpkgs.python36Packages.yamllint
+
+      python
+      python.pkgs.cycler
+      python.pkgs.dateutil
+      python.pkgs.flake8
+      python.pkgs.jsonschema
+      python.pkgs.markdown
+      python.pkgs.matplotlib
+      python.pkgs.mypy
+      python.pkgs.numpy
+      python.pkgs.pip
+      python.pkgs.ply
+      python.pkgs.pylint
+      python.pkgs.pyparsing
+      python.pkgs.requests
+      python.pkgs.ruamel_yaml
+      python.pkgs.setuptools
+      python.pkgs.six
+      python.pkgs.tabulate
+      python.pkgs.twine
+      python.pkgs.wheel
+      python.pkgs.yamllint
+
       nixpkgs.texlive.combined.scheme-full
       nixpkgs.tree
       nixpkgs.vale
@@ -80,7 +89,6 @@ let
       nixpkgs.wget
       nixpkgs.which
       nixpkgs.xorriso
-      nixpkgs.ycmd
     ];
 
   # A custom '.bashrc' (see bashrc/default.nix for details)
@@ -105,7 +113,7 @@ let
   snack = (import ./snack).snack-exe;
 
   # Vim with a custom vimrc and set of packages
-  vim = import ./vim { inherit nixpkgs; };
+  vim = import ./vim { inherit nixpkgs python; };
 
 in
   if nixpkgs.lib.inNixShell
