@@ -13,7 +13,7 @@ if [[ $1 != "-n" ]]; then
 	# keep nix-env packages in lockstep with this repo
 	nix-channel --update
 	nix-env -qaP >nix_env_avail.txt  # easy grep of what packages are available
-	script/update-src.sh nixpkgs
+	find ./ -name "*.src.json" -exec script/update-src.sh '{}' \;
 fi
 nix-env -f default.nix -i --remove-all
 

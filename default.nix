@@ -13,13 +13,35 @@ let
   python = nixpkgs.python36Full;
 
   # The list of packages to be installed
-  homies = with nixpkgs;
-    [
+  homies = [
       # Customized packages
       bashrc
       git
+      replacement
       tmux
       vim
+
+      python
+      python.pkgs.cycler
+      python.pkgs.dateutil
+      python.pkgs.flake8
+      python.pkgs.jsonschema
+      python.pkgs.markdown
+      python.pkgs.matplotlib
+      python.pkgs.mypy
+      python.pkgs.numpy
+      python.pkgs.pip
+      python.pkgs.ply
+      python.pkgs.pylint
+      python.pkgs.pyparsing
+      python.pkgs.requests
+      python.pkgs.ruamel_yaml
+      python.pkgs.setuptools
+      python.pkgs.six
+      python.pkgs.tabulate
+      python.pkgs.twine
+      python.pkgs.wheel
+      python.pkgs.yamllint
 
       # compilers and environments
       # WARNING: bashrc/default.nix may separately reference these,
@@ -60,28 +82,6 @@ let
       nixpkgs.powerline-fonts
       nixpkgs.pwgen
 
-      python
-      python.pkgs.cycler
-      python.pkgs.dateutil
-      python.pkgs.flake8
-      python.pkgs.jsonschema
-      python.pkgs.markdown
-      python.pkgs.matplotlib
-      python.pkgs.mypy
-      python.pkgs.numpy
-      python.pkgs.pip
-      python.pkgs.ply
-      python.pkgs.pylint
-      python.pkgs.pyparsing
-      python.pkgs.requests
-      python.pkgs.ruamel_yaml
-      python.pkgs.setuptools
-      python.pkgs.six
-      python.pkgs.tabulate
-      python.pkgs.twine
-      python.pkgs.wheel
-      python.pkgs.yamllint
-
       nixpkgs.texlive.combined.scheme-full
       nixpkgs.tree
       nixpkgs.vale
@@ -93,6 +93,9 @@ let
 
   # A custom '.bashrc' (see bashrc/default.nix for details)
   bashrc = nixpkgs.callPackage ./bashrc {};
+
+  # TODO: integrate this with a branch of our own nixpkgs
+  replacement = nixpkgs.callPackage ./replacement { inherit nixpkgs python; };
 
   # Git with config baked in
   git = import ./git (
