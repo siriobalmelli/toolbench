@@ -43,11 +43,8 @@ let
       python.pkgs.wheel
       python.pkgs.yamllint
 
-      # compilers and environments
-      # WARNING: bashrc/default.nix may separately reference these,
-      # you cannot change them here and not there
-      # (see that file for the horrible details)
-      nixpkgs.gcc_multi
+      # compilers and wrappers
+      nixpkgs.gcc
       nixpkgs.clang
       nixpkgs.llvm
       nixpkgs.binutils-unwrapped
