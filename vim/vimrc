@@ -5,15 +5,6 @@ set encoding=utf-8
 "This must be first, because it changes other options as a side effect.
 set nocompatible
 
-"TODO: homogenize source navigation:
-" leader,g == YCM GoTo
-" leader,h == back
-" leader,l == forwards
-" ctrl+leader,g == cscope GoTo
-" ctrl+leader,s == cscope search
-" ctrl+leader,h == back (different jumplist?)
-" ctrl+leader,l == forwards
-
 ""
 "	formatting
 ""
@@ -135,22 +126,39 @@ let g:ycm_key_list_previous_completion = ['<c-k>']
 ""let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>'] " YCM original
 "let g:ycm_key_list_previous_completion = ['<Up>', '<Enter>']
 
-nnoremap <F4> :YcmDiags<CR>
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-" also, '<leader>d' will show detailed compiler errors
-
+" \r == 'refresh YCM'
+" \t == 'type of token under cursor'
+map <Leader>r :YcmForceCompileAndDiagnostics<CR>
 map <Leader>t :YcmCompleter GetType<CR>
+
+" \i == close current split (the one currently In)
+" \o == close Other splits
+map <Leader>i :hide<CR>
+map <Leader>o :only<CR>
+
+" \s == 'show' (but switch cursor back to main window thanx)
+" \d == 'detailed diagnostics'
+" \f == 'fix it'
+" \g == 'goto'
+map <Leader>s :YcmDiags<CR><C-W><C-W>
+map <Leader>d :YcmShowDetailedDiagnostic<CR>
 map <Leader>f :YcmCompleter FixIt<CR>
-" go there, jump back
 map <Leader>g :YcmCompleter GoTo<CR>
+
+" \h == jumplist BACK
+" \l == jumplist FORWARD
+" \; == jumplist
 map <Leader>h <C-O>
+map <Leader>l <C-I>
+map <Leader>; :jumps<CR>
 
-" not actually using jumplists
-"" Jumplists (used by YCM GoTo)
-"map <Leader>j :jumps<CR>
-"map <Leader>0 <C-O>
-"map <Leader>9 <C-I>
-
+"TODO: homogenize source navigation:
+" ctrl+leader,g == cscope GoTo
+" ctrl+leader,s == cscope search
+" ... and can we use jumplists so we match YCM?
+" alternately (can't use jumplists), do:
+" ctrl+leader,h == back
+" ctrl+leader,l == forwards
 
 "UltiSnips
 let g:UltiSnipsExpandTrigger='<S-Tab>'

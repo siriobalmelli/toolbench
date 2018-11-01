@@ -22,6 +22,7 @@ let
       vim
 
       python
+      python.pkgs.beancount
       python.pkgs.cycler
       python.pkgs.dateutil
       python.pkgs.flake8
@@ -50,7 +51,6 @@ let
       nixpkgs.binutils-unwrapped
 
       # standard packages - query with `nix-env -qaP`
-      nixpkgs.beancount
       nixpkgs.cacert
       nixpkgs.coreutils
       nixpkgs.cscope
