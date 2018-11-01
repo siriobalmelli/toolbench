@@ -1,3 +1,3 @@
 snippet Sig "Signed-off-by"
-Signed-off-by: `sed -n 's/\s*name =\s*\(.*\)/\1/p' ~/.gitconfig` <`sed -n 's/\s*email =\s*\(.*\)/\1/p' ~/.gitconfig`>
+Signed-off-by: `git config --get user.name` <`git config --get user.email`>
 endsnippet
