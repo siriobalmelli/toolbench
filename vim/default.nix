@@ -10,7 +10,7 @@ let
   };
   extraPackages = with vimPlugins;
     [
-      # TODO: setup ultisnips and vim-snippets
+      autoload_cscope-vim
       UltiSnips
 
       # TODO: meson syntax

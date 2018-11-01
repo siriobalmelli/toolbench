@@ -152,13 +152,10 @@ map <Leader>h <C-O>
 map <Leader>l <C-I>
 map <Leader>; :jumps<CR>
 
-"TODO: homogenize source navigation:
-" ctrl+leader,g == cscope GoTo
-" ctrl+leader,s == cscope search
-" ... and can we use jumplists so we match YCM?
-" alternately (can't use jumplists), do:
-" ctrl+leader,h == back
-" ctrl+leader,l == forwards
+" NOTE that autoload_cscope-vim exports:
+" ctrl+\g == GOTO
+" ctrl+\s == SEARCH
+" ... so whenever YCM fails simply add CTRL and use cscope instead ;)
 
 "UltiSnips
 let g:UltiSnipsExpandTrigger='<S-Tab>'
