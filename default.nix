@@ -45,7 +45,7 @@ let
       python.pkgs.yamllint
 
       # compilers and wrappers
-      nixpkgs.gcc_multi
+      nixpkgs.gcc
       nixpkgs.clang
       nixpkgs.llvm
       nixpkgs.binutils-unwrapped
