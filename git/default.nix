@@ -3,9 +3,9 @@
 symlinkJoin {
   name = "git";
   buildInputs = [makeWrapper];
-  paths = [ git ];
+  paths = [git];
   postBuild = ''
     wrapProgram "$out/bin/git" \
-    --set GIT_CONFIG "${./config}"
+    --set GIT_CONFIG "${./gitconfig}"
   '';
 }
