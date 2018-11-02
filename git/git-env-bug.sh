@@ -12,7 +12,9 @@ fail()
 
 # don't break the user's config
 if [[ -e ~/.gitconfig ]]; then
-	fail "this script would break your existing ~/.gitconfig - please remove it and run again"
+	# don't fail, deleting ~/.gitconfig, for obvious reasons
+	echo "this script would break your existing ~/.gitconfig - please remove it and run again" >&2
+	exit 1
 fi
 
 unset GIT_CONFIG
