@@ -23,7 +23,9 @@ nix-env -f default.nix -i --remove-all
 
 # clobber bashrc so it sources *only* our bash config
 # ... don't go *via* homies-bashrc - source directly!
-echo "$(homies-bashrc)" >~/.bashrc
+homies-bashrc >~/.bashrc
+# clobber .gitconfig (see git/default.nix for details)
+homies-gitconfig >~/.gitconfig
 
 # brand new world
 popd

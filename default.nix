@@ -96,7 +96,7 @@ let
 
   # Git with config baked in
   git = import ./git (
-    { inherit (nixpkgs) makeWrapper symlinkJoin;
+    { inherit (nixpkgs) makeWrapper symlinkJoin writeScriptBin;
       git = nixpkgs.git;
     });
 
