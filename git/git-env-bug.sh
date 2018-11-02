@@ -26,7 +26,7 @@ cat <<EOF | tee git-env-bug/gitconfig
 [alias]
   he = help
 EOF
-export GIT_CONFIG=git-env-bug/gitconfig
+export GIT_CONFIG=$(realpath git-env-bug/gitconfig)
 env | grep GIT_CONFIG
 
 git config -l | grep -q alias.he=help \
