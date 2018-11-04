@@ -61,6 +61,7 @@ let
       nixpkgs.ffmpeg
       nixpkgs.figlet
       nixpkgs.gitAndTools.gitAnnex
+      nixpkgs.gnumake
       nixpkgs.gnused
       nixpkgs.gnutar
       nixpkgs.htop
