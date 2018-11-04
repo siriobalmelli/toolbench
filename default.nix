@@ -45,8 +45,8 @@ let
       python.pkgs.yamllint
 
       # compilers and wrappers
-      nixpkgs.gcc
-      nixpkgs.clang
+      gcc
+      clang
       nixpkgs.llvm
       nixpkgs.binutils-unwrapped
 
@@ -87,6 +87,10 @@ let
       nixpkgs.which
       nixpkgs.xorriso
     ];
+
+
+  gcc = nixpkgs.gcc.overrideAttrs ( oldAttrs: rec { meta.priority = 5; });
+  clang = nixpkgs.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
 
   # A custom '.bashrc' (see bashrc/default.nix for details)
   bashrc = nixpkgs.callPackage ./bashrc {};
