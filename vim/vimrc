@@ -183,9 +183,12 @@ let g:airline_powerline_fonts = 1
 let g:indent_guides_guide_size=1
 
 
-"ale (replace syntastic)
-" ale be all like "your C code doesn't comply with C++ .." TROLOLOL
-let b:ale_linters = {'c': ['ccls'], 'python': ['pylint']}
+"ALE (replace syntastic)
+" ALE be all like "your C code doesn't comply with C++ ..." TROLOLOL
+" must be declared as an autocmd else settings only take effect on the first tab
+"let b:ale_linters = {'c': ['ccls'], 'cpp': ['ccls'], }
+autocmd filetype c,cpp let b:ale_linters = {'c': ['ccls'], 'cpp': ['ccls']}
+autocmd filetype python let b:ale_linters = {'python': ['pylint']}
 
 
 " SEARCH - thank you Damian Conway
