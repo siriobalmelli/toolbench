@@ -65,6 +65,7 @@ let
       nixpkgs.gnused
       nixpkgs.gnutar
       nixpkgs.htop
+      nixpkgs.iftop
       nixpkgs.imagemagickBig
       nixpkgs.jq
       nixpkgs.less
