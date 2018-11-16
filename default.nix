@@ -52,6 +52,7 @@ let
 
       # standard packages - query with `nix-env -qaP`
       nixpkgs.cacert
+      nixpkgs.cointop
       nixpkgs.coreutils
       nixpkgs.cscope
       nixpkgs.curl
@@ -67,6 +68,7 @@ let
       nixpkgs.htop
       nixpkgs.iftop
       nixpkgs.imagemagickBig
+      nixpkgs.ipcalc
       nixpkgs.jq
       nixpkgs.less
       nixpkgs.meson
