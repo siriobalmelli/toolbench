@@ -51,6 +51,7 @@ let
       nixpkgs.binutils-unwrapped
 
       # standard packages - query with `nix-env -qaP`
+      nixpkgs.altcoins.bitcoind
       nixpkgs.cacert
       nixpkgs.cointop
       nixpkgs.coreutils
