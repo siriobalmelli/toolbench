@@ -79,7 +79,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias btcinfo='bitcoin-cli getwalletinfo'
-alias btcblock="echo $(bitcoin-cli getblockcount 2>&1)/$(wget -O - http://blockchain.info/q/getblockcount 2>/dev/null)"
+alias btcblock='echo $(bitcoin-cli getblockcount 2>&1)/$(wget -O - http://blockchain.info/q/getblockcount 2>/dev/null)'
 
 # non-interactive, non-login shell should still source ~/.bahsrc
 export BASH_ENV=~/.bashrc
