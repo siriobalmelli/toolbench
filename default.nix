@@ -52,6 +52,7 @@ let
 
       # standard packages - query with `nix-env -qaP`
       nixpkgs.altcoins.bitcoind
+      nixpkgs.altcoins.go-ethereum
       nixpkgs.cacert
       nixpkgs.cointop
       nixpkgs.coreutils
@@ -77,6 +78,7 @@ let
       nixpkgs.ninja
       nixpkgs.nix
       nixpkgs.nmap
+      nixpkgs.nmon
       nixpkgs.p7zip
       nixpkgs.pandoc
       nixpkgs.pass
