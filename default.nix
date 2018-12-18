@@ -47,6 +47,8 @@ let
       # compilers and wrappers
       gcc
       clang
+      nixpkgs.valgrind
+      nixpkgs.gdb
       nixpkgs.llvm
       nixpkgs.binutils-unwrapped
 
