@@ -65,6 +65,7 @@ let
       nixpkgs.fdupes
       nixpkgs.ffmpeg
       nixpkgs.figlet
+      nixpkgs.findutils
       nixpkgs.gitAndTools.gitAnnex
       nixpkgs.gnumake
       nixpkgs.gnused
