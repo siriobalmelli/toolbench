@@ -1,7 +1,7 @@
 {
   "owner": "siriobalmelli",
   "repo": "nixpkgs",
-  "branch": "unstable",
-  "rev": "ad49300678c27b077c7b9738a924b450cd81737c",
-  "sha256": "053ab4lql4mw0d8a8zhla1r9j0d7fwdxyyfi8pinbmh28x7dhy1v"
+  "branch": "sirio-test-master",
+  "rev": "f06d6fdf0d1836d68552fcb6211f316d75714a5a",
+  "sha256": "1jhq620rfybrl1dnvb75md0fpyn44hg97d83bwlarlw3rwp2gf8j"
 }

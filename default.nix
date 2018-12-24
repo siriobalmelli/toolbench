@@ -10,7 +10,7 @@ let
   # which would obviate having to set PYTHONPATH in bashrc,
   # but would require explicitly reinstalling the wrapped python at every change,
   # as opposed to quickly and painlessly testing things with 'nix-env --install'
-  python = nixpkgs.python36Full;
+  python = nixpkgs.python37Full;
 
   # The list of packages to be installed
   homies = [
@@ -61,6 +61,7 @@ let
       nixpkgs.cscope
       nixpkgs.curl
       nixpkgs.dos2unix
+      nixpkgs.entr
       nixpkgs.fava
       nixpkgs.fdupes
       nixpkgs.ffmpeg
