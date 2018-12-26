@@ -19,7 +19,8 @@ let
       nerdcommenter  # comment manipulation
       surround  # delimiter (quote, brace, etc) manipulation
 
-      # syntastic  # linting
+      rainbow  # paren colorizer
+
       ale  # better linting
       # TODO: markdown linting in a Nix package?
 

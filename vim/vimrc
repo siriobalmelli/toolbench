@@ -84,6 +84,9 @@ set hidden
 "	per-plugin settings and keybindings
 ""
 
+" parenthesis colorizer
+let g:rainbow_active = 1
+
 "make '=' reindent the whole file
 nnoremap = ggVG=<C-o><C-o><CR>
 
