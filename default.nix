@@ -56,6 +56,7 @@ let
       nixpkgs.altcoins.bitcoind
       nixpkgs.altcoins.go-ethereum
       nixpkgs.cacert
+      nixpkgs.cloc
       nixpkgs.cointop
       nixpkgs.coreutils
       nixpkgs.cscope
