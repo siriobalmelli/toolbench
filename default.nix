@@ -85,6 +85,7 @@ let
       nixpkgs.nmap
       nixpkgs.nmon
       nixpkgs.p7zip
+      nixpkgs.pahole
       nixpkgs.pandoc
       nixpkgs.pass
       nixpkgs.pkgconfig
