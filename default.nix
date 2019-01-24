@@ -79,6 +79,7 @@ let
       nixpkgs.jq
       nixpkgs.less
       nixpkgs.meson
+      nixpkgs.mtr
       nixpkgs.ncat
       nixpkgs.ninja
       nixpkgs.nix
