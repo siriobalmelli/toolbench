@@ -70,6 +70,7 @@ let
       nixpkgs.findutils
       nixpkgs.gitAndTools.gitAnnex
       nixpkgs.gnumake
+      nixpkgs.gnupatch
       nixpkgs.gnused
       nixpkgs.gnutar
       nixpkgs.htop
