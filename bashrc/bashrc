@@ -87,3 +87,8 @@ export EDITOR=vim
 
 # hack Python to see nix
 export PYTHONPATH=$(find -L ~/.nix-profile -path "*/python*/site-packages" -type d | tr '\n' ':')$PYTHONPATH
+
+# hack C compilation to see installed libraries
+export PKG_CONFIG_PATH=~/.nix-profile/lib/pkgconfig
+export CPATH=~/.nix-profile/include/
+export LIBRARY_PATH=~/.nix-profile/lib
