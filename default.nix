@@ -79,6 +79,7 @@ let
       nixpkgs.ipcalc
       nixpkgs.jq
       nixpkgs.less
+      nixpkgs.libarchive  # bsdtar
       nixpkgs.lzma  # xz, unxz
       nixpkgs.meson
       nixpkgs.mtr
