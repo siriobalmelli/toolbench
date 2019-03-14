@@ -10,7 +10,7 @@ let
   # which would obviate having to set PYTHONPATH in bashrc,
   # but would require explicitly reinstalling the wrapped python at every change,
   # as opposed to quickly and painlessly testing things with 'nix-env --install'
-  python = nixpkgs.python36Full;
+  python = nixpkgs.python37Full;
 
   # The list of packages to be installed
   homies = [
@@ -33,7 +33,7 @@ let
       python.pkgs.numpy
       python.pkgs.pip
       python.pkgs.ply
-      python.pkgs.pylint
+      #python.pkgs.pylint  # pyenchant build issue?
       python.pkgs.pyparsing
       python.pkgs.requests
       python.pkgs.ruamel_yaml
@@ -53,7 +53,6 @@ let
       nixpkgs.binutils-unwrapped
 
       # standard packages - query with `nix-env -qaP`
-      nixpkgs.altcoins.bitcoind
       nixpkgs.altcoins.go-ethereum
       nixpkgs.cacert
       nixpkgs.cloc
@@ -68,7 +67,7 @@ let
       nixpkgs.ffmpeg
       nixpkgs.figlet
       nixpkgs.findutils
-      nixpkgs.gitAndTools.gitAnnex
+      #nixpkgs.gitAndTools.gitAnnex  # build fails on Darwin
       nixpkgs.gnumake
       nixpkgs.gnupatch
       nixpkgs.gnused
@@ -87,9 +86,7 @@ let
       nixpkgs.ninja
       nixpkgs.nix
       nixpkgs.nmap
-      nixpkgs.nmon
       nixpkgs.p7zip
-      nixpkgs.pahole
       nixpkgs.pandoc
       nixpkgs.pass
       nixpkgs.pkgconfig
@@ -103,6 +100,8 @@ let
       nixpkgs.wget
       nixpkgs.which
       nixpkgs.xorriso
+
+      #nixpkgs.pahole  # not supported on Darwin
     ];
 
 

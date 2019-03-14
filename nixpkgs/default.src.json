@@ -1,7 +1,7 @@
 {
-  "owner": "siriobalmelli",
+  "owner": "siriobalmelli-foss",
   "repo": "nixpkgs",
   "branch": "sirio",
-  "rev": "ad49300678c27b077c7b9738a924b450cd81737c",
-  "sha256": "053ab4lql4mw0d8a8zhla1r9j0d7fwdxyyfi8pinbmh28x7dhy1v"
+  "rev": "8f9e283f929120f2579f791c9ac9b0df7bd8d938",
+  "sha256": "1l9a9bqrb1m1clsm9bc0gkbs8yn1zxmgmszc7lhdyiz4s5r94fgc"
 }
