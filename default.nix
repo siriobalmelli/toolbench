@@ -82,6 +82,7 @@ let
       nixpkgs.libarchive  # bsdtar
       nixpkgs.lzma  # xz, unxz
       nixpkgs.meson
+      nixpkgs.moreutils  # vidir
       nixpkgs.mtr
       nixpkgs.ncat
       nixpkgs.ninja
