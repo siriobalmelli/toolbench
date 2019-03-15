@@ -68,6 +68,7 @@ let
       nixpkgs.figlet
       nixpkgs.findutils
       #nixpkgs.gitAndTools.gitAnnex  # build fails on Darwin
+      nixpkgs.flock
       nixpkgs.gnumake
       nixpkgs.gnupatch
       nixpkgs.gnused
