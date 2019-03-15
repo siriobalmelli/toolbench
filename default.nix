@@ -85,6 +85,8 @@ let
       nixpkgs.moreutils  # vidir
       nixpkgs.mtr
       nixpkgs.ncat
+      nixpkgs.ncurses
+      nixpkgs.ncurses.dev
       nixpkgs.ninja
       nixpkgs.nix
       nixpkgs.nmap
