@@ -61,6 +61,7 @@ let
       nixpkgs.cscope
       nixpkgs.curl
       nixpkgs.dos2unix
+      nixpkgs.dosfstools  # mkdosfs
       nixpkgs.entr
       nixpkgs.fava
       nixpkgs.fdupes
