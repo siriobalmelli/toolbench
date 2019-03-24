@@ -191,7 +191,7 @@ let g:indent_guides_guide_size=1
 " must be declared as an autocmd else settings only take effect on the first tab
 "let b:ale_linters = {'c': ['ccls'], 'cpp': ['ccls'], }
 autocmd filetype c,cpp let b:ale_linters = {'c': ['ccls'], 'cpp': ['ccls']}
-autocmd filetype python let b:ale_linters = {'python': ['mypy', 'flake8']}
+autocmd filetype python let b:ale_linters = {'python': ['flake8']}
 
 
 " SEARCH - thank you Damian Conway

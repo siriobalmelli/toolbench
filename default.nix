@@ -30,11 +30,9 @@ let
       python.pkgs.jsonschema
       python.pkgs.markdown
       python.pkgs.matplotlib
-      python.pkgs.mypy
       python.pkgs.numpy
       python.pkgs.pip
       python.pkgs.ply
-      #python.pkgs.pylint  # pyenchant build issue? Replaced with flake8 and mypy
       python.pkgs.pyparsing
       python.pkgs.requests
       python.pkgs.ruamel_yaml
@@ -44,6 +42,10 @@ let
       python.pkgs.twine
       python.pkgs.wheel
       python.pkgs.yamllint
+      #python.pkgs.mypy # TODO: not playing nice and finding e.g. beancount.
+                        # TODO: debug and re-inable for ALE in vimrc
+      #python.pkgs.pylint  # pyenchant build issue? Replaced with flake8 and mypy
+
 
       # compilers and wrappers
       gcc
@@ -107,6 +109,7 @@ let
       nixpkgs.wget
       nixpkgs.which
       nixpkgs.xorriso
+      nixpkgs.ycmd
 
       #nixpkgs.pahole  # not supported on Darwin
     ];
