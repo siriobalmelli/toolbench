@@ -26,6 +26,7 @@ let
       python.pkgs.cycler
       python.pkgs.dateutil
       python.pkgs.flake8
+      python.pkgs.ipython
       python.pkgs.jsonschema
       python.pkgs.markdown
       python.pkgs.matplotlib
@@ -33,7 +34,7 @@ let
       python.pkgs.numpy
       python.pkgs.pip
       python.pkgs.ply
-      #python.pkgs.pylint  # pyenchant build issue?
+      #python.pkgs.pylint  # pyenchant build issue? Replaced with flake8 and mypy
       python.pkgs.pyparsing
       python.pkgs.requests
       python.pkgs.ruamel_yaml

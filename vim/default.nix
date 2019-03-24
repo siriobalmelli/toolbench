@@ -13,7 +13,6 @@ let
       autoload_cscope-vim
       UltiSnips
 
-      # TODO: meson syntax
       # TODO: vim-beancount
       # TODO: SimplylFold (python folding for vim)
       nerdcommenter  # comment manipulation
@@ -22,7 +21,6 @@ let
       rainbow  # paren colorizer
 
       ale  # better linting
-      # TODO: markdown linting in a Nix package?
 
       tabular  # format tables
       vim-easymotion  # upgraded search
@@ -32,6 +30,7 @@ let
       vim-json  # vim-jdaddy not available
       vim-markdown
       vim-nix
+      meson
 
       # TODO: these packages *seem* like a good idea; audition and learn them
       #ctrlp # grep -Er from inside Vim
