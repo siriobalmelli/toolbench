@@ -91,6 +91,7 @@ let
       nixpkgs.ninja
       nixpkgs.nix
       nixpkgs.nmap
+      nixpkgs.openssh
       nixpkgs.p7zip
       nixpkgs.pandoc
       nixpkgs.pass
