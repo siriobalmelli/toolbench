@@ -36,7 +36,7 @@ esac
 alias btcblock='echo $(bitcoin-cli getblockcount 2>&1)/$(wget -O - http://blockchain.info/q/getblockcount 2>/dev/null)'
 alias btcinfo='bitcoin-cli getwalletinfo'
 alias gd="git diff"
-alias gs="git diff"
+alias gs="git status"
 alias la='ls -A'
 alias ll='ls -lha'
 alias tmp='cd $(mktemp -d)'
