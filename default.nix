@@ -1,9 +1,11 @@
+{
+  system ? builtins.currentSystem,
+  nixpkgs ? import ./nixpkgs {}  # Pin nixpkgs
+}:
+
 # The main homies file, where homies are defined. See the README.md for
 # instructions.
 let
-
-  # The (pinned) Nixpkgs where the original packages are sourced from
-  nixpkgs = import ./nixpkgs {};
 
   # single knob for python version everywhere
   # ... there is also the wrapped 'python35.withPackages' approach (see <https://nixos.org/nixpkgs/manual/#python>)
