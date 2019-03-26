@@ -198,6 +198,19 @@ This is exactly the list we get by running `nix-shell` inside [.ycm_extra_conf.p
 
 [conf]: vim/ycm_extra_conf.py
 
+## Pinned nixpkgs workflow
+
+1. nixpkgs is pinned to a known working state (for both macOS and Linux) in
+    <https://github.com/siriobalmelli-foss/nixpkgs/tree/sirio> (my fork).
+
+1. Fork branches are organized as follows:
+    - `upstream/master` -(pull)-> `master`
+    - `master` -(rebase)-> `master-dev`
+    - *development for upstream* -(commit)-> `master-dev`
+    - `master-dev` -(pull requests)-> `upstream/master`
+    - `master-dev` -(reset --hard)-> `sirio`
+    - *unmergeable: `vim-plugins/update.py` etc* -(commit)-> `sirio`
+
 ## Thanks
 
 1. Originally forked from <https://github.com/nmattia/homies> and then customized,

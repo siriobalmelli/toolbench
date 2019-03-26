@@ -11,7 +11,7 @@ let
   extraPackages = with vimPlugins;
     [
       autoload_cscope-vim
-      UltiSnips
+      ultisnips
 
       # TODO: vim-beancount
       # TODO: SimplylFold (python folding for vim)
