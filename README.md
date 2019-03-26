@@ -209,7 +209,9 @@ This is exactly the list we get by running `nix-shell` inside [.ycm_extra_conf.p
     - *development for upstream* -(commit)-> `master-dev`
     - `master-dev` -(pull requests)-> `upstream/master`
     - `master-dev` -(reset --hard)-> `sirio`
+    - *any branch* -(cherry-pick)-> `sirio`
     - *unmergeable: `vim-plugins/update.py` etc* -(commit)-> `sirio`
+    - *working config on Linux and macOS* -(tag sirio_stable_YYYY_MM_DD)-> `sirio`
 
 ## Thanks
 
