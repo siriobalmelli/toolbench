@@ -3,12 +3,12 @@
   nixpkgs ? import (builtins.fetchGit {
     url = "https://github.com/siriobalmelli-foss/nixpkgs.git";
     ref = "sirio";
-    }) {},
+    }) {}
 }:
 
 let
   # TODO: get accepted upstream
-  replacement = import (builtins.fetchGit {
+  replacement = nixpkgs.replacement or import (builtins.fetchGit {
     url = "https://github.com/siriobalmelli/replacement.git";
     ref = "master";
     }) {};
