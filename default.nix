@@ -1,11 +1,17 @@
 {
   system ? builtins.currentSystem,
-  nixpkgs ? import ./nixpkgs {}  # Pin nixpkgs
+  nixpkgs ? import (builtins.fetchGit {
+    url = "https://github.com/siriobalmelli-foss/nixpkgs.git";
+    ref = "sirio";
+    }) {},
 }:
 
-# The main homies file, where homies are defined. See the README.md for
-# instructions.
 let
+  # TODO: get accepted upstream
+  replacement = import (builtins.fetchGit {
+    url = "https://github.com/siriobalmelli/replacement.git";
+    ref = "master";
+    }) {};
 
   # single knob for python version everywhere
   # ... there is also the wrapped 'python35.withPackages' approach (see <https://nixos.org/nixpkgs/manual/#python>)
@@ -122,9 +128,6 @@ let
 
   # A custom '.bashrc' (see bashrc/default.nix for details)
   bashrc = nixpkgs.callPackage ./bashrc {};
-
-  # TODO: integrate this with a branch of our own nixpkgs
-  replacement = nixpkgs.callPackage ./replacement { inherit nixpkgs python; };
 
   # Git with config baked in
   git = import ./git (

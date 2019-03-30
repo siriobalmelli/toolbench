@@ -13,7 +13,6 @@ let
       autoload_cscope-vim
       ultisnips
 
-      # TODO: vim-beancount
       # TODO: SimplylFold (python folding for vim)
       nerdcommenter  # comment manipulation
       surround  # delimiter (quote, brace, etc) manipulation
@@ -27,10 +26,11 @@ let
       vim-indent-guides  # show indents visually
       youcompleteme  # completion is life
       # language support (and linting) packages:
-      vim-json  # vim-jdaddy not available
+      jdaddy-vim  # crappy previous alternative is vim-json
       vim-markdown
       vim-nix
       meson
+      vim-beancount
 
       # TODO: these packages *seem* like a good idea; audition and learn them
       #ctrlp # grep -Er from inside Vim
