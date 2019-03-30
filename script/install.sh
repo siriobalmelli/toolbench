@@ -1,6 +1,11 @@
+#	install.sh
+# install (pin) a top-level Nix derivation as the Nix environment
+# (c) 2018 Sirio Balmelli
+
 # recipe mode
 set -e
-pushd "$(dirname $0)/.."
+
+[[ $1 ]] && DERIVATION="$1" || DERIVATION="$(dirname $0)/../default.nix"
 
 # install nix if necessary
 if ! command -v nix-env; then
@@ -9,7 +14,7 @@ if ! command -v nix-env; then
 fi
 
 # reset environment to current toolbench, clean up old generations
-nix-env -f default.nix -i --remove-all
+nix-env -f $DERIVATION -i --remove-all
 nix-env --delete-generations 10d
 
 # Set nix-env's environment to point to the nixpkgs we just built against.
@@ -17,7 +22,8 @@ nix-env --delete-generations 10d
 # NOTE this duplicates the fetchGit in default.nix,
 # but I don't (yet) understand the subtleties of Nix tooling any better.
 nix-channel --add \
-	https://github.com/siriobalmelli-foss/nixpkgs/archive/sirio.tar.gz
+	https://github.com/siriobalmelli-foss/nixpkgs/archive/sirio.tar.gz \
+	nixpkgs
 nix-channel --update
 
 # TODO: can't GC as it removes GBs of build-time dependencies,
@@ -33,5 +39,4 @@ ln -sf ~/.bashrc ~/.bash_profile  # macOS
 homies-gitconfig >~/.gitconfig
 
 # brand new world
-popd
 source ~/.bashrc

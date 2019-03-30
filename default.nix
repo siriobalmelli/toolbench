@@ -20,6 +20,33 @@ let
   # as opposed to quickly and painlessly testing things with 'nix-env --install'
   python = nixpkgs.python37Full;
 
+  gcc = nixpkgs.gcc.overrideAttrs ( oldAttrs: rec { meta.priority = 5; });
+  clang = nixpkgs.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
+
+  # A custom '.bashrc' (see bashrc/default.nix for details)
+  bashrc = nixpkgs.callPackage ./bashrc {};
+
+  # Git with config baked in
+  git = import ./git (
+    { inherit (nixpkgs) makeWrapper symlinkJoin writeScriptBin;
+      git = nixpkgs.git;
+    });
+
+  # Tmux with a custom tmux.conf baked in
+  tmux = import ./tmux (with nixpkgs;
+    { inherit
+        symlinkJoin
+        makeWrapper
+        writeText
+        ;
+      tmux = nixpkgs.tmux;
+    });
+
+  snack = (import ./snack).snack-exe;
+
+  # Vim with a custom vimrc and set of packages
+  vim = import ./vim { inherit nixpkgs python; };
+
   # The list of packages to be installed
   homies = [
       # Customized packages
@@ -53,7 +80,6 @@ let
       #python.pkgs.mypy # TODO: not playing nice and finding e.g. beancount.
                         # TODO: debug and re-inable for ALE in vimrc
       #python.pkgs.pylint  # pyenchant build issue? Replaced with flake8 and mypy
-
 
       # compilers and wrappers
       gcc
@@ -121,34 +147,6 @@ let
 
       #nixpkgs.pahole  # not supported on Darwin
     ];
-
-
-  gcc = nixpkgs.gcc.overrideAttrs ( oldAttrs: rec { meta.priority = 5; });
-  clang = nixpkgs.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
-
-  # A custom '.bashrc' (see bashrc/default.nix for details)
-  bashrc = nixpkgs.callPackage ./bashrc {};
-
-  # Git with config baked in
-  git = import ./git (
-    { inherit (nixpkgs) makeWrapper symlinkJoin writeScriptBin;
-      git = nixpkgs.git;
-    });
-
-  # Tmux with a custom tmux.conf baked in
-  tmux = import ./tmux (with nixpkgs;
-    { inherit
-        symlinkJoin
-        makeWrapper
-        writeText
-        ;
-      tmux = nixpkgs.tmux;
-    });
-
-  snack = (import ./snack).snack-exe;
-
-  # Vim with a custom vimrc and set of packages
-  vim = import ./vim { inherit nixpkgs python; };
 
 in
   if nixpkgs.lib.inNixShell
