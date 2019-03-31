@@ -68,6 +68,7 @@ let
       python.pkgs.numpy
       python.pkgs.pip
       python.pkgs.ply
+      python.pkgs.prompt_toolkit
       python.pkgs.pyparsing
       python.pkgs.requests
       python.pkgs.ruamel_yaml
@@ -75,6 +76,7 @@ let
       python.pkgs.six
       python.pkgs.tabulate
       python.pkgs.twine
+      python.pkgs.wcwidth
       python.pkgs.wheel
       python.pkgs.yamllint
       #python.pkgs.mypy # TODO: not playing nice and finding e.g. beancount.
