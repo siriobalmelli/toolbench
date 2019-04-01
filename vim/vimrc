@@ -27,10 +27,29 @@ filetype indent on
 syntax on
 
 "specify indent settings for all languages
-autocmd filetype c,cpp,make,sh setlocal shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab autoindent cc=80
-autocmd filetype go setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent cc=80
-autocmd filetype markdown,conf,javascript,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
-autocmd filetype nix,text,yaml,json setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
+autocmd filetype c,cpp,make,sh setlocal
+	\ shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab autoindent cc=80
+	\ foldmethod=syntax
+
+autocmd filetype go setlocal
+	\ shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent cc=80
+	\ foldmethod=syntax
+
+autocmd filetype conf,javascript,python setlocal
+	\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
+	\ foldmethod=syntax
+
+autocmd filetype markdown setlocal
+	\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
+	\ foldmethod=indent
+
+autocmd filetype nix setlocal
+	\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
+	\ foldmethod=syntax
+
+autocmd filetype text,yaml,json setlocal
+	\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
+	\ foldmethod=indent
 
 let g:yankring_history_dir = "~/.vim"
 
@@ -58,7 +77,10 @@ set splitbelow
 "support indent toggle with 'za'
 "	open all folds with zR
 "	close all folds with zM
-set foldmethod=syntax
+"" set foldmethod PER filetype
+" because e.g. json with large files would barf with syntax folding
+"set foldmethod=syntax
+""
 nnoremap <space> za
 "no folds open when opening a file
 set foldlevel=20
@@ -115,7 +137,7 @@ let g:ctrlp_working_path_mode = 'ra'
 " YCM (YouCompleteMe)
 ""
 let g:ycm_always_populate_location_list = 1
-let g:ycm_autoclose_preview_window_after_insertion = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_complete_in_comments = 1
 " see ID completion with language keywords
 let g:ycm_seed_identifiers_with_syntax = 1

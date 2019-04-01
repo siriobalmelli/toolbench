@@ -16,15 +16,13 @@ let
       # TODO: SimplylFold (python folding for vim)
       nerdcommenter  # comment manipulation
       surround  # delimiter (quote, brace, etc) manipulation
-
       rainbow  # paren colorizer
-
       ale  # better linting
-
       tabular  # format tables
       vim-easymotion  # upgraded search
       vim-indent-guides  # show indents visually
       youcompleteme  # completion is life
+
       # language support (and linting) packages:
       jdaddy-vim  # crappy previous alternative is vim-json
       vim-markdown
