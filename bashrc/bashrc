@@ -35,23 +35,26 @@ esac
 
 alias btcblock='echo $(bitcoin-cli getblockcount 2>&1)/$(wget -O - http://blockchain.info/q/getblockcount 2>/dev/null)'
 alias btcinfo='bitcoin-cli getwalletinfo'
-alias ga="git add"
-alias gb="git branch"
-alias gc="git checkout"
-alias gd="git diff"
-alias gdc="gd --cached"
-alias ge="git remote"
-alias gf="git fetch"
-alias gh="git push"
-alias gl="git log"
-alias gm="git merge"
-alias gp="git pull"
-alias gr="git rebase"
-alias gs="git status"
-alias gt="git commit"
-alias gx="git reset"
-alias gxh="git reset --hard"
-alias gy="git cherry-pick"
+
+# don't conflict with e.g. 'gs' (ghostscript)
+alias gad="git add"
+alias gbr="git branch"
+alias gco="git checkout"
+alias gct="git commit"
+alias gdf="git diff"
+alias gdfc="gd --cached"
+alias gfh="git fetch"
+alias glg="git log"
+alias gmg="git merge"
+alias gph="git push"
+alias gpl="git pull"
+alias gpy="git cherry-pick"
+alias grb="git rebase"
+alias gre="git remote"
+alias grs="git reset"
+alias grsh="git reset --hard"
+alias gst="git status"
+
 alias la='ls -A'
 alias ll='ls -lha'
 alias tmp='cd $(mktemp -d)'
