@@ -27,15 +27,19 @@ let
   bashrc = nixpkgs.callPackage ./bashrc {};
 
   # Git with config baked in
-  git = import ./git (with nixpkgs;
-    { inherit git symlinkJoin makeWrapper writeScriptBin; });
+  git = import ./git (
+    { inherit (nixpkgs) makeWrapper symlinkJoin writeScriptBin;
+      git = nixpkgs.git;
+    });
 
   tbh = import ./script (with nixpkgs;
     { inherit writeShellScriptBin; });
 
   # Tmux with a custom tmux.conf baked in
   tmux = import ./tmux (with nixpkgs;
-    { inherit symlinkJoin makeWrapper writeText tmux; });
+    { inherit symlinkJoin makeWrapper writeText;
+       tmux = nixpkgs.tmux;
+    });
 
   # Vim with a custom vimrc and set of packages
   vim = import ./vim
