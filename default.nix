@@ -27,25 +27,19 @@ let
   bashrc = nixpkgs.callPackage ./bashrc {};
 
   # Git with config baked in
-  git = import ./git (
-    { inherit (nixpkgs) makeWrapper symlinkJoin writeScriptBin;
-      git = nixpkgs.git;
-    });
+  git = import ./git (with nixpkgs;
+    { inherit git symlinkJoin makeWrapper writeScriptBin; });
+
+  tbh = import ./script (with nixpkgs;
+    { inherit writeShellScriptBin; });
 
   # Tmux with a custom tmux.conf baked in
   tmux = import ./tmux (with nixpkgs;
-    { inherit
-        symlinkJoin
-        makeWrapper
-        writeText
-        ;
-      tmux = nixpkgs.tmux;
-    });
-
-  snack = (import ./snack).snack-exe;
+    { inherit symlinkJoin makeWrapper writeText tmux; });
 
   # Vim with a custom vimrc and set of packages
-  vim = import ./vim { inherit nixpkgs python; };
+  vim = import ./vim
+    { inherit nixpkgs python; };
 
   # The list of packages to be installed
   homies = [
@@ -53,6 +47,7 @@ let
       bashrc
       git
       replacement
+      tbh
       tmux
       vim
 
@@ -151,11 +146,10 @@ let
     ];
 
 in
-  if nixpkgs.lib.inNixShell
-  then nixpkgs.mkShell
-    { buildInputs = homies;
-      shellHook = ''
-        $(homies-bashrc)
-        '';
+  if nixpkgs.lib.inNixShell then
+    nixpkgs.mkShell {
+      buildInputs = homies;
+      shellHook = ''$(homies-bashrc)'';
     }
-  else homies
+  else
+    homies

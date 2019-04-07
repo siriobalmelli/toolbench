@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # arbitrary (and inefficient) math on an IP address
 
-import ipaddress
+from ipaddress import ip_address
 import sys
 
-print(eval('ipaddress.ip_address("' + sys.argv[1] + '")' + ' '.join(sys.argv[2:])))
+print(eval('ip_address("' + sys.argv[1] + '")' + ' '.join(sys.argv[2:])))
