@@ -1,4 +1,5 @@
 ## toolbench scripts, for installation on a running system
+# TODO: de-facto 'ghostscript' dependency for merge_pdf is not encoded anywhere
 { writeShellScriptBin ? (import <nixpkgs> {}).writeShellScriptBin }:
 
 {
