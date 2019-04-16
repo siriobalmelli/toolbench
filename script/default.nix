@@ -9,4 +9,6 @@
     (builtins.readFile ./install.sh);
   tbh_merge_pdf = writeShellScriptBin "tbh_merge_pdf"
     (builtins.readFile ./merge_pdf.sh);
+  tbh_preview = writeShellScriptBin "tbh_preview"
+    (builtins.readFile ./preview.sh);
 }
