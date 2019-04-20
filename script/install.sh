@@ -21,6 +21,7 @@ nix-env --delete-generations 10d
 # Depends nix-channel clobbering (replacing) when doing an --add.
 # NOTE this duplicates the fetchGit in default.nix,
 # but I don't (yet) understand the subtleties of Nix tooling any better.
+# TODO: this is not generic (e.g. for private tools)
 nix-channel --add \
 	https://github.com/siriobalmelli-foss/nixpkgs/archive/sirio.tar.gz \
 	nixpkgs
@@ -31,12 +32,6 @@ nix-channel --update
 # Would be nice to remove now-unused packages-though!
 #nix-store --gc
 
-# clobber bashrc so it sources *only* our bash config
-# ... don't go *via* homies-bashrc - source directly!
-homies-bashrc >~/.bashrc
-ln -sf ~/.bashrc ~/.bash_profile  # macOS
-# clobber .gitconfig (see git/default.nix for details)
-homies-gitconfig >~/.gitconfig
-
-# brand new world
-source ~/.bashrc
+# execute post-install scripting
+[[ -s $(dirname $DERIVATION)/impurity.sh ]] && \
+	( cd $(dirname $DERIVATION) && ./impurity.sh )
