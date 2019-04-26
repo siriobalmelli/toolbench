@@ -93,6 +93,7 @@ let
       # standard packages - query with `nix-env -qaP`
       nixpkgs.altcoins.go-ethereum
       nixpkgs.cacert
+      nixpkgs.cht-sh  # cheat sheet
       nixpkgs.cloc
       nixpkgs.cointop
       nixpkgs.coreutils

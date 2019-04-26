@@ -36,6 +36,8 @@ esac
 alias btcblock='echo $(bitcoin-cli getblockcount 2>&1)/$(wget -O - http://blockchain.info/q/getblockcount 2>/dev/null)'
 alias btcinfo='bitcoin-cli getwalletinfo'
 
+alias cht='cht.sh'
+
 # don't conflict with e.g. 'gs' (ghostscript)
 alias gad="git add"
 alias gbr="git branch"
