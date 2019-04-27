@@ -26,7 +26,8 @@ filetype indent on
 "turn on syntax highlighting
 syntax on
 
-"specify indent settings for all languages
+"specify format and indent settings for all languages
+"NOTE that syntax indentation is _expensive_ so disable it for e.g. JSON
 autocmd filetype c,cpp,make,sh setlocal
 	\ shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab autoindent cc=80
 	\ foldmethod=syntax
@@ -35,18 +36,16 @@ autocmd filetype go setlocal
 	\ shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent cc=80
 	\ foldmethod=syntax
 
-autocmd filetype conf,javascript,python setlocal
+autocmd filetype conf,javascript setlocal
 	\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
 	\ foldmethod=syntax
-
-autocmd filetype markdown setlocal
+autocmd filetype markdown,python setlocal
 	\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
 	\ foldmethod=indent
 
 autocmd filetype nix setlocal
 	\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
 	\ foldmethod=syntax
-
 autocmd filetype text,yaml,json setlocal
 	\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
 	\ foldmethod=indent
