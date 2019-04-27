@@ -33,6 +33,8 @@ xterm-color|*-256color)
 	;;
 esac
 
+alias bch='bean-check'
+
 alias btcblock='echo $(bitcoin-cli getblockcount 2>&1)/$(wget -O - http://blockchain.info/q/getblockcount 2>/dev/null)'
 alias btcinfo='bitcoin-cli getwalletinfo'
 
