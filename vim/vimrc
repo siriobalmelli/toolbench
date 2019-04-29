@@ -50,6 +50,10 @@ autocmd filetype text,yaml,json setlocal
 	\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
 	\ foldmethod=indent
 
+" folds in insert mode? ridiculous, just let me _type_ already!
+autocmd InsertEnter * :let oldfold = &foldmethod | :setlocal foldmethod=manual
+autocmd InsertLeave * :execute "setlocal foldmethod=" . oldfold
+
 let g:yankring_history_dir = "~/.vim"
 
 
