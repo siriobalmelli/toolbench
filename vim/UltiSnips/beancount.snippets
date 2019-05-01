@@ -1,66 +1,75 @@
-# Files which follow the 'YYYY-MM-DD.payee - narration - doc.pdf' format
-#+	should become 'document' entries
-snippet "^([0-9-]{10})\.(.*) - (.*) - doc\.pdf$" "filename -> document" r
-`!p
-# get only the first account 'open' statement
-reg = re.compile('^[0-9-]{10}\s+open\s+(\S+).*')
-acct = next( (	mt.group(1)
-		for mt in (reg.match(line) for line in snip.buffer)
-		if mt != None ), 
-	None )
-
-snip.rv = '{0}\tdocument\t{1}\t"{2}"'.format(match.group(1),
-					acct,
-					match.group(0))
-`
-endsnippet
-
-# Files which follow the 'YYYY-MM-DD.payee - statement.pdf' format should become
-#+	'balance' entries with an associated 'document:' metadata
-snippet "^([0-9-]{10})\.(.*) - [Ss]tatement\.pdf$" "filename -> balance" r
-`!p
-from datetime import date, timedelta, datetime
-
-# get only the first account 'open' statement
-reg = re.compile('^[0-9-]{10}\s+open\s+(\S+).*')
-acct = next( (	mt.group(1)
-		for mt in (reg.match(line) for line in snip.buffer)
-		if mt != None ), 
-	None )
-
-# increment the date by 1 day (balance statements are evaluated at start of day)
-posting = datetime.strptime(match.group(1), '%Y-%m-%d')
-posting += timedelta(days=1)
-
-snip.rv = '{0}\tbalance\t\t{1}\t\n\tdocument:\t"{2}"'.format(
-						posting.date(),
-						acct,
-						match.group(0))
-`
-endsnippet
-
-# Files which have a 'YYYY-MM-DD.payee - narration.pdf' format,
-#+	but NOT matching the 'filename -> document' snippet above.
-snippet "^([0-9-]{10})\.(.*) - (.*)(?<! - doc)(?<! - [Ss]tatement)\.pdf$" "filename -> transaction" r
-`!p
-snip.rv = '{0}\t*\t"{1}"\t\t"{2}"'.format(match.group(1),
-					match.group(2),
-					match.group(3))
-
-# find all account 'open' statements
-reg = re.compile('^[0-9-]{10}\s+open\s+(\S+).*')
-accts = [ '\t{0}'.format(mt.group(1))
-	for mt in 
-		[reg.match(line) for line in snip.buffer]
-	if mt != None ]
-snip.rv += '\n{0}'.format('\n'.join(accts))
-`
-endsnippet
+# Beancount snippets file
+# (c) Sirio Balmelli
 
 
 # Generic transaction
 snippet tr "Transaction" b
-${1:`date +%Y`}-${2:`date +%m`}-${3:`date +%d`}	*	"${4:payee}"		"${5:narration}"
+${1:`date +%Y`}-${2:`date +%m`}-${3:`date +%d`} *   "${4:payee}"        "${5:narration}"
+endsnippet
+
+
+# everything after this point has this bit of Python executing
+global !p
+"""
+All snippets see these.
+"""
+import re
+from itertools import islice
+
+acct_re = re.compile('^[0-9-]{10}\s+open\s+(\S+).*')
+
+def iaccounts():
+    """
+    Returns an iterator over accounts in the file.
+    """
+    return (mt.group(1) for mt in (acct_re.match(ln) for ln in snip.buffer) if mt)
+
+def accounts(num):
+    """
+    Returns a list of at most (may be less) the first 'num' accounts found in file.
+    """
+    return list(islice(iaccounts(), num))
+
+def acct():
+    """
+    Returns the first account in the file.
+    """
+    return next(iaccounts(), '')
+endglobal
+
+
+# Files which follow the 'YYYY-MM-DD.payee - narration - doc.pdf' format
+#+  should become 'document' entries
+snippet "^([0-9-]{10})\.(.*) - (.*) - doc\.pdf$" "filename -> document" r
+`!p
+snip.rv = '%s\tdocument\t%s\t"%s"' % (match.group(1), acct(), match.group(0))
+`
+endsnippet
+
+
+# Files which follow the 'YYYY-MM-DD.payee - statement.pdf' format should become
+#+  'balance' entries with an associated 'document:' metadata
+snippet "^([0-9-]{10})\.(.*) - [Ss]tatement\.pdf$" "filename -> balance" r
+`!p
+from datetime import date, timedelta, datetime
+
+# increment the date by 1 day (balance statements are evaluated at start of day)
+posting = datetime.strptime(match.group(1), '%Y-%m-%d') + timedelta(days=1)
+
+top = '%s\tbalance\t\t%s\t' % (posting.date(), acct())
+snip.rv = ('%s\n\tdocument:\t"%s"') % (top, match.group(0))
+`
+endsnippet
+
+
+# Files which have a 'YYYY-MM-DD.payee - narration.pdf' format,
+#+  but NOT matching the 'filename -> document' snippet above.
+snippet "^([0-9-]{10})\.(.*) - (.*)\.pdf$" "filename -> transaction" r
+`!p
+head_print = '%s\t*\t"%s"\t\t"%s"' % (match.groups()[:3])
+acct_print = '\n'.join(['\t%s' % acct for acct in accounts(2)])
+snip.rv = '\n'.join([head_print, acct_print])
+`
 endsnippet
 
 
@@ -69,55 +78,44 @@ snippet bal "Balance" b
 `!p
 from datetime import date, timedelta, datetime
 
-# get only the first account 'open' statement
-reg = re.compile('^[0-9-]{10}\s+open\s+(\S+).*')
-acct = next( (	mt.group(1)
-		for mt in (reg.match(line) for line in snip.buffer)
-		if mt != None ), 
-	None )
-
 date_reg = re.compile('^([0-9-]{10}).*')
 
 # Work backwards and get the date for any entry immediately preceding this one.
-# There is no F'ING reason for this try block ... except UltiSnips otherwise gives
-#+	snip.p.start == 0
-#+	... but whyyyyyyyy
+# There is no apparent reason for this try block
+# ... except UltiSnips otherwise gives 'snip.p.start == 0' ??
 try:
-	date_str = next( (mt.group(1)
-			for mt in (date_reg.match(line)
-				for line in reversed(snip.buffer[0:snip.p.start[0]]))
-			if mt != None ),
-		None )
+    date_str = next((mt.group(1)
+                     for mt in (date_reg.match(ln)
+                                for ln in reversed(snip.buffer[0:snip.p.start[0]]))
+                     if mt),
+                    None)
 
-	# increase date by 1 (balance assertions take effect at the beginning of the day)
-	posting = datetime.strptime(date_str, '%Y-%m-%d')
-	posting += timedelta(days=1)
+    # increase date by 1 (balance assertions take effect at the beginning of the day)
+    posting = datetime.strptime(date_str, '%Y-%m-%d') + timedelta(days=1)
 
-	# output balance entry
-	snip.rv = '{0}\tbalance\t\t{1}\t'.format(posting.date(), acct)
+    # output balance entry
+    snip.rv = '%s\tbalance\t\t%s\t' % (posting.date(), acct())
 except:
-	pass
+    pass
 `
 endsnippet
 
 
 # Hours entry
-snippet hr "hour log entry (assume accounts are on lines 7 and 8 of doc)" b
-${1:`date +%Y`}-${2:`date +%m`}-${3:`date +%d`}	*	"${4:project}"		"${5:0900}-${6:1800}; ${7}"
-	`!p snip.rv = re.split('\s+', snip.buffer[6])[2]`
+snippet hr "hour log entry" b
+${1:`date +%Y-%m-%d`}  *   "${2:project}"      "${3:0900}-${4:1800}; ${5:what}"
 `!p
-# calculate time based on hours entries
-from datetime import timedelta
+from datetime import date, datetime
 
-dl = []
-for a in [ t[5], t[6] ]:
-	if re.match('^[0-9]{4}$', a):
-		tme = re.split('([0-9]{2})', a)
-	else:
-		tme = re.split('([0-9]{2})', '0900')
-	dl.append( timedelta(hours=int(tme[1]), minutes=int(tme[3])) )
+# yr, mo, dy = date.today().isoformat().split('-')
+try:  # no, t[2:4] gives a TypeError
+    start = datetime.strptime(t[3] if t[3] else '0900', '%H%M')
+    end = datetime.strptime(t[4] if t[4] else '0900', '%H%M')
+except ValueError:
+    start = end = datetime.strptime('0900', '%H%M')
+delta = round((end - start).total_seconds() / 3600, 1)
 
-# output hours account line with calculated delta
-snip.rv = "\t{0}\t{1} T_SB".format( re.split('\s+', snip.buffer[7])[2], round((dl[1] - dl[0]).total_seconds() / 3600, 1) )
+accs = accounts(2)
+snip.rv = ('\t%s\n\t%s\t\t%s T_SB') % (accs[0], accs[1], delta)
 `
 endsnippet

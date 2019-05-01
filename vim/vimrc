@@ -39,7 +39,7 @@ autocmd filetype go setlocal
 autocmd filetype conf,javascript setlocal
 	\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
 	\ foldmethod=syntax
-autocmd filetype markdown,python setlocal
+autocmd filetype markdown,python,snippets setlocal
 	\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
 	\ foldmethod=indent
 
