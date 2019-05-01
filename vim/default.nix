@@ -12,6 +12,7 @@ let
     [
       autoload_cscope-vim
       ultisnips
+      vim-snippets
 
       # TODO: SimplylFold (python folding for vim)
       nerdcommenter  # comment manipulation
@@ -45,7 +46,7 @@ let
     (lib.concatStringsSep "\n"
     [ (builtins.readFile ./vimrc)
       ''
-      let g:UltiSnipsSnippetDirectories=['${./UltiSnips}']
+      let g:UltiSnipsSnippetDirectories=['${./UltiSnips}', 'UltiSnips']
       ''
     ]
     );
