@@ -217,6 +217,7 @@ let g:indent_guides_guide_size=1
 "let b:ale_linters = {'c': ['ccls'], 'cpp': ['ccls'], }
 autocmd filetype c,cpp let b:ale_linters = {'c': ['ccls'], 'cpp': ['ccls']}
 autocmd filetype python let b:ale_linters = {'python': ['flake8']}
+autocmd filetype beancount let b:ale_linters = {'beancount': []}
 
 
 " SEARCH - thank you Damian Conway
