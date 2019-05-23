@@ -103,14 +103,14 @@ endsnippet
 
 # Hours entry
 snippet hr "hour log entry" b
-${1:`date +%Y-%m-%d`}  *   "${2:project}"      "${3:0900}-${4:1800}; ${5:what}"
+${1:`date +%Y-%m`}-${2:`date +%d`}  *  "${3:project}"      "${4:0900}-${5:1800}; ${6:what}"
 `!p
 from datetime import date, datetime
 
 # yr, mo, dy = date.today().isoformat().split('-')
 try:  # no, t[2:4] gives a TypeError
-    start = datetime.strptime(t[3] if t[3] else '0900', '%H%M')
-    end = datetime.strptime(t[4] if t[4] else '0900', '%H%M')
+    start = datetime.strptime(t[4] if t[4] else '0900', '%H%M')
+    end = datetime.strptime(t[5] if t[5] else '0900', '%H%M')
 except ValueError:
     start = end = datetime.strptime('0900', '%H%M')
 delta = round((end - start).total_seconds() / 3600, 1)
