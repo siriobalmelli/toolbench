@@ -46,7 +46,7 @@ autocmd filetype markdown,python,snippets setlocal
 autocmd filetype nix setlocal
 	\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
 	\ foldmethod=syntax
-autocmd filetype text,yaml,json setlocal
+autocmd filetype text,yaml,json,beancount setlocal
 	\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
 	\ foldmethod=indent
 
