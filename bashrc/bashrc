@@ -52,12 +52,14 @@ alias glg="git log"
 alias gmg="git merge"
 alias gph="git push"
 alias gpl="git pull"
+alias gpt="git push --tags"
 alias gpy="git cherry-pick"
 alias grb="git rebase"
 alias gre="git remote"
 alias grh="git reset --hard"
 alias grs="git reset"
 alias gst="git status"
+alias gtg="git tag"
 
 alias la='ls -A'
 alias ll='ls -lha'
