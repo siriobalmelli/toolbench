@@ -3,6 +3,8 @@
 { writeShellScriptBin ? (import <nixpkgs> {}).writeShellScriptBin }:
 
 {
+  tbh_flush_dns = writeShellScriptBin "tbh_flush_dns"
+    (builtins.readFile ./flush_dns.sh);
   tbh_gemset_nix = writeShellScriptBin "tbh_gemset_nix"
     (builtins.readFile ./gemset_nix.sh);
   tbh_install = writeShellScriptBin "tbh_install"
