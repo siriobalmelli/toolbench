@@ -28,9 +28,7 @@ let
 
   # Git with config baked in
   git = import ./git (
-    { inherit (nixpkgs) makeWrapper symlinkJoin writeScriptBin;
-      git = nixpkgs.git;
-    });
+    { inherit (nixpkgs) git symlinkJoin makeWrapper writeScriptBin ; });
 
   tbh = import ./script (with nixpkgs;
     { inherit writeShellScriptBin; });
@@ -49,11 +47,14 @@ let
   homies = [
       # Customized packages
       bashrc
-      git
       replacement
       tbh
       tmux
       vim
+
+      git
+      nixpkgs.gitAndTools.gitRemoteGcrypt
+      nixpkgs.git-crypt
 
       python
       python.pkgs.beancount
@@ -92,6 +93,7 @@ let
 
       # standard packages - query with `nix-env -qaP`
       nixpkgs.altcoins.go-ethereum
+      nixpkgs.gitAndTools.gitRemoteGcrypt
       nixpkgs.cacert
       nixpkgs.cht-sh  # cheat sheet
       nixpkgs.cloc
