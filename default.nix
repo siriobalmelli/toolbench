@@ -55,6 +55,7 @@ let
       git
       nixpkgs.gitAndTools.gitRemoteGcrypt
       nixpkgs.git-crypt
+      #nixpkgs.gitAndTools.gitAnnex  # build fails on Darwin
 
       python
       python.pkgs.beancount
@@ -93,7 +94,6 @@ let
 
       # standard packages - query with `nix-env -qaP`
       nixpkgs.altcoins.go-ethereum
-      nixpkgs.gitAndTools.gitRemoteGcrypt
       nixpkgs.cacert
       nixpkgs.cht-sh  # cheat sheet
       nixpkgs.cloc
@@ -109,7 +109,6 @@ let
       nixpkgs.ffmpeg
       nixpkgs.figlet
       nixpkgs.findutils
-      #nixpkgs.gitAndTools.gitAnnex  # build fails on Darwin
       nixpkgs.flock
       nixpkgs.gnumake
       nixpkgs.gnupatch

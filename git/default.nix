@@ -8,7 +8,8 @@
     paths = [git];
     postBuild = ''
       wrapProgram "$out/bin/git" \
-      --set GIT_CONFIG "${./gitconfig}"
+      --set GIT_CONFIG "${./gitconfig}" \
+      --set GCRYPT_FULL_REPACK 1
     '';
   };
 
