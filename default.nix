@@ -119,6 +119,7 @@ let
       nixpkgs.imagemagickBig
       nixpkgs.ipcalc
       nixpkgs.jq
+      nixpkgs.keybase
       nixpkgs.less
       nixpkgs.libarchive  # bsdtar
       nixpkgs.lzma  # xz, unxz
