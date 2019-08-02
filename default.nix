@@ -96,6 +96,7 @@ let
       nixpkgs.gnupg
       nixpkgs.keybase
       nixpkgs.paperkey
+      nixpkgs.pass
       nixpkgs.gopass
       nixpkgs.pinentry
       nixpkgs.scrypt
