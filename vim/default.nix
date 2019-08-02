@@ -10,6 +10,9 @@ let
   };
   extraPackages = with vimPlugins;
     [
+      # TODO: move to NeoVim so we can use Vim as PAGER also
+      #vim-pager
+
       autoload_cscope-vim
       ultisnips
       vim-snippets

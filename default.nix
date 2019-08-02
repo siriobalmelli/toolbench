@@ -96,6 +96,7 @@ let
       nixpkgs.gnupg
       nixpkgs.keybase
       nixpkgs.paperkey
+      nixpkgs.gopass
       nixpkgs.pinentry
       nixpkgs.scrypt
 
@@ -141,7 +142,6 @@ let
       nixpkgs.openssh
       nixpkgs.p7zip
       nixpkgs.pandoc
-      nixpkgs.pass
       nixpkgs.pkgconfig
       nixpkgs.powerline-fonts
       nixpkgs.pwgen

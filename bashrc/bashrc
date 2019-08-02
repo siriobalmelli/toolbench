@@ -88,6 +88,7 @@ stty ixon
 
 export BASH_ENV=~/.bashrc
 export EDITOR=vim
+export PAGER=less
 
 # hack Python to see nix
 export PYTHONPATH=$(find ~/.nix-profile/lib -type d -path "*/python*/site-packages" | tr '\n' ':')$PYTHONPATH
@@ -97,6 +98,9 @@ export PKG_CONFIG_PATH=~/.nix-profile/lib/pkgconfig
 export CPATH=~/.nix-profile/include/
 export LIBRARY_PATH=~/.nix-profile/lib
 
+# gopass completion
+# TODO: broken (possibly quoting or similar?)
+#$(gopass completion bash)
 
 # Eternal bash history, found here: https://stackoverflow.com/questions/9457233/unlimited-bash-history
 # ---------------------
