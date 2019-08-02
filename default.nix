@@ -92,6 +92,13 @@ let
       nixpkgs.llvm
       nixpkgs.binutils-unwrapped
 
+      #crypto
+      nixpkgs.gnupg
+      nixpkgs.keybase
+      nixpkgs.paperkey
+      nixpkgs.pinentry
+      nixpkgs.scrypt
+
       # standard packages - query with `nix-env -qaP`
       nixpkgs.altcoins.go-ethereum
       nixpkgs.cacert
@@ -119,7 +126,6 @@ let
       nixpkgs.imagemagickBig
       nixpkgs.ipcalc
       nixpkgs.jq
-      nixpkgs.keybase
       nixpkgs.less
       nixpkgs.libarchive  # bsdtar
       nixpkgs.lzma  # xz, unxz
