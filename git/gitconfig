@@ -7,12 +7,10 @@
 	infograph = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 
 [commit]
-	#gpgsign = true
+	gpgsign = true
 
 [gcrypt]
 	publish-participants = true
-	gpg-args = "--use-agent false" for "github.com:siriobalmelli/.gnupg.git"
-	gpg-args = "--use-agent false" for "git@github.com:siriobalmelli/.gnupg.git"
 
 [push]
 	default = simple
@@ -23,4 +21,4 @@
 [user]
 	name = Sirio Balmelli
 	email = sirio@b-ad.ch
-	signingkey = 9849F76B
+	signingkey = F72C4A887F9A24CA
