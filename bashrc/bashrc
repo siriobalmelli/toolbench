@@ -98,6 +98,8 @@ export PKG_CONFIG_PATH=~/.nix-profile/lib/pkgconfig
 export CPATH=~/.nix-profile/include/
 export LIBRARY_PATH=~/.nix-profile/lib
 
+export GPG_TTY=$(tty)
+
 # gopass completion
 # TODO: broken (possibly quoting or similar?)
 #$(gopass completion bash)
