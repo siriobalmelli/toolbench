@@ -46,7 +46,9 @@ let
   # The list of packages to be installed
   homies = [
       # Customized packages
+      nixpkgs.bash
       bashrc
+
       replacement
       tbh
       tmux
