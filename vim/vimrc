@@ -54,6 +54,10 @@ autocmd filetype text,yaml,json,beancount setlocal
 autocmd InsertEnter * :let oldfold = &foldmethod | :setlocal foldmethod=manual
 autocmd InsertLeave * :execute "setlocal foldmethod=" . oldfold
 
+" apparently, setting to 'indent' fold *still* slows vim-markdown to the
+" point of unusability
+let g:vim_markdown_folding_disabled=1
+
 let g:yankring_history_dir = "~/.vim"
 
 
