@@ -14,7 +14,7 @@ if ! command -v nix-env; then
 fi
 
 # reset environment to current toolbench, clean up old generations
-nix-env -f $DERIVATION -i --remove-all
+nix-env --cores $(nproc) -f $DERIVATION -i --remove-all
 nix-env --delete-generations 10d
 
 # Set nix-env's environment to point to the nixpkgs we just built against.

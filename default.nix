@@ -43,6 +43,9 @@ let
   vim = import ./vim
     { inherit nixpkgs python; };
 
+  # some tests fail on Darwin
+  git-annex = nixpkgs.haskell.lib.dontCheck nixpkgs.gitAndTools.gitAnnex;
+
   # The list of packages to be installed
   homies = [
       # Customized packages
@@ -57,7 +60,7 @@ let
       git
       nixpkgs.gitAndTools.gitRemoteGcrypt
       nixpkgs.git-crypt
-      #nixpkgs.gitAndTools.gitAnnex  # build fails on Darwin
+      git-annex
 
       python
       python.pkgs.beancount

@@ -7,14 +7,15 @@
     buildInputs = [makeWrapper];
     paths = [git];
     postBuild = ''
-      wrapProgram "$out/bin/git" \
-      --set GCRYPT_FULL_REPACK 1
+      wrapProgram "$out/bin/git"
     '';
     # Do NOT set GIT_CONFIG ... any tool e.g. gcrypt running 'git config'
     # will thereafter modify the global config (which is super annoying).
     # Rely on "impure" handling where 'homies-gitconfig' is written to homedir
     # by tbh_install.
       # --set GIT_CONFIG "${./gitconfig}" \
+    # Do NOT repack every time - even rsync remotes become too slowed down
+      # --set GCRYPT_FULL_REPACK 1
   };
 
   # temporary measure: output a script to clobber .gitconfig
