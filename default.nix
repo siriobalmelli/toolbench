@@ -58,9 +58,10 @@ let
       vim
 
       git
+      git-annex
       nixpkgs.gitAndTools.gitRemoteGcrypt
       nixpkgs.git-crypt
-      git-annex
+      nixpkgs.bfg-repo-cleaner
 
       python
       python.pkgs.beancount
