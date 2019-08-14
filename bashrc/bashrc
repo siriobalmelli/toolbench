@@ -68,6 +68,9 @@ alias tmp='cd $(mktemp -d)'
 # clean all the things
 alias gitpocalypse='git reflog expire --expire=now --all && git gc --prune=now --aggressive'
 
+# fix "stty: 'standard input': Inappropriate ioctl for device"
+alias stty='stty 2>/dev/null'
+
 ## a simple, workable, cross-platform clipboard
 #CLIPBOARD=~/.clipboard
 #shopt -s expand_aliases  # that works even inside a vim '!'
