@@ -68,9 +68,6 @@ alias tmp='cd $(mktemp -d)'
 # clean all the things
 alias gitpocalypse='git reflog expire --expire=now --all && git gc --prune=now --aggressive'
 
-# fix "stty: 'standard input': Inappropriate ioctl for device"
-alias stty='stty 2>/dev/null'
-
 ## a simple, workable, cross-platform clipboard
 #CLIPBOARD=~/.clipboard
 #shopt -s expand_aliases  # that works even inside a vim '!'
@@ -85,9 +82,15 @@ alias stty='stty 2>/dev/null'
 if [[ ! $- == *i* ]]; then
 	# OS or default bashrc may have some funky ideas about stty
 	# that shouldn't be seen by non-interactive shells
-	stty sane
+	# ... except this somehow creates
+	# "stty: 'standard input': Inappropriate ioctl for device"
+	# so not always a good idea (facepalm)
+	# stty sane
 	return
 fi
+# fix "stty: 'standard input': Inappropriate ioctl for device"
+alias stty='stty 2>/dev/null'
+
 
 ## lock tty on Ctrl-S (DC3), release with Ctrl-Q (DC1)
 stty ixon
