@@ -40,27 +40,6 @@ alias btcinfo='bitcoin-cli getwalletinfo'
 
 alias cht='cht.sh'
 
-# don't conflict with e.g. 'gs' (ghostscript)
-alias gad="git add"
-alias gbr="git branch"
-alias gco="git checkout"
-alias gct="git commit"
-alias gdc="git diff --cached"
-alias gdf="git diff"
-alias gfh="git fetch"
-alias glg="git log"
-alias gmg="git merge"
-alias gph="git push"
-alias gpl="git pull"
-alias gpt="git push --tags"
-alias gpy="git cherry-pick"
-alias grb="git rebase"
-alias gre="git remote"
-alias grh="git reset --hard"
-alias grs="git reset"
-alias gst="git status"
-alias gtg="git tag"
-
 alias la='ls -A'
 alias ll='ls -lha'
 alias tmp='cd $(mktemp -d)'
