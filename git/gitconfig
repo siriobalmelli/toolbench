@@ -1,5 +1,17 @@
 [alias]
 	a = add
+
+	ai = !git annex init --version=7 "$1" && git config annex.thin true && echo
+	ad = annex drop
+	af= !git annex fsck; git annex smudge --update; git annex fix
+	ag = annex get
+	# functional substitute for "push to all"
+	ah = !git annex sync --jobs=cpus && git remote | xargs -P 4 -I {} git annex copy --all --to {}
+	ar = !git checkout "$1" && git annex fsck "$1" || git annex get # "$1" already appended here
+	as = annex status
+	aw = annex whereis
+	ay = annex sync --jobs=cpus
+
 	b = branch
 	c = commit
 	co = checkout
@@ -8,6 +20,8 @@
 	f = fetch
 	h = push
 	ht = push --tags
+	i = init
+	ib = init --bare
 	l = log
 	lp = log -p
 	m = merge
@@ -19,13 +33,10 @@
 	s = status
 	t = tag
 
-	as = annex sync
-	asc = annex sync --content
-
-	test = !echo "got $0" && echo
-
 	graph = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	housekeep = !git reflog expire --expire=now --all && git gc --prune=now --aggressive
 	infograph = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	purge = !bfg --no-blob-protection --delete-files
 
 [commit]
 	gpgsign = true
