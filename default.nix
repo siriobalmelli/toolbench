@@ -141,6 +141,7 @@ let
       nixpkgs.moreutils  # vidir
       nixpkgs.mtr
       nixpkgs.ncat
+      nixpkgs.ncdu
       nixpkgs.ncurses
       nixpkgs.ncurses.dev
       nixpkgs.ninja
