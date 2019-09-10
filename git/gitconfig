@@ -12,8 +12,7 @@
 
 	b = branch
 	c = commit
-	cam = commit -am
-	camx = "!f() { git commit -am \"$@\" && git push && exit 0; }; f"
+	camp = "!f() { git commit -am \"$@\" && git push; }; f"
 	co = checkout
 	d = diff
 	dc = diff --cached
