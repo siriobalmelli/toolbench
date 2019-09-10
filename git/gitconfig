@@ -13,7 +13,7 @@
 	b = branch
 	c = commit
 	cam = commit -am
-	camx = !git commit -am "$1" && git push && exit 0 ; echo
+	camx = "!f() { git commit -am \"$@\" && git push && exit 0; }; f"
 	co = checkout
 	d = diff
 	dc = diff --cached
