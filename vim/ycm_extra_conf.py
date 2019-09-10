@@ -4,7 +4,8 @@ Generic YouCompleteMe file for clang/gcc C projects using a Nix toolchain.
 Install this file as '.ycm_extra_conf.py' at the toplevel of your directory,
 next to 'default.nix' and 'meson.build'.
 
-Many, many thanks to Val Marcovic for YouCompleteMe (https://github.com/Valloric/YouCompleteMe)
+Many, many thanks to Val Marcovic for YouCompleteMe
+(https://github.com/Valloric/YouCompleteMe)
 and for the original prototype for this script.
 
 (c) 2018 Sirio Balmelli
@@ -14,9 +15,9 @@ import os
 import ycm_core  # pylint: disable=import-error
 
 # These are the compilation flags that will be used
-#+  IN ADDITION TO any flags from the compilation database.
+#   IN ADDITION TO any flags from the compilation database.
 # If you need to add some flags and don't know where,
-#+  PUT THEM HERE (aka: THESE ARE THE DROIDS YOU ARE LOOKING FOR).
+#   PUT THEM HERE (aka: THESE ARE THE DROIDS YOU ARE LOOKING FOR).
 FLAGS = [
     # NOTE: the flag and the value are two *separate* list elements
     '-I', 'include'  # assume all projects have a toplevel 'include' dir
@@ -26,6 +27,7 @@ FLAGS = [
 # absolute path for dir of this script (aka: TLD for the project)
 DIR = os.path.dirname(os.path.abspath(__file__))
 
+
 def get_nix_flags():
     '''get_nix_flags()
     Try to run the preprocessor for both clang and gcc inside a nix-shell,
@@ -33,24 +35,25 @@ def get_nix_flags():
     Return a list of flags, which may be empty if nix-shell won't run, etc
     '''
     # Run clang (or gcc if no clang) preprocessor with nothing,
-    #+ just to see where it might look for header files.
+    # just to see where it might look for header files.
     cmd = r'''\
         cd {0} && \
         nix-shell --command \
-            'clang -E -Wp,-v - </dev/null 2>&1 || gcc -E -Wp,-v - </dev/null 2>&1' \
+            'clang -E -Wp,-v - </dev/null 2>&1 \
+                || gcc -E -Wp,-v - </dev/null 2>&1' \
             2>/dev/null \
         | sed -nE 's|\s*(/.*include)$|\1|p'
     '''.format(DIR)
     try:
         lst = [p.strip() for p in
-               check_output(cmd, shell=True).split('\n')
-              ]
+               check_output(cmd, shell=True).split('\n')]
         # prepend an '-isystem' to each path, discarding empty paths
         # NOTE that '-isystem' means these includes will be used last
         # (after flags and compilation db)
         return [flat for p in lst for flat in ['-isystem', p] if p]
-    except Exception:  #pylint: disable=broad-except
+    except Exception:  # pylint: disable=broad-except
         return []
+
 
 def get_compile_db():
     '''get_compile_db()
@@ -65,15 +68,11 @@ def get_compile_db():
     try:
         folder = check_output(cmd, shell=True).strip()
         return ycm_core.CompilationDatabase(folder)
-    except Exception:  #pylint: disable=broad-except
+    except Exception:  # pylint: disable=broad-except
         return None
 
-def MakeRelativePathsInFlagsAbsolute(flags, working_directory):  # pylint: disable=invalid-name
-    '''MakeRelativePathsInFlagsAbsolute()
-    Unsure what this does exactly:
-        lifted directly from Valloric's original file,
-        then cleaned it up so it will lint.
-    '''
+
+def AbsoluteFlagPaths(flags, working_directory):
     if not working_directory:
         return list(flags)
     new_flags = []
@@ -104,9 +103,10 @@ def MakeRelativePathsInFlagsAbsolute(flags, working_directory):  # pylint: disab
                 new_flag = path_flag + os.path.join(working_directory, path)
                 break
 
-            # Remove the -c compiler directive (necessary to get header files compiling...)
-            # YouCompleteMe seems to remove this directive correctly for the cpp files,
-            # but not the header files.
+            # Remove the -c compiler directive
+            # (necessary to get header files compiling...)
+            # YouCompleteMe seems to remove this directive correctly
+            # for the cpp files, but not the header files.
             if flag == '-c':
                 remove_next = True
                 break
@@ -125,10 +125,11 @@ def FlagsForFile(filename):  # pylint: disable=invalid-name
     '''
     database = get_compile_db()
     if database:
-        # Swap .h and .cpp files
-        # Check to see if given file is a .h file, if so, swap .h and .cpp then
-        # perform the lookup. This is because .h files are not included in the
-        # compilation database. See: https://github.com/Valloric/YouCompleteMe/issues/174.
+        # Swap .h and .cpp files.
+        # Check to see if given file is a .h file, if so,
+        # swap .h and .cpp then perform the lookup.
+        # This is because .h files are not in the compilation database.
+        # See: https://github.com/Valloric/YouCompleteMe/issues/174.
         # We should also resort to a minimum set of flags that work inside the
         # standard library if we can't find the compilation database entry.
         base_filename, file_extension = os.path.splitext(filename)
@@ -138,16 +139,16 @@ def FlagsForFile(filename):  # pylint: disable=invalid-name
         # Bear in mind that compilation_info.compiler_flags_ does NOT return a
         # python list, but a "list-like" StringVec object
         compilation_info = database.GetCompilationInfoForFile(filename)
-        final_flags = MakeRelativePathsInFlagsAbsolute(
+        final_flags = AbsoluteFlagPaths(
             compilation_info.compiler_flags_,
             compilation_info.compiler_working_dir_)
     else:
         final_flags = []
 
     final_flags += get_nix_flags()
-    final_flags += MakeRelativePathsInFlagsAbsolute(FLAGS, DIR)
+    final_flags += AbsoluteFlagPaths(FLAGS, DIR)
     final_flags += [
-        # This -x option is necessary in order to compile header files (as C files).
+        # -x option is necessary in order to compile header files (as C files).
         '-x', 'c',
         # On macOS, I need this in order to find the system libraries.
         # See: https://github.com/Valloric/YouCompleteMe/issues/303
