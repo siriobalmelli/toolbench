@@ -46,7 +46,7 @@ def get_nix_flags():
     '''.format(DIR)
     try:
         lst = [p.strip() for p in
-               check_output(cmd, shell=True).split('\n')]
+               check_output(cmd, shell=True).decode().split('\n')]
         # prepend an '-isystem' to each path, discarding empty paths
         # NOTE that '-isystem' means these includes will be used last
         # (after flags and compilation db)
