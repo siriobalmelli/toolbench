@@ -5,14 +5,14 @@
 	ad = annex drop
 	af= !git annex fix; git annex fsck --all; git annex unused; git annex drop --unused
 	ag = annex get
-	# functional substitute for "push to all"
-	ah = !git remote | xargs -P 4 -I {} git annex copy --all --to {}; git annex sync --jobs=cpus
+	ah = annex sync --jobs=cpus --content  # functional substitute for "push to all"
 	as = annex status
 	aw = annex whereis
 	ay = annex sync --jobs=cpus
 
 	b = branch
 	c = commit
+	cam = commit -am
 	co = checkout
 	d = diff
 	dc = diff --cached
