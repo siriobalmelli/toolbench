@@ -44,6 +44,8 @@ alias btcinfo='bitcoin-cli getwalletinfo'
 
 alias cht='cht.sh'
 
+alias gopasw='gopass show -c'
+
 grepd() { grep -rIE "$*" ./; }
 
 alias la='ls -A'
