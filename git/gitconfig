@@ -11,6 +11,7 @@
 	ay = annex sync --jobs=cpus
 
 	b = branch
+	bd = branch -d
 	c = commit
 	camp = "!f() { git commit -am \"$@\" && git push; }; f"
 	co = checkout
@@ -18,6 +19,7 @@
 	dc = diff --cached
 	f = fetch
 	h = push
+	hf = push --force
 	ht = push --tags
 	i = init
 	ib = init --bare
