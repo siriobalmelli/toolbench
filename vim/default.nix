@@ -7,7 +7,11 @@ with nixpkgs;
 let
   vim_config = vim_configurable.override {
     inherit python;
+    guiSupport="";  # work around build issue looking for a gtk3 header
+    ftNixSupport=false;  # use vim-nix plugin instead
+    rubySupport = false;  # because *why*??
   };
+
   extraPackages = with vimPlugins;
     [
       # TODO: move to NeoVim so we can use Vim as PAGER also
@@ -25,7 +29,7 @@ let
       tabular  # format tables
       vim-easymotion  # upgraded search
       vim-indent-guides  # show indents visually
-      youcompleteme  # completion is life
+      #youcompleteme  # completion is life
 
       # language support (and linting) packages:
       jdaddy-vim  # crappy previous alternative is vim-json
@@ -44,19 +48,23 @@ let
       # NOTE: intriguing packages which I'm still not sure are a good idea
       #vim-trailing-whitespace
       #vimproc
-    ];
+    ] ++ (if stdenv.isDarwin then [ ] else [ youcompleteme ]);  # TODO: fix this!
+
   vimrc = writeText "vimrc"
     (lib.concatStringsSep "\n"
     [ (builtins.readFile ./vimrc)
       ''
+      let g:ycm_python_binary_path = '${python}/bin/python'
       let g:UltiSnipsSnippetDirectories=['${./UltiSnips}', 'UltiSnips']
       ''
     ]
     );
+
   customRC = vimUtils.vimrcFile
     { customRC = builtins.readFile vimrc;
       packages.mvc.start = extraPackages;
     };
+
 in
 symlinkJoin {
   name = "vim";

@@ -18,7 +18,7 @@ let
   # which would obviate having to set PYTHONPATH in bashrc,
   # but would require explicitly reinstalling the wrapped python at every change,
   # as opposed to quickly and painlessly testing things with 'nix-env --install'
-  python = nixpkgs.python37Full;
+  python = nixpkgs.python3Full;
 
   gcc = nixpkgs.gcc.overrideAttrs ( oldAttrs: rec { meta.priority = 5; });
   clang = nixpkgs.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
@@ -108,7 +108,7 @@ let
       nixpkgs.scrypt
 
       # standard packages - query with `nix-env -qaP`
-      nixpkgs.altcoins.go-ethereum
+      nixpkgs.go-ethereum
       nixpkgs.cacert
       nixpkgs.cht-sh  # cheat sheet
       nixpkgs.cloc
@@ -161,7 +161,6 @@ let
       nixpkgs.wget
       nixpkgs.which
       nixpkgs.xorriso
-      nixpkgs.ycmd
 
       #nixpkgs.pahole  # not supported on Darwin
     ];
