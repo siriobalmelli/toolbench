@@ -44,11 +44,11 @@ alias btcinfo='bitcoin-cli getwalletinfo'
 
 alias cht='cht.sh'
 
-findd() { find ./ -name "*$**"; }
+findd() { find ./ -iname "*$**" 2>/dev/null; }
 
 alias gopasw='gopass show -c'
 
-grepd() { grep -rIE "$*" ./; }
+grepd() { grep -rIE "$*" ./ 2>/dev/null; }
 
 alias la='ls -A'
 alias ll='ls -lha'
