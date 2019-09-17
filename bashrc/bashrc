@@ -46,7 +46,7 @@ alias cht='cht.sh'
 
 findd() { find ./ -iname "*$**" 2>/dev/null; }
 
-alias gopasw='gopass show -c'
+gopasw() { gopass show "$*"; gopass show -c "$*"; }
 
 grepd() { grep -rIE "$*" ./ 2>/dev/null; }
 

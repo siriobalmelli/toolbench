@@ -1,21 +1,35 @@
-{
-  system ? builtins.currentSystem,
-  nixpkgs ? import (builtins.fetchGit {
-    url = "https://github.com/siriobalmelli-foss/nixpkgs.git";
-    ref = "ac4ef4cd327244a205ec742beb235804c79e1512";
-    }) {}
-}:
+{ system ? builtins.currentSystem }:
 
-with nixpkgs;
+with import (builtins.fetchGit {
+  url = "https://github.com/NixOS/nixpkgs.git";
+  ref = "master";
+  }) {};
+
 let
+  # NOTE: bug is the same with either python2 or python3
+  #python = python2Full;
   python = python3Full;
 
+  # huge Vim build - bug is evident here
   vim_config = vim_configurable.override {
     inherit python;
+    darwinSupport = stdenv.isDarwin;
     guiSupport="";  # work around build issue looking for a gtk3 header
-    ftNixSupport=false;  # use vim-nix plugin instead
-    rubySupport = false;  # because *why*??
   };
+
+  ## smallest Vim build - bug is evident here also
+  #vim_config = vim_configurable.override {
+  #  inherit python;
+  #  darwinSupport = stdenv.isDarwin;
+  #  guiSupport="";
+
+  #  features = "normal";  # python does not work with "tiny" or "small"
+  #  ftNixSupport=false;  # use vim-nix plugin instead
+  #  luaSupport = false;
+  #  rubySupport = false;
+  #  cscopeSupport = false;
+  #  netbeansSupport = false;
+  #};
 
   extraPackages = with vimPlugins; [ youcompleteme ];
 

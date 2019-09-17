@@ -5,6 +5,10 @@
     nix-env -i -f ycmd_bug/reproduce.nix
     # don't even have to open a file, just Vim itself
     vim
+
+
+    # OR, alternate way to reproduce:
+    nix-build ycmd_bug/reproduce.nix && result/bin/vim
     ```
 
     This gives the following error in Vim:
@@ -23,6 +27,12 @@
     ```bash
     $ file /cores/core.29150
     /cores/core.29150: Mach-O 64-bit core x86_64
+
+    # ... but coredump file seems to be useless?!
+    $ gdb -c /cores/core.29150
+    GNU gdb (GDB) 8.3
+    "python3.7-88112-501.core": no core file handler recognizes format
+    (gdb) quit
     ```
 
 1. Contents of `:YcmDebugInfo`:
@@ -45,42 +55,48 @@
 1. Output of `vim --version`
 
     ```bash
-    VIM - Vi IMproved 8.1 (2018 May 18, compiled Sep 15 2019 20:49:38)
-    macOS version w/o darwin feat.
+    # compiled with "huge" featureset
+    ```
+
+    This same bug is also reproducible with a much smaller featureset:
+
+    ```bash
+    VIM - Vi IMproved 8.1 (2018 May 18, compiled Sep 17 2019 14:52:33)
+    macOS version
     Included patches: 1-1967
     Compiled by siriobalmelli
-    Huge version without GUI.  Features included (+) or not (-):
+    Normal version without GUI.  Features included (+) or not (-):
     +acl               -farsi             -mouse_sysmouse    -tag_any_white
-    +arabic            +file_in_path      +mouse_urxvt       -tcl
-    +autocmd           +find_in_path      +mouse_xterm       +termguicolors
-    +autochdir         +float             +multi_byte        +terminal
+    -arabic            +file_in_path      -mouse_urxvt       -tcl
+    +autocmd           +find_in_path      +mouse_xterm       -termguicolors
+    +autochdir         +float             +multi_byte        -terminal
     -autoservername    +folding           +multi_lang        +terminfo
     -balloon_eval      -footer            -mzscheme          +termresponse
-    +balloon_eval_term +fork()            +netbeans_intg     +textobjects
+    -balloon_eval_term +fork()            +netbeans_intg     +textobjects
     -browse            +gettext           +num64             +textprop
-    ++builtin_terms    -hangul_input      +packages          +timers
+    +builtin_terms     -hangul_input      +packages          +timers
     +byte_offset       +iconv             +path_extra        +title
     +channel           +insert_expand     -perl              -toolbar
     +cindent           +job               +persistent_undo   +user_commands
-    +clientserver      +jumplist          +postscript        +vartabs
-    +clipboard         +keymap            +printer           +vertsplit
-    +cmdline_compl     +lambda            +profile           +virtualedit
-    +cmdline_hist      +langmap           -python            +visual
+    -clientserver      +jumplist          +postscript        -vartabs
+    +clipboard         -keymap            +printer           +vertsplit
+    +cmdline_compl     +lambda            -profile           +virtualedit
+    +cmdline_hist      -langmap           -python            +visual
     +cmdline_info      +libcall           +python3           +visualextra
     +comments          +linebreak         +quickfix          +viminfo
-    +conceal           +lispindent        +reltime           +vreplace
-    +cryptv            +listcmds          +rightleft         +wildignore
-    +cscope            +localmap          -ruby              +wildmenu
-    +cursorbind        +lua               +scrollbind        +windows
+    -conceal           +lispindent        +reltime           +vreplace
+    +cryptv            +listcmds          -rightleft         +wildignore
+    -cscope            +localmap          -ruby              +wildmenu
+    +cursorbind        -lua               +scrollbind        +windows
     +cursorshape       +menu              +signs             +writebackup
-    +dialog_con        +mksession         +smartindent       +X11
-    +diff              +modify_fname      -sound             +xfontset
+    +dialog_con        +mksession         +smartindent       -X11
+    +diff              +modify_fname      -sound             -xfontset
     +digraphs          +mouse             +spell             -xim
     -dnd               -mouseshape        +startuptime       -xpm
-    -ebcdic            +mouse_dec         +statusline        -xsmp
-    +emacs_tags        -mouse_gpm         -sun_workshop      +xterm_clipboard
+    -ebcdic            -mouse_dec         +statusline        -xsmp
+    -emacs_tags        -mouse_gpm         -sun_workshop      -xterm_clipboard
     +eval              -mouse_jsbterm     +syntax            -xterm_save
-    +ex_extra          +mouse_netterm     +tag_binary        
+    +ex_extra          -mouse_netterm     +tag_binary        
     +extra_search      +mouse_sgr         -tag_old_static    
        system vimrc file: "$VIM/vimrc"
          user vimrc file: "$HOME/.vimrc"
@@ -88,10 +104,10 @@
           user exrc file: "$HOME/.exrc"
            defaults file: "$VIMRUNTIME/defaults.vim"
       fall-back for $VIM: "
-    /nix/store/53a965n3a2p8w4w6mv8rpyc29c2597i0-vim_configurable-8.1.1967/share/vim
+    /nix/store/zrd98c8wyzjb41jnrkdaj9id5yxmgzhj-vim_configurable-8.1.1967/share/vim
     "
-    Compilation: see nix-store --read-log /nix/store/53a965n3a2p8w4w6mv8rpyc29c2597i0-vim_configurable-8.1.1967
-    Linking: see nix-store --read-log /nix/store/53a965n3a2p8w4w6mv8rpyc29c2597i0-vim_configurable-8.1.1967
+    Compilation: see nix-store --read-log /nix/store/zrd98c8wyzjb41jnrkdaj9id5yxmgzhj-vim_configurable-8.1.1967
+    Linking: see nix-store --read-log /nix/store/zrd98c8wyzjb41jnrkdaj9id5yxmgzhj-vim_configurable-8.1.1967
     ```
 
 1. Python binary path seems correct:
