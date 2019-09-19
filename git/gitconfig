@@ -13,7 +13,7 @@
 	b = branch
 	bd = branch -d
 	c = commit
-	camp = "!f() { git commit -am \"$@\" && git push; }; f"
+	camp = "!f() { git commit -am \"$@\" && git push && git log HEAD^1...HEAD; }; f"
 	co = checkout
 	d = diff
 	dc = diff --cached

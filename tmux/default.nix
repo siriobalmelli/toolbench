@@ -1,9 +1,9 @@
 # Tmux with ./tmux.conf baked in
-{ tmux, writeText, symlinkJoin, makeWrapper }:
+{ nixpkgs, writeText, symlinkJoin, makeWrapper }:
 symlinkJoin {
   name = "tmux";
   buildInputs = [makeWrapper];
-  paths = [ tmux ];
+  paths = [ nixpkgs.tmux ];
   postBuild = ''
     wrapProgram "$out/bin/tmux" \
     --add-flags "-f ${./tmux.conf}"

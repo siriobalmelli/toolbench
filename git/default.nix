@@ -1,11 +1,11 @@
 # Git, with a git config baked in (see ./config)
-{ git, symlinkJoin, makeWrapper, writeScriptBin }:
+{ nixpkgs, symlinkJoin, makeWrapper, writeScriptBin }:
 
 {
   bin = symlinkJoin {
     name = "git";
     buildInputs = [makeWrapper];
-    paths = [git];
+    paths = [nixpkgs.git];
     postBuild = ''
       wrapProgram "$out/bin/git"
     '';

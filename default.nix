@@ -1,10 +1,11 @@
 {
-  system ? builtins.currentSystem,
   nixpkgs ? import (builtins.fetchGit {
     url = "https://github.com/siriobalmelli-foss/nixpkgs.git";
     ref = "sirio";
     }) {}
 }:
+
+with nixpkgs;
 
 let
   # TODO: get accepted upstream
@@ -18,38 +19,32 @@ let
   # which would obviate having to set PYTHONPATH in bashrc,
   # but would require explicitly reinstalling the wrapped python at every change,
   # as opposed to quickly and painlessly testing things with 'nix-env --install'
-  python = nixpkgs.python3Full;
+  python = python3Full;
 
   gcc = nixpkgs.gcc.overrideAttrs ( oldAttrs: rec { meta.priority = 5; });
   clang = nixpkgs.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
 
   # A custom '.bashrc' (see bashrc/default.nix for details)
-  bashrc = nixpkgs.callPackage ./bashrc {};
+  bashrc = callPackage ./bashrc {};
 
   # Git with config baked in
-  git = import ./git (
-    { inherit (nixpkgs) git symlinkJoin makeWrapper writeScriptBin ; });
+  git = import ./git { inherit nixpkgs symlinkJoin makeWrapper writeScriptBin ; };
 
-  tbh = import ./script (with nixpkgs;
-    { inherit writeShellScriptBin; });
+  tbh = import ./script { inherit writeShellScriptBin; };
 
   # Tmux with a custom tmux.conf baked in
-  tmux = import ./tmux (with nixpkgs;
-    { inherit symlinkJoin makeWrapper writeText;
-       tmux = nixpkgs.tmux;
-    });
+  tmux = import ./tmux { inherit nixpkgs symlinkJoin makeWrapper writeText; };
 
   # Vim with a custom vimrc and set of packages
-  vim = import ./vim
-    { inherit nixpkgs python; };
+  vim = import ./vim { inherit nixpkgs python; };
 
   # some tests fail on Darwin
-  git-annex = nixpkgs.haskell.lib.dontCheck nixpkgs.gitAndTools.gitAnnex;
+  git-annex = haskell.lib.dontCheck gitAndTools.gitAnnex;
 
   # The list of packages to be installed
   homies = [
       # Customized packages
-      nixpkgs.bash
+      bash
       bashrc
 
       replacement
@@ -59,9 +54,9 @@ let
 
       git
       git-annex
-      nixpkgs.gitAndTools.gitRemoteGcrypt
-      nixpkgs.git-crypt
-      nixpkgs.bfg-repo-cleaner
+      gitAndTools.gitRemoteGcrypt
+      git-crypt
+      bfg-repo-cleaner
 
       python
       python.pkgs.beancount
@@ -93,82 +88,82 @@ let
       # compilers and wrappers
       gcc
       clang
-      nixpkgs.valgrind
-      nixpkgs.gdb
-      nixpkgs.llvm
-      nixpkgs.binutils-unwrapped
+      valgrind
+      gdb
+      llvm
+      binutils-unwrapped
 
       #crypto
-      nixpkgs.gnupg
-      nixpkgs.keybase
-      nixpkgs.paperkey
-      nixpkgs.pass
-      nixpkgs.gopass
-      nixpkgs.pinentry
-      nixpkgs.scrypt
+      gnupg
+      keybase
+      paperkey
+      pass
+      gopass
+      pinentry
+      scrypt
 
       # standard packages - query with `nix-env -qaP`
-      nixpkgs.go-ethereum
-      nixpkgs.cacert
-      nixpkgs.cht-sh  # cheat sheet
-      nixpkgs.cloc
-      nixpkgs.cointop
-      nixpkgs.coreutils
-      nixpkgs.cscope
-      nixpkgs.curl
-      nixpkgs.dos2unix
-      nixpkgs.dosfstools  # mkdosfs
-      nixpkgs.entr
-      nixpkgs.fava
-      nixpkgs.fdupes
-      nixpkgs.ffmpeg
-      nixpkgs.figlet
-      nixpkgs.findutils
-      nixpkgs.flock
-      nixpkgs.gnumake
-      nixpkgs.gnupatch
-      nixpkgs.gnused
-      nixpkgs.gnutar
-      nixpkgs.htop
-      nixpkgs.iftop
-      nixpkgs.imagemagickBig
-      nixpkgs.ipcalc
-      nixpkgs.jq
-      nixpkgs.less
-      nixpkgs.libarchive  # bsdtar
-      nixpkgs.lzma  # xz, unxz
-      nixpkgs.meson
-      nixpkgs.moreutils  # vidir
-      nixpkgs.mtr
-      nixpkgs.ncat
-      nixpkgs.ncdu
-      nixpkgs.ncurses
-      nixpkgs.ncurses.dev
-      nixpkgs.ninja
-      nixpkgs.nix
-      nixpkgs.nmap
-      nixpkgs.openssh
-      nixpkgs.p7zip
-      nixpkgs.pandoc
-      nixpkgs.pkgconfig
-      nixpkgs.powerline-fonts
-      nixpkgs.pwgen
+      go-ethereum
+      cacert
+      cht-sh  # cheat sheet
+      cloc
+      cointop
+      coreutils
+      cscope
+      curl
+      dos2unix
+      dosfstools  # mkdosfs
+      entr
+      fava
+      fdupes
+      ffmpeg
+      figlet
+      findutils
+      flock
+      gnumake
+      gnupatch
+      gnused
+      gnutar
+      htop
+      iftop
+      imagemagickBig
+      ipcalc
+      jq
+      less
+      libarchive  # bsdtar
+      lzma  # xz, unxz
+      meson
+      moreutils  # vidir
+      mtr
+      ncat
+      ncdu
+      ncurses
+      ncurses.dev
+      ninja
+      nix
+      nmap
+      openssh
+      p7zip
+      pandoc
+      pkgconfig
+      powerline-fonts
+      pwgen
 
-      nixpkgs.texlive.combined.scheme-full
-      nixpkgs.tree
-      nixpkgs.vale
-      nixpkgs.watch
-      nixpkgs.wget
-      nixpkgs.which
-      nixpkgs.xorriso
+      texlive.combined.scheme-full
+      tree
+      vale
+      watch
+      wget
+      which
+      xorriso
 
-      #nixpkgs.pahole  # not supported on Darwin
+      #pahole  # not supported on Darwin
     ];
 
 in
-  if nixpkgs.lib.inNixShell then
-    nixpkgs.mkShell {
-      buildInputs = homies;
+  if lib.inNixShell then
+    nixhell {
+      bts = homies;
       shellHook = ''$(homies-bashrc)'';
     }
   else
