@@ -41,16 +41,19 @@ let
   # some tests fail on Darwin
   git-annex = haskell.lib.dontCheck gitAndTools.gitAnnex;
 
+  ycmd = nixpkgs.ycmd.override { inherit gocode godef gotools; };
+
   # The list of packages to be installed
   homies = [
       # Customized packages
       bash
       bashrc
+      tbh
 
       replacement
-      tbh
       tmux
       vim
+      ycmd
 
       git
       git-annex
@@ -86,13 +89,17 @@ let
       #python.pkgs.pylint  # pyenchant build issue? Replaced with flake8 and mypy
 
       # compilers and wrappers
-      gcc
+      binutils-unwrapped
       clang
-      valgrind
+      gcc
       gdb
       llvm
-      binutils-unwrapped
+      valgrind
       #pahole  # not supported on Darwin
+
+      go
+      gocode
+      godef
 
       #crypto
       gnupg
@@ -161,12 +168,12 @@ let
       # AWS
       awscli
       kubectl
-    ];
+  ];
 
 in
   if lib.inNixShell then
-    nixhell {
-      bts = homies;
+    mkShell {
+      buildInputs = homies;
       shellHook = ''$(homies-bashrc)'';
     }
   else

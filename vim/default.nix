@@ -1,7 +1,8 @@
 # somehow passing 'neovim' instead of 'nixpkgs' gives infinite recursion?
 { nixpkgs, python }:
 
-with nixpkgs.vimPlugins;
+with nixpkgs;
+with vimPlugins;
 
 nixpkgs.neovim.override {
 

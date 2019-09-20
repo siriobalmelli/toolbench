@@ -1,8 +1,8 @@
 # Git, with a git config baked in (see ./config)
 { nixpkgs, symlinkJoin, makeWrapper, writeScriptBin }:
 
-{
-  bin = symlinkJoin {
+let
+  git = symlinkJoin {
     name = "git";
     buildInputs = [makeWrapper];
     paths = [nixpkgs.git];
@@ -22,8 +22,10 @@
   # This is because git is ignoring GIT_CONFIG
   # (see git-env-check.sh and related bug report on git mailing list)
   # write a script that sources it
-  script = writeScriptBin "homies-gitconfig"
+  homies-gitconfig = writeScriptBin "homies-gitconfig"
     ''
     cat ${./gitconfig}
     '';
-}
+
+in
+  [ git homies-gitconfig ]
