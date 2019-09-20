@@ -19,6 +19,7 @@ nixpkgs.neovim.override {
     packages.ultisnips.start = [ ultisnips ];
     packages.vim-beancount.start = [ vim-beancount ];
     packages.vim-easymotion.start = [ vim-easymotion ];
+    packages.vim-go.start = [ vim-go ];
     packages.vim-indent-guides.start = [ vim-indent-guides ];
     packages.vim-markdown.start = [ vim-markdown ];
     packages.vim-nix.start = [ vim-nix ];

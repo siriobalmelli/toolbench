@@ -92,6 +92,7 @@ let
       gdb
       llvm
       binutils-unwrapped
+      #pahole  # not supported on Darwin
 
       #crypto
       gnupg
@@ -157,7 +158,9 @@ let
       which
       xorriso
 
-      #pahole  # not supported on Darwin
+      # AWS
+      awscli
+      kubectl
     ];
 
 in
