@@ -11,6 +11,7 @@ set -e
 if ! command -v nix-env; then
 	curl https://nixos.org/nix/install | sh
 	source $HOME/.nix-profile/etc/profile.d/nix.sh
+	nix-env -iA "nixpkgs.git"  # some CentOs boxes have git 1.8, no -C flag
 fi
 
 # reset environment to current toolbench, clean up old generations
