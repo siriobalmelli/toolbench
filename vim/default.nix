@@ -14,6 +14,7 @@ nixpkgs.neovim.override {
     packages.jdaddy-vim.start = [ jdaddy-vim ];
     packages.meson.start = [ meson ];
     packages.nerdcommenter.start = [ nerdcommenter ];
+    packages.plantuml-syntax.start = [ plantuml-syntax ];
     packages.rainbow.start = [ rainbow ];
     packages.surround.start = [ surround ];
     packages.tabular.start = [ tabular ];

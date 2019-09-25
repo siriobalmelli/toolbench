@@ -154,6 +154,7 @@ let
       p7zip
       pandoc
       pkgconfig
+      plantuml
       powerline-fonts
       pwgen
 
