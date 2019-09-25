@@ -13,6 +13,10 @@ let
     url = "https://github.com/siriobalmelli/replacement.git";
     ref = "master";
     }) {};
+  nonlibc = nixpkgs.nonlibc or import (builtins.fetchGit {
+    url = "https://github.com/siriobalmelli/nonlibc.git";
+    ref = "master";
+    }) {};
 
   # single knob for python version everywhere
   # ... there is also the wrapped 'python35.withPackages' approach (see <https://nixos.org/nixpkgs/manual/#python>)
@@ -50,7 +54,10 @@ let
       bashrc
       tbh
 
+      # dogfood
       replacement
+      nonlibc
+
       tmux
       vim
       ycmd
