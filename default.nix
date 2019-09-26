@@ -67,6 +67,7 @@ let
       gitAndTools.gitRemoteGcrypt
       git-crypt
       bfg-repo-cleaner
+      mr
 
       python
       python.pkgs.beancount

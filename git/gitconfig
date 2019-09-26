@@ -6,9 +6,9 @@
 	af= !git annex fix; git annex fsck --all; git annex unused; git annex drop --unused
 	ag = annex get
 	ah = annex sync --jobs=cpus --content  # functional substitute for "push to all"
+	ap = annex sync --jobs=cpus  # 'p' is "pull" for consistency with 'git p'
 	as = annex status
 	aw = annex whereis
-	ay = annex sync --jobs=cpus
 
 	b = branch
 	bd = branch -d
