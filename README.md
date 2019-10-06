@@ -204,14 +204,13 @@ This is exactly the list we get by running `nix-shell` inside [.ycm_extra_conf.p
     <https://github.com/siriobalmelli-foss/nixpkgs/tree/sirio> (my fork).
 
 1. Fork branches are organized as follows:
-    - `upstream/master` -(pull)-> `master`
-    - `master` -(rebase)-> `master-dev`
-    - *development for upstream* -(commit)-> `master-dev`
-    - `master-dev` -(pull requests)-> `upstream/master`
-    - `master-dev` -(reset --hard)-> `sirio`
-    - *any branch* -(cherry-pick)-> `sirio`
+    - `upstream/master` : track nixpkgs
+    - `master` : current stable version (reference this in Nix derivations)
+    - *development for upstream* -(commit)-> `fix/per-feature`
+    - `fix/per-feature` -(pull requests)-> `upstream/master`
+    - `fix/per-feture` -(cherry-pick)-> `sirio`
     - *unmergeable: `vim-plugins/update.py` etc* -(commit)-> `sirio`
-    - *working config on Linux and macOS* -(tag sirio_stable_YYYY_MM_DD)-> `sirio`
+    - *working config on Linux and macOS* -(tag sirio_stable_YYYY_MM_DD)-> `master`
 
 ## Thanks
 
