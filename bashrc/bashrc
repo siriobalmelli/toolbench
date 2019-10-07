@@ -74,6 +74,7 @@ alias tmp='cd $(mktemp -d)'
 ##
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
+# use 'ssh-add -L' to list keys
 
 
 ##
