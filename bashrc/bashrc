@@ -53,7 +53,7 @@ grepd() { grep -rIE "$*" ./ 2>/dev/null; }
 alias la='ls -A'
 alias ll='ls -lha'
 
-alias mr='mr -j$(nproc)'
+alias mr='mr -j$(nproc) -m'
 
 #	tarify()
 # Archive $1 into a tar.bz2 file and then delete it
