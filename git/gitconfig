@@ -1,3 +1,6 @@
+[advice]
+    pushNonFastForward = false  # quieter git output
+
 [alias]
 	a = add
 
