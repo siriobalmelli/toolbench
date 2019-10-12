@@ -65,8 +65,9 @@ git reflog expire --expire=now --all && git gc --prune=now --aggressive
 # only push if top commit is the _same_
 git fetch clean
 git remote prune clean
-FAIL=""
+DIVERGE=""
 SUCCESS=""
+FAIL=""
 for b in $BRANCHES; do
 	# commit IDs will be different, but all other attributes should match
 	TAINTED="$(git log -1 --pretty=format:'%an %ae %s %ct' tainted/$b)"
@@ -75,11 +76,14 @@ for b in $BRANCHES; do
 		echo "divergent commits on branch '$b':"	>&2
 		echo "tainted/$b:	$TAINTED"		>&2
 		echo "clean/$b:		$CLEAN"			>&2
-		FAIL="$FAIL\n$b"
+		DIVERGE="$DIVERGE\n$b"
 	else
 		git checkout tainted/$b >/dev/null 2>&1
-		git push --force clean $b
-		SUCCESS="$SUCCESS\n$b"
+		if git push --force clean $b; then
+			SUCCESS="$SUCCESS\n$b"
+		else
+			FAIL="$FAIL\n$b"
+		fi
 	fi
 done
 
@@ -91,7 +95,9 @@ Done!
 
 Branches succeeded:$SUCCESS
 
-Branches failed (divergent):$FAIL
+Branches failed:$FAIL
+
+Branches ignored (divergent):$DIVERGE
 
 ... don't forget the "$(realpath ./)/bfg-report*" directory,
 to be inspected or deleted as necessary.

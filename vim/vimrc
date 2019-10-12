@@ -36,7 +36,7 @@ autocmd filetype go setlocal
 	\ shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent cc=80
 	\ foldmethod=syntax
 
-autocmd filetype conf,javascript setlocal
+autocmd filetype cmake,conf,javascript setlocal
 	\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
 	\ foldmethod=syntax
 autocmd filetype markdown,python,snippets setlocal
