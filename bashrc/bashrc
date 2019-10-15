@@ -73,6 +73,7 @@ alias tmp='cd $(mktemp -d)'
 #	gpg auth with SSH
 ##
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpg-connect-agent updatestartuptty /bye > /dev/null
 gpgconf --launch gpg-agent
 # use 'ssh-add -L' to list keys
 
