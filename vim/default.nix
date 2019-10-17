@@ -23,6 +23,7 @@ nixpkgs.neovim.override {
     packages.vim-easymotion.start = [ vim-easymotion ];
     packages.vim-go.start = [ vim-go ];
     packages.vim-indent-guides.start = [ vim-indent-guides ];
+    packages.vim-localvimrc.start = [ vim-localvimrc ];
     packages.vim-markdown.start = [ vim-markdown ];
     packages.vim-nix.start = [ vim-nix ];
     packages.vim-pager.start = [ vim-pager ];
