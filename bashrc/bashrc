@@ -44,7 +44,7 @@ alias btcinfo='bitcoin-cli getwalletinfo'
 
 alias cht='cht.sh'
 
-alias cscopez='rm -f ./cscope* ./ncscope*; cscope -bqRU'
+alias cscopez='cscope -bqRU'
 
 findd() { find ./ -iname "*$**" 2>/dev/null; }
 
