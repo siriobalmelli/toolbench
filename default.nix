@@ -118,6 +118,12 @@ let
       pinentry
       scrypt
 
+      # build systems
+      cmake  # TODO: ninja back-end for cmake
+      gnumake
+      ninja
+      pkgconfig
+
       # standard packages - query with `nix-env -qaP`
       go-ethereum
       cacert
@@ -136,7 +142,6 @@ let
       figlet
       findutils
       flock
-      gnumake
       gnupatch
       gnused
       gnutar
@@ -155,13 +160,11 @@ let
       ncdu
       ncurses
       ncurses.dev
-      ninja
       nix
       nmap
       openssh
       p7zip
       pandoc
-      pkgconfig
       plantuml
       powerline-fonts
       pwgen
