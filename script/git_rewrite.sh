@@ -78,7 +78,7 @@ for b in $BRANCHES; do
 		echo "clean/$b:		$CLEAN"			>&2
 		DIVERGE="$DIVERGE\n$b"
 	else
-		git checkout tainted/$b >/dev/null 2>&1
+		git checkout --force tainted/$b >/dev/null 2>&1
 		if git push --force clean $b; then
 			SUCCESS="$SUCCESS\n$b"
 		else
