@@ -11,3 +11,7 @@ homies-gitconfig >~/.gitconfig
 
 # brand new world
 source ~/.bashrc
+
+echo "you can get a list of all packages and attribute paths with:"
+echo
+echo "nix-env -qaP >nix_env_avail.txt"
