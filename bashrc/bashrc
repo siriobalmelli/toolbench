@@ -55,6 +55,8 @@ grepd() { grep -rIE "$*" ./ 2>/dev/null; }
 alias la='ls -A'
 alias ll='ls -lha'
 
+alias lsusb='[ $(uname) = "Darwin" ] && ioreg -p IOUSB || lsusb'
+
 alias mr='time mr -j$(nproc) -m'
 
 #	tarify()
