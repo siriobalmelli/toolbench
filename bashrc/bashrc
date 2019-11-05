@@ -74,17 +74,6 @@ alias tmp='cd $(mktemp -d)'
 
 
 ##
-#	gpg auth with SSH
-##
-export GPG_TTY=$(tty)
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-#gpg-connect-agent updatestartuptty /bye > /dev/null
-gpgconf --launch gpg-agent
-# use 'ssh-add -L' to list keys
-
-
-
-##
 #	interactive-section
 # things that pollute the environment should go below here
 ##
@@ -99,6 +88,16 @@ if [[ ! $- == *i* ]]; then
 fi
 # fix "stty: 'standard input': Inappropriate ioctl for device"
 alias stty='stty 2>/dev/null'
+
+
+##
+#	gpg auth with SSH - only in interactive section
+##
+export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpg-connect-agent updatestartuptty /bye >/dev/null
+gpg-connect-agent /bye
+# use 'ssh-add -L' to list keys
 
 
 ## lock tty on Ctrl-S (DC3), release with Ctrl-Q (DC1)
@@ -124,8 +123,11 @@ export LIBRARY_PATH=~/.nix-profile/lib
 # ---------------------
 # Undocumented feature which sets the size to "unlimited".
 # http://stackoverflow.com/questions/9457233/unlimited-bash-history
-export HISTFILESIZE=
-export HISTSIZE=
+#export HISTFILESIZE=
+#export HISTSIZE=
+# ok, unlimited might be a bit nuts ... let's stick to 15k lines
+export HISTFILESIZE=15000
+export HISTSIZE=15000
 export HISTTIMEFORMAT="[%F %T] "
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
