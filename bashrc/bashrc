@@ -49,6 +49,8 @@ alias cscopez='cscope -bqRU'
 findd() { find ./ -iname "*$**" 2>/dev/null; }
 
 gopasw() { gopass show "$*"; gopass show -c "$*"; }
+# TODO: track and sync ~/.config
+# gopass config safecontent true
 
 grepd() { grep -rIE "$*" ./ 2>/dev/null; }
 
