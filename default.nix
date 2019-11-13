@@ -130,6 +130,7 @@ let
       cht-sh  # cheat sheet
       cloc
       cointop
+      colordiff
       coreutils
       cscope
       curl
