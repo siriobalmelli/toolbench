@@ -115,7 +115,6 @@ let
       paperkey
       pass
       gopass
-      pinentry
       scrypt
 
       # build systems
@@ -139,7 +138,7 @@ let
       entr
       fava
       fdupes
-      ffmpeg
+      ffmpeg-full
       figlet
       findutils
       flock
@@ -181,7 +180,11 @@ let
       # AWS
       awscli
       kubectl
-  ];
+
+    # packages that don't build on Darwin
+    ] ++ lib.optionals (!stdenv.isDarwin) [
+      pinentry
+    ];
 
 in
   if lib.inNixShell then
