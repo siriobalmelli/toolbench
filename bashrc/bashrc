@@ -12,6 +12,8 @@ source $HOME/.nix-profile/etc/profile.d/nix.sh
 
 # allow coredumps
 ulimit -c unlimited >/dev/null 2>&1
+# e.g. because git annex opens many files
+(($(ulimit -n) < 2048)) && ulimit -n 2048 >/dev/null 2>&1
 
 # color support
 case "$TERM" in
