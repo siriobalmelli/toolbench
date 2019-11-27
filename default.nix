@@ -111,6 +111,7 @@ let
 
       #crypto
       gnupg
+      go-ethereum
       keybase
       paperkey
       pass
@@ -123,8 +124,11 @@ let
       ninja
       pkgconfig
 
+      # data transfer
+      borgbackup
+      rsync
+
       # standard packages - query with `nix-env -qaP`
-      go-ethereum
       cacert
       cht-sh  # cheat sheet
       cloc
