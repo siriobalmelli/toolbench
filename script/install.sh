@@ -14,6 +14,10 @@ if ! command -v nix-env; then
 	nix-env -iA "nixpkgs.git"  # some CentOs boxes have git 1.8, no -C flag
 fi
 
+# make sure there is a Git
+command -v git || nix-env -iA "nixpkgs.git"
+command -v nproc || nix-env -iA "nixpkgs.coreutils"
+
 # reset environment to current toolbench, clean up old generations
 nix-env --cores $(nproc) -f $DERIVATION -i --remove-all
 nix-env --delete-generations 10d

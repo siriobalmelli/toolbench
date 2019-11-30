@@ -1,6 +1,6 @@
 {
   nixpkgs ? import (builtins.fetchGit {
-    url = "https://github.com/siriobalmelli-foss/nixpkgs.git";
+    url = "https://siriobalmelli@github.com/siriobalmelli-foss/nixpkgs.git";
     ref = "master";
     }) {}
 }:
@@ -10,11 +10,11 @@ with nixpkgs;
 let
   # TODO: get accepted upstream
   replacement = nixpkgs.replacement or import (builtins.fetchGit {
-    url = "https://github.com/siriobalmelli/replacement.git";
+    url = "https://siriobalmelli@github.com/siriobalmelli/replacement.git";
     ref = "master";
     }) {};
   nonlibc = nixpkgs.nonlibc or import (builtins.fetchGit {
-    url = "https://github.com/siriobalmelli/nonlibc.git";
+    url = "https://siriobalmelli@github.com/siriobalmelli/nonlibc.git";
     ref = "master";
     }) {};
 
