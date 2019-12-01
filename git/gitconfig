@@ -6,7 +6,6 @@
 
 	# files added with 'git add' are unlocked by default
 	ad = annex drop
-	af= !git annex fix; git annex fsck --all; git annex unused; git annex drop --unused
 	ag = annex get
 	ah = annex sync --jobs=cpus --content  # functional substitute for "push to all"
 	ap = annex sync --jobs=cpus  # 'p' is "pull" for consistency with 'git p'
@@ -42,9 +41,12 @@
 	initgit = !git init && echo ".DS_Store" >>.gitignore && sort -uo .gitignore .gitignore
 	initannex = !git initgit && git update-index --index-version 4 && git annex init && git annex wanted . present
 
+	preengit = !git fsck --full && git reflog expire --expire=now --all && git gc --prune=now --aggressive
+	preenannex = !git annex fix && git annex fsck --all && git annex unused && git annex drop --unused && git preengit
+
 	graph = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	infograph = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-	preen = !git fsck --full && git reflog expire --expire=now --all && git gc --prune=now --aggressive
+
 	purge = !bfg --no-blob-protection --delete-files
 
 [annex]
