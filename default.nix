@@ -66,6 +66,7 @@ let
       git-annex
       gitAndTools.gitRemoteGcrypt
       git-crypt
+      git-lfs
       bfg-repo-cleaner
       mr
 
