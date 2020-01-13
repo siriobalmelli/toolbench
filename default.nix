@@ -109,6 +109,7 @@ let
       go
       gocode
       godef
+      hugo
 
       #crypto
       gnupg
