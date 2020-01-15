@@ -49,19 +49,19 @@ let
 
   # The list of packages to be installed
   homies = [
-      # Customized packages
-      bash
-      bashrc
-      tbh
-
       # dogfood
       replacement
       nonlibc
 
+      # terminals editors and hacks
       tmux
       vim
       ycmd
+      bash
+      bashrc
+      tbh
 
+      # version control
       git
       git-annex
       gitAndTools.gitRemoteGcrypt
@@ -70,6 +70,7 @@ let
       bfg-repo-cleaner
       mr
 
+      # python
       python
       python.pkgs.beancount
       python.pkgs.cycler
@@ -106,6 +107,7 @@ let
       valgrind
       #pahole  # not supported on Darwin
 
+      # go ecosystem
       go
       gocode
       godef
@@ -119,6 +121,7 @@ let
       pass
       gopass
       scrypt
+      cointop
 
       # build systems
       cmake  # TODO: ninja back-end for cmake
@@ -130,11 +133,14 @@ let
       borgbackup
       rsync
 
+      # visual
+      imagemagickBig
+      mscgen
+
       # standard packages - query with `nix-env -qaP`
       cacert
       cht-sh  # cheat sheet
       cloc
-      cointop
       colordiff
       coreutils
       cscope
@@ -153,7 +159,6 @@ let
       gnutar
       htop
       iftop
-      imagemagickBig
       ipcalc
       jq
       less
