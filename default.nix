@@ -67,7 +67,6 @@ let
       gitAndTools.gitRemoteGcrypt
       git-crypt
       git-lfs
-      bfg-repo-cleaner
       mr
 
       # python

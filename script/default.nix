@@ -7,8 +7,6 @@ let
     (builtins.readFile ./flush_dns.sh);
   tbh_gemset_nix = writeShellScriptBin "tbh_gemset_nix"
     (builtins.readFile ./gemset_nix.sh);
-  tbh_git_rewrite = writeShellScriptBin "tbh_git_rewrite"
-    (builtins.readFile ./git_rewrite.sh);
   tbh_install = writeShellScriptBin "tbh_install"
     (builtins.readFile ./install.sh);
   tbh_merge_pdf = writeShellScriptBin "tbh_merge_pdf"
@@ -17,4 +15,4 @@ let
     (builtins.readFile ./preview.sh);
 
 in
-  [ tbh_flush_dns tbh_gemset_nix tbh_git_rewrite tbh_install tbh_merge_pdf tbh_preview ]
+  [ tbh_flush_dns tbh_gemset_nix tbh_install tbh_merge_pdf tbh_preview ]
