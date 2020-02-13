@@ -65,7 +65,7 @@ let
       git
       git-annex
       gitAndTools.gitRemoteGcrypt
-      git-crypt
+      gitAndTools.git-filter-repo
       git-lfs
       mr
 
