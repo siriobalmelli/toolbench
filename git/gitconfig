@@ -19,7 +19,8 @@
 	co = checkout
 	d = diff
 	dc = diff --cached
-	f = fetch
+	f = fetch --prune
+	ft = fetch --prune --prune-tags
 	h = push
 	hf = push --force
 	ht = push --tags
