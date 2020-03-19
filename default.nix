@@ -162,6 +162,7 @@ let
       jq
       less
       libarchive  # bsdtar
+      lzip  # .lz files
       lzma  # xz, unxz
       meson
       moreutils  # vidir
