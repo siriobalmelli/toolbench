@@ -179,6 +179,7 @@ let
       plantuml
       powerline-fonts
       pwgen
+      speedtest-cli
 
       texlive.combined.scheme-full
       tree
