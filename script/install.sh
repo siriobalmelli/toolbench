@@ -19,7 +19,7 @@ command -v git || nix-env -iA "nixpkgs.git"
 command -v nproc || nix-env -iA "nixpkgs.coreutils"
 
 # reset environment to current toolbench, clean up old generations
-nix-env --cores $(nproc) -f $DERIVATION -i --remove-all
+nix-env --cores $(nproc) -f $DERIVATION -i --remove-all --tarball-ttl 0
 nix-env --delete-generations 10d
 
 # Set nix-env's environment to point to the nixpkgs we just built against.
