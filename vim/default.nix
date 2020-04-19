@@ -29,7 +29,7 @@ nixpkgs.neovim.override {
     packages.vim-pager.start = [ vim-pager ];
     packages.vim-snippets.start = [ vim-snippets ];
     packages.vim-toml.start = [ vim-toml ];
-    packages.youcompleteme.start = [ youcompleteme ];
+    packages.YouCompleteMe.start = [ YouCompleteMe ];
     # TODO: these packages *seem* like a good idea; audition and learn them
     #ctrlp # grep -Er from inside Vim
     #fugitive  # frob Git from inside Vim
