@@ -85,6 +85,7 @@ let
       python.pkgs.pip
       python.pkgs.ply
       python.pkgs.prompt_toolkit
+      python.pkgs.ptyprocess
       python.pkgs.pyparsing
       python.pkgs.requests
       python.pkgs.ruamel_yaml
