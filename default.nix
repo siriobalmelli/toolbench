@@ -81,6 +81,7 @@ let
       python.pkgs.markdown
       # python.pkgs.matplotlib
       # python.pkgs.numpy
+      python.pkgs.pexpect
       python.pkgs.pip
       python.pkgs.ply
       python.pkgs.prompt_toolkit
