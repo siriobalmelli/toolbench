@@ -183,7 +183,7 @@ let
       powerline-fonts
       pwgen
       speedtest-cli
-
+      telnet
       texlive.combined.scheme-full
       tree
       vale
