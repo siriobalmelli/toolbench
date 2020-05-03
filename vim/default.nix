@@ -14,6 +14,7 @@ nixpkgs.neovim.override {
     packages.ale.start = [ ale ];  # linting
 
     packages.lightline-vim.start = [ lightline-vim ];  # minimalist status bar (cf vim-airline)
+    packages.vim-gitbranch.start = [ vim-gitbranch ];  # git branch data for lightline
 
     packages.ultisnips.start = [ ultisnips ];  # snippets engine
     packages.vim-snippets.start = [ vim-snippets ];  # community snippets
