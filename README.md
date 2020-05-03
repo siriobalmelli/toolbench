@@ -229,3 +229,27 @@ This is exactly the list we get by running `nix-shell` inside [.ycm_extra_conf.p
   - [nix pills](https://nixos.org/nixos/nix-pills/index.html)
   - [gentle nix introduction](https://ebzzry.io/en/nix/)
   - [nix cheatsheet](https://learnxinyminutes.com/docs/nix/)
+
+## TODO
+
+There are a couple painpoints:
+
+1. App selection and config file differences:
+    - graphical app configs (eg Alacritty) will be different between Linux and Darwin
+    - choice of window manager will be different based on OS
+    - some systems should *not* have to install the full panoply of packages
+        (eg no graphical apps, no heavy LaTeX stuff on a console-only linux VM)
+
+    Explore how others are doing this:
+
+    - [Hugo Reeves](https://hugoreeves.com/posts/2019/nix-home/):
+        https://github.com/HugoReeves/nix-home/
+
+1. Homogenization of dependencies:
+    Need a way to force a single version of a dependency for all packages, eg
+    - clang
+    - gcc
+    - python = python3 = python3.8
+
+1. Remove boilerplate in config file generation, eg:
+    - https://github.com/balsoft/nixos-config/blob/master/modules/workspace/i3blocks/scripts/battery.nix

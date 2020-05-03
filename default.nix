@@ -1,7 +1,7 @@
 {
   nixpkgs ? import (builtins.fetchGit {
     url = "https://siriobalmelli@github.com/siriobalmelli-foss/nixpkgs.git";
-    ref = "master";
+    ref = "ff98ee78ce8289ce9abd14d62f601b0a5b3f3a54";
     }) {}
 }:
 
@@ -49,17 +49,20 @@ let
 
   # The list of packages to be installed
   homies = [
+      nix
+
       # dogfood
       replacement
       nonlibc
 
       # terminals editors and hacks
+      bash
+      bashrc
+      irssi  # irc!
+      tbh
       tmux
       vim
       ycmd
-      bash
-      bashrc
-      tbh
 
       # version control
       git
@@ -79,12 +82,11 @@ let
       python.pkgs.ipython
       python.pkgs.jsonschema
       python.pkgs.markdown
-      # python.pkgs.matplotlib
-      # python.pkgs.numpy
+      # python.pkgs.matplotlib  # no longer builds on Darwin
+      # python.pkgs.numpy  # build problems on Darwin now also
       python.pkgs.pexpect
       python.pkgs.pip
       python.pkgs.ply
-      python.pkgs.prompt_toolkit
       python.pkgs.ptyprocess
       python.pkgs.pyparsing
       python.pkgs.requests
@@ -97,9 +99,6 @@ let
       python.pkgs.wcwidth
       python.pkgs.wheel
       python.pkgs.yamllint
-      #python.pkgs.mypy # TODO: not playing nice and finding e.g. beancount.
-                        # TODO: debug and re-inable for ALE in vimrc
-      #python.pkgs.pylint  # pyenchant build issue? Replaced with flake8 and mypy
 
       # compilers and wrappers
       binutils-unwrapped
@@ -108,7 +107,6 @@ let
       gdb
       llvm
       valgrind
-      #pahole  # not supported on Darwin
 
       # go ecosystem
       go
@@ -129,6 +127,7 @@ let
       # build systems
       cmake  # TODO: ninja back-end for cmake
       gnumake
+      meson
       ninja
       pkgconfig
 
@@ -137,7 +136,7 @@ let
       rsync
 
       # visual
-      imagemagickBig
+      imagemagickBig  # 'convert' utility
       mscgen
 
       # standard packages - query with `nix-env -qaP`
@@ -168,37 +167,37 @@ let
       libarchive  # bsdtar
       lzip  # .lz files
       lzma  # xz, unxz
-      meson
       moreutils  # vidir
       mtr
       ncat
       ncdu
       ncurses
       ncurses.dev
-      nix
       nmap
       openssh
-      p7zip
+      #p7zip  # marked insecure
       pandoc
-      plantuml
-      powerline-fonts
       pwgen
       speedtest-cli
       telnet
       texlive.combined.scheme-full
       tree
-      vale
+      vale  # command line linter for prose
       watch
       wget
       which
       xorriso
 
-      # AWS
-      awscli
-      kubectl
+      ## AWS
+      #awscli
+      #kubectl
+
+      ## graphical packages, require better config management than currently
+      #alacritty
 
     # packages that don't build on Darwin
     ] ++ lib.optionals (!stdenv.isDarwin) [
+      pahole
       pinentry
     ];
 

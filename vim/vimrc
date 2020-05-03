@@ -29,23 +29,23 @@ syntax on
 "specify format and indent settings for all languages
 "NOTE that syntax indentation is _expensive_ so disable it for e.g. JSON
 autocmd filetype c,cpp,make,sh setlocal
-	\ shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab autoindent cc=80
-	\ foldmethod=syntax
+			\ shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab autoindent cc=80
+			\ foldmethod=syntax
 
 autocmd filetype go setlocal
-	\ shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent cc=80
-	\ foldmethod=syntax
+			\ shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent cc=80
+			\ foldmethod=syntax
 
 autocmd filetype cmake,conf,javascript setlocal
-	\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
-	\ foldmethod=syntax
+			\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
+			\ foldmethod=syntax
 autocmd filetype markdown,python,snippets setlocal
-	\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
-	\ foldmethod=indent
+			\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
+			\ foldmethod=indent
 
 autocmd filetype beancount,json,nix,text,yaml setlocal
-	\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
-	\ foldmethod=indent
+			\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
+			\ foldmethod=indent
 
 " folds in insert mode? ridiculous, just let me _type_ already!
 autocmd InsertEnter * :let oldfold = &foldmethod | :setlocal foldmethod=manual
@@ -113,25 +113,16 @@ set hidden
 " parenthesis colorizer
 let g:rainbow_active = 1
 
-"make '=' reindent the whole file
-nnoremap = ggVG=<C-o><C-o><CR>
-
-"make '=' reindent the whole file
-"nnoremap <C-g> ggVG<CR>
-
-"make 'X' delete the buffer
-nnoremap X :bdelete<CR>
-
 "jump to last cursor position when opening a file
 "dont do it when writing a commit log entry
 autocmd BufReadPost * call SetCursorPosition()
 function! SetCursorPosition()
-    if &filetype !~ 'svn\|commit\c'
-        if line("'\"") > 0 && line("'\"") <= line("$")
-            exe "normal! g`\""
-            normal! zz
-        endif
-    end
+	if &filetype !~ 'svn\|commit\c'
+		if line("'\"") > 0 && line("'\"") <= line("$")
+			exe "normal! g`\""
+			normal! zz
+		endif
+	end
 endfunction
 
 let g:ctrlp_working_path_mode = 'ra'
@@ -205,11 +196,7 @@ let g:snips_github = "https://github.com/siriobalmelli"
 
 "airline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-
-"indent_guides
-let g:indent_guides_guide_size=1
+let g:airline_powerline_fonts = 0
 
 
 "ALE (replace syntastic)
@@ -265,49 +252,3 @@ nnoremap <C-\>q :tabdo q<CR>
 nnoremap <C-\>Q :tabdo q!<CR>
 nnoremap <C-\>w :tabdo w<CR>
 nnoremap <C-\>z :tabdo wq<CR>
-
-
-"TODO: figure out what these do and whether it would be a good idea
-"set formatoptions-=o "dont continue comments when pushing o/O
-"
-""vertical/horizontal scroll off settings
-"set scrolloff=3
-"set sidescrolloff=7
-"set sidescroll=1
-
-""nerdtree settings
-"let g:NERDTreeMouseMode = 2
-"let g:NERDTreeWinSize = 40
-"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-""explorer mappings
-"nnoremap <f1> :BufExplorer<cr>
-"nnoremap <f3> :TagbarToggle<cr>
-"nnoremap <Leader>o :NERDTreeToggle<CR>
-"nnoremap <Leader>/ /\c
-
-""make <c-l> clear the highlight as well as redraw
-"nnoremap <C-L> :nohls<CR><C-L>
-"inoremap <C-L> <C-O>:nohls<CR>
-"inoremap <C-e> <C-o>$
-
-""map Q to line wrapping
-"noremap Q gq
-
-""make Y consistent with C and D
-"nnoremap Y y$
-
-""visual search mappings
-"function! s:VSetSearch()
-"    let temp = @@
-"    norm! gvy
-"    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-"    let @@ = temp
-"endfunction
-"vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
-"vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
-
-"set guioptions-=m "remove menu
-"set guioptions-=T "remove toolbar
-"set guioptions-=r "remove scroll bar right
-"set guioptions-=L "remove scroll bar left

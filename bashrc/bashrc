@@ -108,6 +108,8 @@ gpg-connect-agent /bye
 ## lock tty on Ctrl-S (DC3), release with Ctrl-Q (DC1)
 stty ixon
 
+export XDG_CONFIG_HOME=~/.config
+
 export BASH_ENV=~/.bashrc
 export EDITOR=vim
 export PAGER=less

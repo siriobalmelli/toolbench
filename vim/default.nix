@@ -9,47 +9,40 @@ nixpkgs.neovim.override {
   vimAlias = true;
 
   configure = {
-    packages.ale.start = [ ale ];
-    packages.autoload_cscope-vim.start = [ autoload_cscope-vim ];
+    ## TODO: better C syntax highlighting with eg chromatica or color_coded
+    packages.YouCompleteMe.start = [ YouCompleteMe ];  # autocompletion
+    packages.ale.start = [ ale ];  # linting
+
+    packages.lightline-vim.start = [ lightline-vim ];  # minimalist status bar (cf vim-airline)
+
+    packages.ultisnips.start = [ ultisnips ];  # snippets engine
+    packages.vim-snippets.start = [ vim-snippets ];  # community snippets
+
+    packages.autoload_cscope-vim.start = [ autoload_cscope-vim ];  # cscope!
+    packages.nerdcommenter.start = [ nerdcommenter ];  # comment toggling
+    packages.rainbow.start = [ rainbow ];  # parenthesis matching
+    packages.surround.start = [ surround ];  # bracket and quote pairs
+    packages.tabular.start = [ tabular ];  # table generation
+    packages.vim-easymotion.start = [ vim-easymotion ];  # efficient search
+    packages.vim-localvimrc.start = [ vim-localvimrc ];  # dir and subdir .lvimrc
+
+    # language support
     packages.jdaddy-vim.start = [ jdaddy-vim ];
     packages.meson.start = [ meson ];
-    packages.nerdcommenter.start = [ nerdcommenter ];
-    packages.plantuml-syntax.start = [ plantuml-syntax ];
-    packages.rainbow.start = [ rainbow ];
-    packages.surround.start = [ surround ];
-    packages.tabular.start = [ tabular ];
-    packages.ultisnips.start = [ ultisnips ];
     packages.vim-beancount.start = [ vim-beancount ];
-    packages.vim-easymotion.start = [ vim-easymotion ];
     packages.vim-go.start = [ vim-go ];
-    packages.vim-indent-guides.start = [ vim-indent-guides ];
-    packages.vim-localvimrc.start = [ vim-localvimrc ];
     packages.vim-markdown.start = [ vim-markdown ];
     packages.vim-nix.start = [ vim-nix ];
-    packages.vim-pager.start = [ vim-pager ];
-    packages.vim-snippets.start = [ vim-snippets ];
     packages.vim-toml.start = [ vim-toml ];
-    packages.YouCompleteMe.start = [ YouCompleteMe ];
-    # TODO: these packages *seem* like a good idea; audition and learn them
-    #ctrlp # grep -Er from inside Vim
-    #fugitive  # frob Git from inside Vim
-    #tmux-navigator
-    #nerdtree  # file browser from inside Vim
-    #vim-airline  # status bar
+    packages.vim-css-color.start = [ vim-css-color ];  # colorize hex values in css
 
-    # NOTE: intriguing packages which I'm still not sure are a good idea
-    #vim-trailing-whitespace
-    #vimproc
-
-    customRC =
-      (nixpkgs.lib.concatStringsSep "\n"
+    customRC = (nixpkgs.lib.concatStringsSep "\n"
       [ (builtins.readFile ./vimrc)
         ''
         let g:ycm_python_binary_path = '${python}/bin/python'
         let g:UltiSnipsSnippetDirectories=['${./UltiSnips}', 'UltiSnips']
-        let g:ycm_python_binary_path = '${python}/bin/python'
         ''
       ]
-      );
+    );
   };
 }
