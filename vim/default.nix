@@ -10,6 +10,7 @@ nixpkgs.neovim.override {
 
   configure = {
     ## TODO: better C syntax highlighting with eg chromatica or color_coded
+    ## TODO: move from YCM to coc completion?
     packages.YouCompleteMe.start = [ YouCompleteMe ];  # autocompletion
     packages.ale.start = [ ale ];  # linting
 
