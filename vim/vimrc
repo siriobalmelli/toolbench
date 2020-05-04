@@ -202,9 +202,15 @@ let g:lightline = {
 	\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
 	\ },
 	\ 'component_function': {
-	\   'gitbranch': 'gitbranch#name'
+	\   'gitbranch': 'gitbranch#name',
+	\   'filename': 'LightlineFilename',
 	\ },
 	\ }
+
+function! LightlineFilename()
+  return expand('%') !=# '' ? expand('%') : '[No Name]'
+endfunction
+
 
 
 "ALE (replace syntastic)
