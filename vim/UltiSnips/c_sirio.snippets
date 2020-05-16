@@ -1,30 +1,38 @@
 ###
 #	c snippets
 #
-# (c) 2017 Sirio Balmelli; Balmelli Analog & Digital
+# (c) 2017-2020 Sirio Balmelli; Balmelli Analog & Digital
 ###
 
 priority 1
 
-snippet #ifn "include guard for a header file" !b
-`!p
-# 'fn' is filename
-incl = '%s_' % fn.replace('.', '_')
-snip.rv = '#ifndef %s\n' % incl
-snip.rv += '#define %s\n' % incl
-snip.rv += '#endif /* %s */' % incl
-`
+snippet #if "#if #endif" !b
+#if ${1:0}
+${VISUAL}$0
+#endif /* $1 */
 endsnippet
 
-snippet #i "include statement" b
+# 'fn' is filename
+snippet #ifn "include guard for a header file" b
+#ifndef ${1:`!p snip.rv = fn.replace('.', '_').upper()`}
+#define $1
+${VISUAL}$0
+#endif /* $1 */
+endsnippet
+
+snippet #i "#include" b
+#include "${1}"
+endsnippet
+snippet #ii "#include <stdlib>" b
 #include <${1}>
 endsnippet
 
-snippet #d "define statement" b
+snippet #d "#define" b
 #define ${1}
 endsnippet
 
-snippet #0 "#if 0 block" b
-#if 0
-#endif
+snippet foru "for unsigned int loop (foru)" b
+for (${4:unsigned int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
+	${VISUAL}$0
+}
 endsnippet

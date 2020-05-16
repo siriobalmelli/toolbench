@@ -1,7 +1,19 @@
+priority 1
+
+global !p
+from vimsnippets import get_comment_format
+endglobal
+
+
 snippet '![.0-9(].*!' "shell out to python for math" r
 `!p
 import parser
 #strip all "non-math" characters from string; compile and evaluate
 snip.rv = eval(parser.expr(re.sub('[^-+*/.0-9()]', '', match.group(0))).compile())
 `
+endsnippet
+
+
+snippet todo "TODO comment (improved)" w
+`!p snip.rv=get_comment_format()[0]` TODO: ${1:fix this} (${2:`!v strftime('%Y-%m-%d')`}${3:, `!v g:snips_author`}) `!p snip.rv=get_comment_format()[2]`
 endsnippet
