@@ -24,31 +24,23 @@ def bufslice():
 
 def acts():
 	"""
-	Returns an iterator over accounts in the file.
+	Returns an iterator over (account, currency) tuples in the file.
 	"""
 	# include commented-out account names for convenience
-	act_re = re.compile(r'^;?\s*[0-9-]{10}\s+open\s+(\S+).*')
-	return (m.group(1) for m in (act_re.match(ln) for ln in bufslice()) if m)
+	act_re = re.compile(r'^;?\s*[0-9-]{10}\s+open\s+(\S+)\s*([A-Z_]+)?.*')
+	return (m.groups() for m in (act_re.match(ln) for ln in bufslice()) if m)
 
 def act(n):
 	"""
 	Returns the 'n'th account for which there is an opening statement in the file
 	"""
-	return next(islice(acts(), n, n + 1), '')
-
-
-def curs():
-	"""
-	Returns an interator over currencies in account opening statements
-	"""
-	cur_re = re.compile(r'^;?\s*[0-9-]{10}\s+open\s+\S+\s+([A-Z]+).*')
-	return (m.group(1) for m in (cur_re.match(ln) for ln in bufslice()) if m)
+	return next(islice(acts(), n, n + 1), (None, None))[0] or ''
 
 def cur(n):
 	"""
 	Returns the 'n'th currency found in account opening statements
 	"""
-	return next(islice(curs(), n, n + 1), '')
+	return next(islice(acts(), n, n + 1), (None, None))[1] or ''
 
 
 def last():
@@ -88,7 +80,8 @@ snippet tr "transaction" b
 ${1:`date "+%Y-%m"`}-${2:`date "+%d"`}	*	"${3:payee}"	"${4:narration}"
 	document: "${5:None}"
 	${6:`!p snip.rv = act(0)`}
-	${7:`!p snip.rv = act(1)`}	$0
+	${7:`!p snip.rv = act(1)`} ${8:1} ${9:`!p snip.rv = cur(1)`}
+$0
 endsnippet
 
 # PDFs which have a 'YYYY-MM-DD.payee - narration.pdf' format,
@@ -97,14 +90,15 @@ snippet "^([0-9-]{10})\.(.*?) - (.*)(?<!- [Ss]tatement)(?<!- [Dd]oc)\.pdf$" "pdf
 ${1:`!p snip.rv = match.group(1)`}	*	"${2:`!p snip.rv = match.group(2)`}"	"${3:`!p snip.rv = match.group(3)`}"
 	document: "`!p snip.rv = match.group(0)`"
 	${4:`!p snip.rv = act(0)`}
-	${5:`!p snip.rv = act(1)`}	$0
+	${7:`!p snip.rv = act(1)`} ${8:1} ${9:`!p snip.rv = cur(1)`}
+$0
 endsnippet
 
 
 
 snippet ba "balance" b
-${1:`!p snip.rv = tmrw(last())`}	balance	${2:`!p snip.rv = act(0)`}	${3:0.00}
-	document: "${4:None}"
+${1:`!p snip.rv = tmrw(last())`}	balance	${2:`!p snip.rv = act(0)`}	${3:0.00} ${4:`!p snip.rv = cur(0)`}
+	document: "${5:None}"
 $0
 endsnippet
 
@@ -113,7 +107,7 @@ endsnippet
 # - dated the following day
 # - with an associated 'document:' metadata field
 snippet "^([0-9-]{10})\..*- [Ss]tatement\.pdf$" "pdf -> balance" r
-${1:`!p snip.rv = tmrw(match.group(1))`}	balance	${2:`!p snip.rv = act(0)`}	${3:0.00}
+${1:`!p snip.rv = tmrw(match.group(1))`}	balance	${2:`!p snip.rv = act(0)`}	${3:0.00} ${4:`!p snip.rv = cur(0)`}
 	document: "`!p snip.rv = match.group(0)`"
 $0
 endsnippet
@@ -123,7 +117,7 @@ endsnippet
 # Files which follow the 'YYYY-MM-DD.payee - narration - doc.pdf' format
 #+  should become 'document' entries
 snippet "^([0-9-]{10})\..*- [Dd]oc\.pdf$" "pdf -> document" r
-${1:`!p snip.rv = match.group(1)`}	document	${2:`!p snip.rv = act(0)`}	`!p snip.rv = f'"{match.group(0)}"'`
+${1:`!p snip.rv = match.group(1)`}	document	${2:`!p snip.rv = act(0)`}	"`!p snip.rv = match.group(0)`"
 $0
 endsnippet
 
@@ -133,8 +127,6 @@ endsnippet
 snippet hr "hours log entry" b
 ${1:`date "+%Y-%m"`}-${2:`date "+%d"`}	*	"${3:project}"	"${4:0900}-${5:1800}; ${6:actions}"
 	${7:`!p snip.rv = act(0)`}
-	${8:`!p snip.rv = act(1)`}	${9:`!p
-		snip.rv = round((hr(t[5]) + timedelta(days=1) - hr(t[4])).seconds / 3600 % 24, 1)
-		`} ${10:`!p snip.rv = curs(1)`}
+	${8:`!p snip.rv = act(1)`}	${9:`!p snip.rv = round((hr(t[5]) + timedelta(days=1) - hr(t[4])).seconds / 3600 % 24, 1)`} ${10:`!p snip.rv = cur(1)`}
 $0
 endsnippet
