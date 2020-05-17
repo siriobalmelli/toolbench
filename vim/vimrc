@@ -32,14 +32,14 @@ autocmd filetype c,cpp,make,sh setlocal
 			\ shiftwidth=8 tabstop=8 softtabstop=8 noexpandtab autoindent cc=80
 			\ foldmethod=syntax
 
-autocmd filetype go setlocal
+autocmd filetype go,snippets setlocal
 			\ shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab autoindent cc=80
 			\ foldmethod=syntax
 
 autocmd filetype cmake,conf,javascript setlocal
 			\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
 			\ foldmethod=syntax
-autocmd filetype markdown,python,snippets setlocal
+autocmd filetype markdown,python setlocal
 			\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
 			\ foldmethod=indent
 

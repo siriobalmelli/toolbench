@@ -1,121 +1,140 @@
 # Beancount snippets file
-# (c) Sirio Balmelli
+# (c) 2018-2020 Sirio Balmelli
 
+priority 1
 
-# Generic transaction
-snippet tr "Transaction" b
-${1:`date +%Y`}-${2:`date +%m`}-${3:`date +%d`} *   "${4:payee}"        "${5:narration}"
-endsnippet
-
-
-# everything after this point has this bit of Python executing
 global !p
 """
 All snippets see these.
 """
 import re
+from datetime import datetime, timedelta
 from itertools import islice
 
-acct_re = re.compile('^[0-9-]{10}\s+open\s+(\S+).*')
 
-def iaccounts():
-    """
-    Returns an iterator over accounts in the file.
-    """
-    return (mt.group(1) for mt in (acct_re.match(ln) for ln in snip.buffer) if mt)
+def bufslice():
+	"""
+	Return a slice of the buffer which:
+	- is a lazy iterator
+	- is enough to pick up the first many lines without slowing in big files
+	- avoids an assertion when treating snip.buffer as an iterator
+		(maybe does not implement StopIteration ?)
+	"""
+	return islice(snip.buffer, 0, min(len(snip.buffer), 100))
 
-def accounts(num):
-    """
-    Returns a list of at most (may be less) the first 'num' accounts found in file.
-    """
-    return list(islice(iaccounts(), num))
+def acts():
+	"""
+	Returns an iterator over accounts in the file.
+	"""
+	# include commented-out account names for convenience
+	act_re = re.compile(r'^;?\s*[0-9-]{10}\s+open\s+(\S+).*')
+	return (m.group(1) for m in (act_re.match(ln) for ln in bufslice()) if m)
 
-def acct():
-    """
-    Returns the first account in the file.
-    """
-    return next(iaccounts(), '')
+def act(n):
+	"""
+	Returns the 'n'th account for which there is an opening statement in the file
+	"""
+	return next(islice(acts(), n, n + 1), '')
+
+
+def curs():
+	"""
+	Returns an interator over currencies in account opening statements
+	"""
+	cur_re = re.compile(r'^;?\s*[0-9-]{10}\s+open\s+\S+\s+([A-Z]+).*')
+	return (m.group(1) for m in (cur_re.match(ln) for ln in bufslice()) if m)
+
+def cur(n):
+	"""
+	Returns the 'n'th currency found in account opening statements
+	"""
+	return next(islice(curs(), n, n + 1), '')
+
+
+def last():
+	"""
+	Work backwards and get the date for the first entry preceding this one
+	(if any), otherwise return today's date.
+	"""
+	date_re = re.compile('^([0-9-]{10}).*')
+
+	try:
+		buf = reversed(snip.buffer[0:snip.p.start[0]])  # iterator
+		return next((m.group(1) for m in (date_re.match(l) for l in buf) if m),
+					str(datetime.now().date()))
+	except:
+		return str(datetime.now().date())
+
+def hr(var):
+	"""
+	Attempt to parse 'var' into HH:MM time; return 0900 by default
+	"""
+	try:
+		return datetime.strptime(var, '%H%M')
+	except Exception:
+		return datetime.strptime('0900', '%H%M')
+
+def tmrw(string):
+	"""
+	Parses ISO date in 'string' and returns the date for the next day
+	"""
+	tomorrow = datetime.strptime(string, '%Y-%m-%d') + timedelta(days=1)
+	return str(tomorrow.date())
 endglobal
+
+
+
+snippet tr "transaction" b
+${1:`date "+%Y-%m"`}-${2:`date "+%d"`}	*	"${3:payee}"	"${4:narration}"
+	document: "${5:None}"
+	${6:`!p snip.rv = act(0)`}
+	${7:`!p snip.rv = act(1)`}	$0
+endsnippet
+
+# PDFs which have a 'YYYY-MM-DD.payee - narration.pdf' format,
+# but NOT "- statement.pdf" or "- doc.pdf"
+snippet "^([0-9-]{10})\.(.*?) - (.*)(?<!- [Ss]tatement)(?<!- [Dd]oc)\.pdf$" "pdf -> transaction" r
+${1:`!p snip.rv = match.group(1)`}	*	"${2:`!p snip.rv = match.group(2)`}"	"${3:`!p snip.rv = match.group(3)`}"
+	document: "`!p snip.rv = match.group(0)`"
+	${4:`!p snip.rv = act(0)`}
+	${5:`!p snip.rv = act(1)`}	$0
+endsnippet
+
+
+
+snippet ba "balance" b
+${1:`!p snip.rv = tmrw(last())`}	balance	${2:`!p snip.rv = act(0)`}	${3:0.00}
+	document: "${4:None}"
+$0
+endsnippet
+
+# Files which follow the 'YYYY-MM-DD.payee - statement.pdf' format
+# should become 'balance' entries:
+# - dated the following day
+# - with an associated 'document:' metadata field
+snippet "^([0-9-]{10})\..*- [Ss]tatement\.pdf$" "pdf -> balance" r
+${1:`!p snip.rv = tmrw(match.group(1))`}	balance	${2:`!p snip.rv = act(0)`}	${3:0.00}
+	document: "`!p snip.rv = match.group(0)`"
+$0
+endsnippet
+
 
 
 # Files which follow the 'YYYY-MM-DD.payee - narration - doc.pdf' format
 #+  should become 'document' entries
-snippet "^([0-9-]{10})\.(.*) - (.*) - doc\.pdf$" "filename -> document" r
-`!p
-snip.rv = '%s\tdocument\t%s\t"%s"' % (match.group(1), acct(), match.group(0))
-`
+snippet "^([0-9-]{10})\..*- [Dd]oc\.pdf$" "pdf -> document" r
+${1:`!p snip.rv = match.group(1)`}	document	${2:`!p snip.rv = act(0)`}	`!p snip.rv = f'"{match.group(0)}"'`
+$0
 endsnippet
 
-
-# Files which follow the 'YYYY-MM-DD.payee - statement.pdf' format should become
-#+  'balance' entries with an associated 'document:' metadata
-snippet "^([0-9-]{10})\.(.*) - [Ss]tatement\.pdf$" "filename -> balance" r
-`!p
-from datetime import date, timedelta, datetime
-
-# increment the date by 1 day (balance statements are evaluated at start of day)
-posting = datetime.strptime(match.group(1), '%Y-%m-%d') + timedelta(days=1)
-
-top = '%s\tbalance\t\t%s\t' % (posting.date(), acct())
-snip.rv = ('%s\n\tdocument:\t"%s"') % (top, match.group(0))
-`
-endsnippet
-
-
-# Files which have a 'YYYY-MM-DD.payee - narration.pdf' format,
-#+  but NOT matching the 'filename -> document' snippet above.
-snippet "^([0-9-]{10})\.(.*) - (.*)\.pdf$" "filename -> transaction" r
-`!p
-head_print = '%s\t*\t"%s"\t\t"%s"' % (match.groups()[:3])
-acct_print = '\n'.join(['\t%s' % acct for acct in accounts(2)])
-snip.rv = '\n'.join([head_print, acct_print])
-`
-endsnippet
-
-
-# balance entry
-snippet bal "Balance" b
-`!p
-from datetime import date, timedelta, datetime
-
-date_reg = re.compile('^([0-9-]{10}).*')
-
-# Work backwards and get the date for any entry immediately preceding this one.
-# There is no apparent reason for this try block
-# ... except UltiSnips otherwise gives 'snip.p.start == 0' ??
-try:
-    date_str = next((mt.group(1)
-                     for mt in (date_reg.match(ln)
-                                for ln in reversed(snip.buffer[0:snip.p.start[0]]))
-                     if mt),
-                    None)
-
-    # increase date by 1 (balance assertions take effect at the beginning of the day)
-    posting = datetime.strptime(date_str, '%Y-%m-%d') + timedelta(days=1)
-
-    # output balance entry
-    snip.rv = '%s\tbalance\t\t%s\t' % (posting.date(), acct())
-except:
-    pass
-`
-endsnippet
 
 
 # Hours entry
-snippet hr "hour log entry" b
-${1:`date +%Y-%m`}-${2:`date +%d`}  *  "${3:project}"      "${4:0900}-${5:1800}; ${6:what}"
-`!p
-from datetime import date, datetime
-
-# yr, mo, dy = date.today().isoformat().split('-')
-try:  # no, t[2:4] gives a TypeError
-    start = datetime.strptime(t[4] if t[4] else '0900', '%H%M')
-    end = datetime.strptime(t[5] if t[5] else '0900', '%H%M')
-except ValueError:
-    start = end = datetime.strptime('0900', '%H%M')
-delta = round((end - start).total_seconds() / 3600, 1)
-
-accs = accounts(2)
-snip.rv = ('\t%s\n\t%s\t\t%s T_SB') % (accs[0], accs[1], delta)
-`
+snippet hr "hours log entry" b
+${1:`date "+%Y-%m"`}-${2:`date "+%d"`}	*	"${3:project}"	"${4:0900}-${5:1800}; ${6:actions}"
+	${7:`!p snip.rv = act(0)`}
+	${8:`!p snip.rv = act(1)`}	${9:`!p
+		snip.rv = round((hr(t[5]) + timedelta(days=1) - hr(t[4])).seconds / 3600 % 24, 1)
+		`} ${10:`!p snip.rv = curs(1)`}
+$0
 endsnippet
