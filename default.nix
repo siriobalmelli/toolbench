@@ -58,6 +58,7 @@ let
 
       # terminals editors and hacks
       bash
+      shellcheck
       bashrc
       irssi  # irc!
       tbh
