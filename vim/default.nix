@@ -7,6 +7,8 @@ with vimPlugins;
 nixpkgs.neovim.override {
 
   vimAlias = true;
+  withPython = false;
+  withPython3 = true;
 
   configure = {
     ## TODO: better C syntax highlighting with eg chromatica or color_coded
