@@ -81,7 +81,9 @@ let
       python.pkgs.dateutil
       python.pkgs.flake8
       python.pkgs.howdoi
+      python.pkgs.intelhex
       python.pkgs.ipython
+      python.pkgs.jinja2
       python.pkgs.jsonschema
       python.pkgs.markdown
       # python.pkgs.matplotlib  # no longer builds on Darwin
