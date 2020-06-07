@@ -4,6 +4,8 @@
 with nixpkgs;
 with vimPlugins;
 
+# see https://github.com/teto/home/blob/master/config/nixpkgs/overlays/neovim.nix#L181
+# for how to better/further override neovim
 nixpkgs.neovim.override {
 
   vimAlias = true;

@@ -143,6 +143,16 @@ let
       imagemagickBig  # 'convert' utility
       mscgen
 
+      # network
+      iftop
+      ipcalc
+      mtr
+      ncat
+      nmap
+      openssh
+      telnet
+      wget
+
       # standard packages - query with `nix-env -qaP`
       cacert
       cht-sh  # cheat sheet
@@ -164,31 +174,23 @@ let
       gnused
       gnutar
       htop
-      iftop
-      ipcalc
       jq
       less
       libarchive  # bsdtar
       lzip  # .lz files
       lzma  # xz, unxz
       moreutils  # vidir
-      mtr
-      ncat
       ncdu
       ncurses
       ncurses.dev
-      nmap
-      openssh
       #p7zip  # marked insecure
       pandoc
       pwgen
       speedtest-cli
-      telnet
       texlive.combined.scheme-full
       tree
       vale  # command line linter for prose
       watch
-      wget
       which
       xorriso
 
