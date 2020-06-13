@@ -24,7 +24,7 @@ let
   # which would obviate having to set PYTHONPATH in bashrc,
   # but would require explicitly reinstalling the wrapped python at every change,
   # as opposed to quickly and painlessly testing things with 'nix-env --install'
-  python = python38Full;
+  python = python3;
 
   gcc = nixpkgs.gcc.overrideAttrs ( oldAttrs: rec { meta.priority = 5; });
   clang = nixpkgs.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
