@@ -74,9 +74,11 @@ let
       git-lfs
       mr
 
+      #python.pkgs.beancount
+      #fava
+
       # python
       python
-      python.pkgs.beancount
       python.pkgs.cycler
       python.pkgs.dateutil
       python.pkgs.flake8
@@ -164,7 +166,6 @@ let
       dos2unix
       dosfstools  # mkdosfs
       entr
-      fava
       fdupes
       ffmpeg-full
       figlet
