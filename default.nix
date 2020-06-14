@@ -1,7 +1,7 @@
 {
   nixpkgs ? import (builtins.fetchGit {
     url = "https://siriobalmelli@github.com/siriobalmelli-foss/nixpkgs.git";
-    ref = "master";
+    ref = "sirio";
     }) {}
   #nixpkgs ? import ~/repos/foss/nixpkgs/default.nix {}
 }:
@@ -74,8 +74,8 @@ let
       git-lfs
       mr
 
-      #python.pkgs.beancount
-      #fava
+      python.pkgs.beancount
+      fava
 
       # python
       python
