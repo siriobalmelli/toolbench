@@ -1,7 +1,7 @@
 {
   nixpkgs ? import (builtins.fetchGit {
     url = "https://siriobalmelli@github.com/siriobalmelli-foss/nixpkgs.git";
-    ref = "sirio";
+    ref = "master";
     }) {}
   #nixpkgs ? import ~/repos/foss/nixpkgs/default.nix {}
 }:
