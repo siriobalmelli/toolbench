@@ -74,8 +74,8 @@ let
       git-lfs
       mr
 
-      python.pkgs.beancount
-      fava
+      #python.pkgs.beancount
+      #fava
 
       # python
       python
@@ -88,8 +88,6 @@ let
       python.pkgs.jinja2
       python.pkgs.jsonschema
       python.pkgs.markdown
-      # python.pkgs.matplotlib  # no longer builds on Darwin
-      # python.pkgs.numpy  # build problems on Darwin now also
       python.pkgs.pexpect
       python.pkgs.pip
       python.pkgs.ply
