@@ -25,6 +25,7 @@ filetype plugin on
 filetype indent on
 "turn on syntax highlighting
 syntax on
+set spelllang=en
 
 "specify format and indent settings for all languages
 "NOTE that syntax indentation is _expensive_ so disable it for e.g. JSON
@@ -39,9 +40,13 @@ autocmd filetype go,snippets setlocal
 autocmd filetype cmake,conf,javascript setlocal
 			\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
 			\ foldmethod=syntax
-autocmd filetype markdown,python setlocal
+autocmd filetype python setlocal
 			\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
 			\ foldmethod=indent
+autocmd filetype markdown,gitcommit setlocal
+			\ shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent cc=80
+			\ foldmethod=indent
+			\ spell
 
 autocmd filetype beancount,json,nix,text,yaml setlocal
 			\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
