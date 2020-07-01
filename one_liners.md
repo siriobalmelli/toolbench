@@ -11,3 +11,7 @@
 1. Converting Python `.format()` strings into f-strings:
 
         sed -E 's/(.*)\(.(.*)\{[0-9]?\}(.*).\.format\((.*)\)\)/\1(f"\2{\4}\3")/g'
+
+1. Performing an action with all `Unmerged paths:` in a git merge conflict:
+
+        git status | sed -E -e '1,/Unmerged/ d' -ne 's/.*:\s+(.*)/\1/p' | xargs -I{} git rm {}
