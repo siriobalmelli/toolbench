@@ -48,7 +48,7 @@ autocmd filetype markdown,gitcommit setlocal
 			\ foldmethod=indent
 			\ spell
 
-autocmd filetype beancount,json,nix,text,yaml setlocal
+autocmd filetype beancount,json,nix,proto,text,yaml setlocal
 			\ shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent cc=80
 			\ foldmethod=indent
 

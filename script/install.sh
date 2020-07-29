@@ -28,7 +28,7 @@ nix-env --delete-generations 10d
 # but I don't (yet) understand the subtleties of Nix tooling any better.
 # TODO: this is not generic (e.g. for private tools)
 nix-channel --add \
-	https://github.com/siriobalmelli-foss/nixpkgs/archive/sirio.tar.gz \
+	https://github.com/siriobalmelli-foss/nixpkgs/archive/master.tar.gz \
 	nixpkgs
 nix-channel --update
 
