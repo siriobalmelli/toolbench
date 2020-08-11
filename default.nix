@@ -9,16 +9,6 @@
 with nixpkgs;
 
 let
-  # TODO: get accepted upstream
-  replacement = nixpkgs.replacement or import (builtins.fetchGit {
-    url = "https://siriobalmelli@github.com/siriobalmelli/replacement.git";
-    ref = "master";
-    }) {};
-  nonlibc = nixpkgs.nonlibc or import (builtins.fetchGit {
-    url = "https://siriobalmelli@github.com/siriobalmelli/nonlibc.git";
-    ref = "master";
-    }) {};
-
   # single knob for python version everywhere
   # ... there is also the wrapped 'python35.withPackages' approach (see <https://nixos.org/nixpkgs/manual/#python>)
   # which would obviate having to set PYTHONPATH in bashrc,
@@ -52,9 +42,7 @@ let
   homies = [
       nix
 
-      # dogfood
-      replacement
-      nonlibc
+      replacement  # dogfood
 
       # terminals editors and hacks
       bash
@@ -79,28 +67,21 @@ let
 
       # python
       python
-      python.pkgs.cycler
       python.pkgs.dateutil
       python.pkgs.flake8
-      python.pkgs.howdoi
-      python.pkgs.intelhex
       python.pkgs.ipython
       python.pkgs.jinja2
       python.pkgs.jsonschema
       python.pkgs.markdown
       python.pkgs.pexpect
       python.pkgs.pip
-      python.pkgs.ply
-      python.pkgs.ptyprocess
       python.pkgs.pyparsing
       python.pkgs.requests
       python.pkgs.ruamel_yaml
       python.pkgs.setuptools
       python.pkgs.sh
-      python.pkgs.six
       python.pkgs.tabulate
       python.pkgs.twine
-      python.pkgs.wcwidth
       python.pkgs.wheel
       python.pkgs.yamllint
 
@@ -110,6 +91,7 @@ let
       gcc
       gdb
       llvm
+      protobuf
       valgrind
 
       # go ecosystem
@@ -129,7 +111,7 @@ let
       cointop
 
       # build systems
-      cmake  # TODO: ninja back-end for cmake
+      cmake
       gnumake
       meson
       ninja
@@ -137,7 +119,9 @@ let
 
       # data transfer
       borgbackup
+      rclone
       rsync
+      syncthing
 
       # visual
       imagemagickBig  # 'convert' utility
@@ -182,7 +166,6 @@ let
       ncdu
       ncurses
       ncurses.dev
-      #p7zip  # marked insecure
       pandoc
       pwgen
       speedtest-cli
