@@ -88,6 +88,7 @@ let
       # compilers and wrappers
       binutils-unwrapped
       clang
+      clang-tools
       gcc
       gdb
       llvm
