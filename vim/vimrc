@@ -271,3 +271,8 @@ nnoremap <C-\>q :tabdo q<CR>
 nnoremap <C-\>Q :tabdo q!<CR>
 nnoremap <C-\>w :tabdo w<CR>
 nnoremap <C-\>z :tabdo wq<CR>
+
+
+" vim-clang-format
+nnoremap <Leader>z :ClangFormat<CR>
+vnoremap <Leader>z :ClangFormat<CR>
