@@ -56,7 +56,6 @@ let
 
       # text formatting and alternatives to basic utilities
       bat
-      delta  # TODO: evaluate 'git d | delta'
       fd  # replaces earlier 'findd' alias
       hyperfine  # preferrable to 'time'
       ripgrep  # replaces earlier 'grepd' alias
@@ -64,6 +63,7 @@ let
       # version control
       git
       git-annex
+      nixpkgs.gitAndTools.delta  # TODO: evaluate 'git d | delta'
       gitAndTools.gitRemoteGcrypt
       gitAndTools.git-filter-repo
       git-lfs
