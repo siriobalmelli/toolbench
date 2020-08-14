@@ -54,13 +54,20 @@ let
       vim
       ycmd
 
+      # text formatting and alternatives to basic utilities
+      bat
+      delta  # TODO: evaluate 'git d | delta'
+      fd  # replaces earlier 'findd' alias
+      hyperfine  # preferrable to 'time'
+      ripgrep  # replaces earlier 'grepd' alias
+
       # version control
       git
       git-annex
       gitAndTools.gitRemoteGcrypt
       gitAndTools.git-filter-repo
       git-lfs
-      mr
+      mr  # TODO: still needed?
 
       #python.pkgs.beancount
       #fava

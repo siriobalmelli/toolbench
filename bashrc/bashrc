@@ -48,14 +48,6 @@ alias cht='cht.sh'
 
 alias cscopez='cscope -bqRU'
 
-findd() { find ./ -iname "*$**" 2>/dev/null; }
-
-gopasw() { gopass show "$*"; gopass show -c "$*"; }
-# TODO: track and sync ~/.config
-# gopass config safecontent true
-
-grepd() { grep -rIE "$*" ./ 2>/dev/null; }
-
 alias la='ls -A'
 alias ll='ls -lha'
 
@@ -113,6 +105,10 @@ export XDG_CONFIG_HOME=~/.config
 export BASH_ENV=~/.bashrc
 export EDITOR=vim
 export PAGER=less
+
+# improve general commandline experience
+alias cat=bat
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # hack Python to see nix
 export PYTHONPATH=$(find ~/.nix-profile/lib -type d -path "*/python*/site-packages" | tr '\n' ':')$PYTHONPATH
