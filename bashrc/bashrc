@@ -121,6 +121,8 @@ export LIBRARY_PATH=~/.nix-profile/lib
 # gopass completion
 # TODO: broken (possibly quoting or similar?)
 #$(gopass completion bash)
+alias psw='gopass show -C'
+
 
 # Eternal bash history, found here: https://stackoverflow.com/questions/9457233/unlimited-bash-history
 # ---------------------

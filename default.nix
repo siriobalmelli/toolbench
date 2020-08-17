@@ -113,7 +113,7 @@ let
       go-ethereum
       keybase
       paperkey
-      pass
+      pass  # TODO: replace with gopass entirely
       gopass
       scrypt
       cointop
