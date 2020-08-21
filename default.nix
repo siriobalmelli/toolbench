@@ -41,6 +41,7 @@ let
   # The list of packages to be installed
   homies = [
       nix
+      cachix
 
       replacement  # dogfood
 

@@ -45,6 +45,8 @@ alias bch='bean-check'
 alias btcblock='echo $(bitcoin-cli getblockcount 2>&1)/$(wget -O - http://blockchain.info/q/getblockcount 2>/dev/null)'
 alias btcinfo='bitcoin-cli getwalletinfo'
 
+nixpub() { nix-build "$@" | cachix push siriobalmelli-nixpkgs; };
+
 alias cht='cht.sh'
 
 alias cscopez='cscope -bqRU'
