@@ -36,7 +36,7 @@ let
   # some tests fail on Darwin
   git-annex = haskell.lib.dontCheck gitAndTools.gitAnnex;
 
-  ycmd = nixpkgs.ycmd.override { inherit gocode godef gotools; };
+  ycmd = nixpkgs.ycmd.override { inherit gocode godef gotools; rustracerd = null; };
 
   # The list of packages to be installed
   homies = [
