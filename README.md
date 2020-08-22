@@ -13,6 +13,9 @@ The portable toolshed, a reproducible specification for:
   script/install.sh
   ```
 
+NOTE: the packages built here are available in
+[this cachix cache](https://app.cachix.org/cache/siriobalmelli-nixpkgs).
+
 ---
 
 NOTE: this is my personal toolchain:
