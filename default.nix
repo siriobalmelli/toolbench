@@ -88,6 +88,7 @@ let
       python.pkgs.ruamel_yaml
       python.pkgs.setuptools
       python.pkgs.sh
+      python.pkgs.six
       python.pkgs.tabulate
       python.pkgs.twine
       python.pkgs.wheel
