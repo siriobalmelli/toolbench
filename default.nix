@@ -83,6 +83,7 @@ let
       python.pkgs.markdown
       python.pkgs.pexpect
       python.pkgs.pip
+      python.pkgs.ply
       python.pkgs.pyparsing
       python.pkgs.requests
       python.pkgs.ruamel_yaml
