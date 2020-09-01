@@ -78,9 +78,34 @@ I recommend you fork unless you want my workflow preferences overriding yours.
     nix-shell --pure
     ```
 
+1. Starting from scratch on macOS:
+
+    ```bash
+    # set up BASH as default shell
+    chsh -s /bin/bash
+    /bin/bash
+
+    # install nix
+    curl -L https://nixos.org/nix/install | sh
+    source $HOME/.nix-profile/etc/profile.d/nix.sh
+
+    # optional: set up cachix
+    nix-env -iA cachix -f https://cachix.org/api/v1/install
+    cachix use siriobalmelli-nixpkgs
+
+    # get non-developer-tools git
+    nix-env -A "nixpkgs.git"
+    hash -r
+
+    # clone this repo and install
+    git clone https://github.com/siriobalmelli/toolbench.git
+    cd toolbench
+    script/install.sh default.nix
+    ```
+
 1. Tweaking/searching/installing packages:
 
-    ``` bash
+    ```bash
     # get currently installed packages
     $ nix-env -q
     imagemagick-6.9.9-34
