@@ -15,6 +15,16 @@ let
     (builtins.readFile ./merge_pdf.sh);
   tbh_preview = writeShellScriptBin "tbh_preview"
     (builtins.readFile ./preview.sh);
+  tbh_pyenv = writeShellScriptBin "tbh_pyenv"
+    (builtins.readFile ./pyenv.sh);
 
 in
-  [ tbh_flush_dns tbh_gemset_nix tbh_install tbh_mac_tftp tbh_merge_pdf tbh_preview ]
+[
+  tbh_flush_dns
+  tbh_gemset_nix
+  tbh_install
+  tbh_mac_tftp
+  tbh_merge_pdf
+  tbh_preview
+  tbh_pyenv
+]
