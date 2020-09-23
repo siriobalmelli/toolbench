@@ -97,7 +97,8 @@ export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 gpg-connect-agent /bye
-# use 'ssh-add -L' to list keys
+# to get SSH key, use: gpg --export-ssh-key sirio@b-ad.ch
+# to list all keys, use 'ssh-add -L'
 
 
 ## lock tty on Ctrl-S (DC3), release with Ctrl-Q (DC1)
