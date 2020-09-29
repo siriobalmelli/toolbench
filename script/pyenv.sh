@@ -14,7 +14,7 @@ mkShell {
   postShellHook = ''
     export SOURCE_DATE_EPOCH=315532800  # fix ZIP does not support timestamps before 1980
     alias pip="python -m pip"
-    pip install --upgrade pip wheel
+    pip install --upgrade pip setuptools wheel
     [ -s requirements.txt ] && pip install -r requirements.txt
   '';
 }
