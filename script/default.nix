@@ -7,6 +7,8 @@ let
     (builtins.readFile ./flush_dns.sh);
   tbh_gemset_nix = writeShellScriptBin "tbh_gemset_nix"
     (builtins.readFile ./gemset_nix.sh);
+  tbh_iconify = writeShellScriptBin "tbh_iconify"
+    (builtins.readFile ./iconify.sh);
   tbh_install = writeShellScriptBin "tbh_install"
     (builtins.readFile ./install.sh);
   tbh_mac_tftp = writeShellScriptBin "tbh_mac_tftp"
@@ -22,6 +24,7 @@ in
 [
   tbh_flush_dns
   tbh_gemset_nix
+  tbh_iconify
   tbh_install
   tbh_mac_tftp
   tbh_merge_pdf
