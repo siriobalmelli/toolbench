@@ -25,7 +25,7 @@ let
   # Git with config baked in
   git = import ./git { inherit nixpkgs symlinkJoin makeWrapper writeScriptBin ; };
 
-  tbh = import ./script { inherit writeShellScriptBin; };
+  tbh = import ./script { inherit writeShellScriptBin syncthing; };
 
   # Tmux with a custom tmux.conf baked in
   tmux = import ./tmux { inherit nixpkgs symlinkJoin makeWrapper writeText; };

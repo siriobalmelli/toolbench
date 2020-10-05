@@ -1,6 +1,6 @@
 ## toolbench scripts, for installation on a running system
 # TODO: de-facto 'ghostscript' dependency for merge_pdf is not encoded anywhere
-{ writeShellScriptBin }:
+{ writeShellScriptBin, syncthing }:
 
 let
   tbh_flush_dns = writeShellScriptBin "tbh_flush_dns"
@@ -19,6 +19,14 @@ let
     (builtins.readFile ./preview.sh);
   tbh_pyenv = writeShellScriptBin "tbh_pyenv"
     (builtins.readFile ./pyenv.sh);
+  tbh_syncthing = writeShellScriptBin "tbh_syncthing" ''
+    case "$(uname)" in
+      Darwin) LOGDIR="$HOME/Library/Application Support/Syncthing" ;;
+      Linux)  LOGDIR="$HOME/.config/syncthing" ;;
+    esac
+    ${syncthing}/bin/syncthing -logfile="$LOGDIR/log" & >>"$LOGDIR/log" 2>&1
+    disown %1
+  '';
 
 in
 [
@@ -30,4 +38,5 @@ in
   tbh_merge_pdf
   tbh_preview
   tbh_pyenv
+  tbh_syncthing
 ]
