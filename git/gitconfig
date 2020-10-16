@@ -13,31 +13,29 @@
 	aw = annex whereis
 
 	b = branch
-	bd = branch -d
 	c = commit
+	ca = commit -a
+	cam = commit -am
 	camp = "!f() { git commit -am \"$@\" && git push && git log HEAD^1...HEAD; }; f"
 	co = checkout
 	d = diff
 	dc = diff --cached
-	f = fetch --prune
-	ft = fetch --prune --prune-tags
+	f = fetch --all --prune --prune-tags
 	h = push
 	hf = push --force
 	ht = push --tags
-	i = init
-	ib = init --bare
+	hft = push --force --tags
 	l = log
 	lp = log -p
+	lag = log --all --oneline --graph
 	m = merge
-	p = pull
+	p = pull --all --prune --prune-tags
 	r = rebase
 	re = remote
 	rs = reset
 	rsh = reset --hard
 	s = status
 	t = tag
-	x = rm
-	xc = rm --cached
 
 	initgit = !git init && echo ".DS_Store" >>.gitignore && sort -uo .gitignore .gitignore
 	initannex = !git initgit && git update-index --index-version 4 && git annex init && git annex wanted . present
@@ -59,6 +57,9 @@
 [commit]
 	gpgsign = true
 
+[fetch]
+	parallel = 0
+
 [gcrypt]
 	publish-participants = true
 
@@ -67,6 +68,9 @@
 
 [push]
 	default = simple
+
+[submodule]
+	fetchJobs = 0
 
 [tag]
 	gpgSign = true
