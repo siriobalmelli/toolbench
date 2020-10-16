@@ -68,7 +68,7 @@ let
       gitAndTools.gitRemoteGcrypt
       gitAndTools.git-filter-repo
       git-lfs
-      mr  # TODO: still needed?
+      mr
 
       #python.pkgs.beancount
       #fava
