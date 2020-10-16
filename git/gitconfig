@@ -62,6 +62,9 @@
 [gcrypt]
 	publish-participants = true
 
+[pull]
+	ff = only
+
 [push]
 	default = simple
 
