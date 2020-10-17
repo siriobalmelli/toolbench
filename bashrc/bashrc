@@ -56,7 +56,7 @@ alias ll='ls -lha'
 
 alias lsusb='[ $(uname) = "Darwin" ] && ioreg -p IOUSB || lsusb'
 
-alias mr='time mr -j$(nproc) -m'
+alias mr='time mr -j$(nproc) --stats'
 
 #	tarify()
 # Archive $1 into a tar.bz2 file and then delete it
