@@ -1,8 +1,8 @@
-result
-.*.sw[op]
-nix_env_avail.txt
-.DS_Store
-.mypy_cache
-result*
 *.refs.txt
 *.tree.txt
+.*.sw[op]
+.DS_Store
+.mypy_cache
+nix_env_avail.txt
+result
+result*
