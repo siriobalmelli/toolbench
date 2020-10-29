@@ -177,6 +177,7 @@ let
       ncdu
       ncurses
       ncurses.dev
+      neofetch
       pandoc
       pwgen
       speedtest-cli
