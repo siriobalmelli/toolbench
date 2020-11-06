@@ -103,7 +103,7 @@ let
       gdb
       llvm
       protobuf
-      valgrind
+      #valgrind
 
       # go ecosystem
       go
