@@ -188,8 +188,9 @@ let
       which
       xorriso
 
-      ## AWS
-      #awscli
+      ## Clouds
+      awscli
+      google-cloud-sdk
       #kubectl
 
       ## graphical packages, require better config management than currently
