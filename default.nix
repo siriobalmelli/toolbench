@@ -3,7 +3,6 @@
     url = "https://siriobalmelli@github.com/siriobalmelli-foss/nixpkgs.git";
     ref = "master";
     }) {}
-  #nixpkgs ? import ~/repos/foss/nixpkgs/default.nix {}
 }:
 
 with nixpkgs;
@@ -189,7 +188,7 @@ let
       xorriso
 
       ## Clouds
-      awscli
+      #awscli
       google-cloud-sdk
       #kubectl
 

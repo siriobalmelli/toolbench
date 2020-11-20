@@ -33,6 +33,8 @@ nixpkgs.neovim.override {
     packages.vim-localvimrc.start = [ vim-localvimrc ];  # dir and subdir .lvimrc
 
     # language support
+    # TODO: centralize language autocompletion into CoC?
+    # ... see https://octetz.com/docs/2019/2019-04-24-vim-as-a-go-ide/
     packages.jdaddy-vim.start = [ jdaddy-vim ];
     packages.meson.start = [ meson ];
     packages.vim-beancount.start = [ vim-beancount ];

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ##
 #	do NOT poison a nix shell
 ##
@@ -8,7 +10,8 @@ grep -q IN_NIX_SHELL <(env) && return
 #	always-section
 # is executed even when running non-interactively (e.g. from a Vim session)
 ##
-source $HOME/.nix-profile/etc/profile.d/nix.sh
+# shellcheck source=/Users/sirio/.nix-profile/etc/profile.d/nix.sh
+source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
 # allow coredumps
 ulimit -c unlimited >/dev/null 2>&1
@@ -45,7 +48,7 @@ alias bch='bean-check'
 alias btcblock='echo $(bitcoin-cli getblockcount 2>&1)/$(wget -O - http://blockchain.info/q/getblockcount 2>/dev/null)'
 alias btcinfo='bitcoin-cli getwalletinfo'
 
-nixpub() { nix-build "$@" | cachix push siriobalmelli-nixpkgs; };
+nixpub() { nix-build --tarball-ttl 0 --max-jobs auto --cores 0 --keep-going "$@" | cachix push siriobalmelli-nixpkgs; };
 
 alias cht='cht.sh'
 
@@ -93,8 +96,10 @@ alias stty='stty 2>/dev/null'
 ##
 #	gpg auth with SSH - only in interactive section
 ##
-export GPG_TTY=$(tty)
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+GPG_TTY=$(tty)
+export GPG_TTY
+SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export SSH_AUTH_SOCK
 gpg-connect-agent updatestartuptty /bye >/dev/null
 gpg-connect-agent /bye
 # to get SSH key, use: gpg --export-ssh-key sirio@b-ad.ch
@@ -115,7 +120,8 @@ alias cat=bat
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # hack Python to see nix
-export PYTHONPATH=$(find ~/.nix-profile/lib -type d -path "*/python*/site-packages" | tr '\n' ':')$PYTHONPATH
+PYTHONPATH=$(find ~/.nix-profile/lib -type d -path "*/python*/site-packages" | tr '\n' ':')$PYTHONPATH
+export PYTHONPATH
 
 # hack C compilation to see installed libraries
 export PKG_CONFIG_PATH=~/.nix-profile/lib/pkgconfig
