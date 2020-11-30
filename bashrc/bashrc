@@ -109,6 +109,8 @@ gpg-connect-agent /bye
 ## lock tty on Ctrl-S (DC3), release with Ctrl-Q (DC1)
 stty ixon
 
+export LC_ALL="en_US.UTF-8"  # copy-paste accents in/out of nvim
+
 export XDG_CONFIG_HOME=~/.config
 
 export BASH_ENV=~/.bashrc
