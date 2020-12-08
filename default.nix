@@ -195,6 +195,9 @@ let
       ## graphical packages, require better config management than currently
       #alacritty
 
+      # nix
+      nixpkgs-review
+
     # packages that don't build on Darwin
     ] ++ lib.optionals (!stdenv.isDarwin) [
       pahole
