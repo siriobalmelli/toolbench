@@ -69,31 +69,6 @@ let
       git-lfs
       mr
 
-      #python.pkgs.beancount
-      #fava
-
-      # python
-      python
-      python.pkgs.dateutil
-      python.pkgs.flake8
-      python.pkgs.ipython
-      python.pkgs.jinja2
-      python.pkgs.jsonschema
-      python.pkgs.markdown
-      python.pkgs.pexpect
-      python.pkgs.pip
-      python.pkgs.ply
-      python.pkgs.pyparsing
-      python.pkgs.requests
-      python.pkgs.ruamel_yaml
-      python.pkgs.setuptools
-      python.pkgs.sh
-      python.pkgs.six
-      python.pkgs.tabulate
-      python.pkgs.twine
-      python.pkgs.wheel
-      python.pkgs.yamllint
-
       # compilers and wrappers
       binutils-unwrapped
       clang
@@ -202,7 +177,38 @@ let
     ] ++ lib.optionals (!stdenv.isDarwin) [
       pahole
       pinentry
-    ];
+
+    # python
+    ] ++ (with python.pkgs; [
+      python
+
+      # REPLs
+      ipython
+      ptpython
+
+      #beancount
+      #fava
+
+      dateutil
+      flake8
+      jinja2
+      jsonschema
+      markdown
+      numpy
+      pexpect
+      pip
+      ply
+      pyparsing
+      requests
+      ruamel_yaml
+      setuptools
+      sh
+      six
+      tabulate
+      twine
+      wheel
+      yamllint
+    ]);
 
 in
   if lib.inNixShell then
