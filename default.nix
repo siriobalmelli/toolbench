@@ -111,6 +111,7 @@ let
       # visual
       imagemagickBig  # 'convert' utility
       mscgen
+      visidata
 
       # network
       iftop
