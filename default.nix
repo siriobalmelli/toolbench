@@ -87,6 +87,7 @@ let
 
       #crypto
       gnupg
+      pinentry
       go-ethereum
       keybase
       paperkey
