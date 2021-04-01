@@ -136,7 +136,7 @@ let
       dosfstools  # mkdosfs
       entr
       fdupes
-      ffmpeg-full
+      ffmpeg  # ffmpeg-full doesn't build on BigSur, also see https://github.com/NixOS/nixpkgs/issues/15930
       figlet
       findutils
       flock
