@@ -5,6 +5,7 @@ with import <nixpkgs>{};
 
 mkShell {
   buildInputs = with python3Packages; [
+    less  # used by python help()
     python
     venvShellHook
   ];
