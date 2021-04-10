@@ -56,6 +56,7 @@ let
 
       # text formatting and alternatives to basic utilities
       bat
+      bc
       fd  # replaces earlier 'findd' alias
       hyperfine  # preferrable to 'time'
       ripgrep  # replaces earlier 'grepd' alias
@@ -87,14 +88,17 @@ let
 
       #crypto
       gnupg
-      pinentry
-      go-ethereum
-      keybase
+      gopass
       paperkey
       pass  # TODO: replace with gopass entirely
-      gopass
+      pinentry
       scrypt
+
+      # cryptocurrencies
+      bitcoin
       cointop
+      go-ethereum
+      keybase
 
       # build systems
       cmake
