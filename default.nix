@@ -60,6 +60,7 @@ let
       fd  # replaces earlier 'findd' alias
       hyperfine  # preferrable to 'time'
       ripgrep  # replaces earlier 'grepd' alias
+      pv  # monitor data progress through a pipe
 
       # version control
       git
