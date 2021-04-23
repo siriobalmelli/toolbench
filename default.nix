@@ -61,6 +61,7 @@ let
       hyperfine  # preferrable to 'time'
       ripgrep  # replaces earlier 'grepd' alias
       pv  # monitor data progress through a pipe
+      watchexec  # execute on file changes
 
       # version control
       git
