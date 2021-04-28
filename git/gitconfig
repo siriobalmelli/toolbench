@@ -37,6 +37,9 @@
 	s = status
 	t = tag
 
+	## checkout a remote pr into a local branch:
+	# git fetch upstream pull/120988/head:pr120988
+
 	initgit = !git init && echo ".DS_Store" >>.gitignore && sort -uo .gitignore .gitignore
 	initannex = !git initgit && git update-index --index-version 4 && git annex init && git annex wanted . present
 
