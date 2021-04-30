@@ -58,6 +58,7 @@ let
       bat
       bc
       fd  # replaces earlier 'findd' alias
+      file
       hyperfine  # preferrable to 'time'
       ripgrep  # replaces earlier 'grepd' alias
       pv  # monitor data progress through a pipe
