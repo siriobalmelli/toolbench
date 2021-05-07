@@ -63,6 +63,7 @@ let
       ripgrep  # replaces earlier 'grepd' alias
       pv  # monitor data progress through a pipe
       watchexec  # execute on file changes
+      xjobs  # xargs, but make it a job manager
 
       # version control
       git
