@@ -8,6 +8,7 @@ mkShell {
     less  # used by python help()
     python
     venvShellHook
+    $@  ## additional user-supplied packages
   ];
 
   venvDir = "venv";
