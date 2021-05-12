@@ -28,7 +28,7 @@ let
     disown %1
   '';
   tbh_zfsmon = writeShellScriptBin "tbh_zfsmon" ''
-    watch -- 'zpool iostat -yl; echo; zfs get all | grep compress'
+    watch -- 'zpool iostat -yl; echo; zfs get refcompressratio'
   '';
 
 in
