@@ -27,6 +27,9 @@ let
     ${syncthing}/bin/syncthing -logfile="$LOGDIR/log" & >>"$LOGDIR/log" 2>&1
     disown %1
   '';
+  tbh_zfsmon = writeShellScriptBin "tbh_zfsmon" ''
+    watch -- 'zpool iostat -yl; echo; zfs get all | grep compress'
+  '';
 
 in
 [
@@ -39,4 +42,5 @@ in
   tbh_preview
   tbh_pyenv
   tbh_syncthing
+  tbh_zfsmon
 ]
