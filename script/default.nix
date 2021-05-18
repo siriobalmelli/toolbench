@@ -28,7 +28,7 @@ let
     disown %1
   '';
   tbh_zfsmon = writeShellScriptBin "tbh_zfsmon" ''
-    watch -- 'zpool iostat -yl; echo; zfs get usedbydataset,refcompressratio'
+    watch -- 'zpool iostat -yl 1 1; echo; zfs get usedbydataset,refcompressratio'
   '';
 
 in
