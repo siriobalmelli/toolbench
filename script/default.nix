@@ -27,6 +27,11 @@ let
     ${syncthing}/bin/syncthing -logfile="$LOGDIR/log" & >>"$LOGDIR/log" 2>&1
     disown %1
   '';
+  tbh_unixify = writeShellScriptBin "tbh_unixify" ''
+    find ./ -type f -exec file --mime-type "{}" \; \
+      | sed -nE 's/(.*): text\/.*/\1/p' \
+      | xargs -I{} dos2unix -v -s "{}"
+  '';
   tbh_zfsmon = writeShellScriptBin "tbh_zfsmon" ''
     watch -- 'zpool iostat -yl 1 1; echo; zfs get usedbydataset,refcompressratio'
   '';
@@ -42,5 +47,6 @@ in
   tbh_preview
   tbh_pyenv
   tbh_syncthing
+  tbh_unixify
   tbh_zfsmon
 ]
