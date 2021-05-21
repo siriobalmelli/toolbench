@@ -30,7 +30,7 @@ let
   tbh_unixify = writeShellScriptBin "tbh_unixify" ''
     find ./ -type f -exec file --mime-type "{}" \; \
       | sed -nE 's/(.*): text\/.*/\1/p' \
-      | xargs -I{} dos2unix -v -s "{}"
+      | xargs -P$(nproc) -I{} dos2unix -v -s "{}"
   '';
   tbh_zfsmon = writeShellScriptBin "tbh_zfsmon" ''
     watch -- 'zpool iostat -yl 1 1; echo; zfs get usedbydataset,refcompressratio'
