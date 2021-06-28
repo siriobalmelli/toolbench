@@ -2,7 +2,7 @@
 # TODO: de-facto 'ghostscript' dependency for merge_pdf is not encoded anywhere
 { writeShellScriptBin, syncthing }:
 
-let
+{
   tbh_flush_dns = writeShellScriptBin "tbh_flush_dns"
     (builtins.readFile ./flush_dns.sh);
   tbh_gemset_nix = writeShellScriptBin "tbh_gemset_nix"
@@ -35,18 +35,4 @@ let
   tbh_zfsmon = writeShellScriptBin "tbh_zfsmon" ''
     watch -- 'zpool iostat -yl 1 1; echo; zfs get usedbydataset,refcompressratio'
   '';
-
-in
-[
-  tbh_flush_dns
-  tbh_gemset_nix
-  tbh_iconify
-  tbh_install
-  tbh_mac_tftp
-  tbh_merge_pdf
-  tbh_preview
-  tbh_pyenv
-  tbh_syncthing
-  tbh_unixify
-  tbh_zfsmon
-]
+}
