@@ -99,7 +99,7 @@ let
       scrypt
 
       # cryptocurrencies
-      bitcoin
+      bitcoind
       cointop
       go-ethereum
       keybase
