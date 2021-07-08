@@ -167,6 +167,7 @@ let
       speedtest-cli
       texlive.combined.scheme-full
       tree
+      unzip  # convenient
       vale  # command line linter for prose
       watch
       which
