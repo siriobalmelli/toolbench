@@ -32,9 +32,6 @@ let
   # Vim with a custom vimrc and set of packages
   vim = import ./vim { inherit nixpkgs python; };
 
-  # some tests fail on Darwin
-  git-annex = haskell.lib.dontCheck gitAndTools.gitAnnex;
-
   ycmd = nixpkgs.ycmd.override { inherit gocode godef gotools; rustracerd = null; };
 
   # The list of packages to be installed
@@ -67,7 +64,6 @@ let
 
       # version control
       git
-      git-annex
       nixpkgs.gitAndTools.delta  # TODO: evaluate 'git d | delta'
       gitAndTools.gitRemoteGcrypt
       gitAndTools.git-filter-repo
