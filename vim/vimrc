@@ -257,7 +257,8 @@ let g:EasyMotion_smartcase = 1
 " Tabularize
 " Can't seem to find a way to run command against character under cursor
 "nnoremap <c-a> :Tabularize /<C-R><C-W>
-noremap <c-a> :Tabularize /
+"noremap <c-a> :Tabularize /  " <c-a> by default searches for the next number and increments it
+noremap <c-s> :Tabularize /\|<CR>
 
 
 " NAVIGATION
