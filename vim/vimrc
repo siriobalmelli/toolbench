@@ -222,9 +222,28 @@ endfunction
 " ALE be all like "your C code doesn't comply with C++ ..." TROLOLOL
 " must be declared as an autocmd else settings only take effect on the first tab
 "let b:ale_linters = {'c': ['ccls'], 'cpp': ['ccls'], }
-autocmd filetype c,cpp let b:ale_linters = {'c': ['ccls'], 'cpp': ['ccls']}
-autocmd filetype python let b:ale_linters = {'python': ['flake8']}
-autocmd filetype beancount let b:ale_linters = {'beancount': []}
+autocmd filetype c,cpp let
+			\ b:ale_linters = {'c': ['ccls'], 'cpp': ['ccls']}
+autocmd filetype c,cpp let
+			\ b:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format']}
+
+autocmd filetype python let
+			\ b:ale_linters = {'python': ['flake8']}
+autocmd filetype python let
+			\ b:ale_fixers = {'python': ['black']}
+
+autocmd filetype javascript,markdown,json,yaml let
+			\ b:ale_fixers = {'javascript': ['prettier'],
+							\ 'markdown': ['prettier'],
+							\ 'json': ['prettier'],
+							\ 'yaml': ['prettier'],
+							\ }
+
+autocmd filetype beancount let
+			\ b:ale_linters = {'beancount': []}
+
+nnoremap <Leader>z :ALEFix<CR>
+
 
 
 " SEARCH - thank you Damian Conway
@@ -272,8 +291,3 @@ nnoremap <C-\>q :tabdo q<CR>
 nnoremap <C-\>Q :tabdo q!<CR>
 nnoremap <C-\>w :tabdo w<CR>
 nnoremap <C-\>z :tabdo wq<CR>
-
-
-" vim-clang-format
-nnoremap <Leader>z :ClangFormat<CR>
-vnoremap <Leader>z :ClangFormat<CR>

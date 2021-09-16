@@ -38,7 +38,6 @@ nixpkgs.neovim.override {
     packages.jdaddy-vim.start = [ jdaddy-vim ];
     packages.meson.start = [ meson ];
     packages.vim-beancount.start = [ vim-beancount ];
-    packages.vim-clang-format.start = [ vim-clang-format ];
     packages.vim-go.start = [ vim-go ];
     packages.vim-markdown.start = [ vim-markdown ];
     packages.vim-nix.start = [ vim-nix ];

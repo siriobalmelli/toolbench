@@ -196,6 +196,7 @@ let
       #beancount
       #fava
 
+      black
       dateutil
       flake8
       jinja2
@@ -215,7 +216,13 @@ let
       twine
       wheel
       yamllint
-    ]);
+
+  # node
+  ]) ++ (with nodePackages; [
+      eslint
+      prettier
+
+  ]);
 
 in
   if lib.inNixShell then
