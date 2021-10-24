@@ -114,8 +114,7 @@ endsnippet
 
 
 
-# ow the 'YYYY-MM-DD.payee - narration - doc.pdf' format
-#+docnt' entries
+# Follow the 'YYYY-MM-DD.payee - narration - doc.pdf' format
 snippet "^([0-9-]{10})\..*- [Dd]oc\.pdf$" "pdf -> document" r
 ${1:`!p snip.rv = match.group(1)`}	document	${2:`!p snip.rv = act(0)`}	"`!p snip.rv = match.group(0)`"
 $0

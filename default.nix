@@ -64,7 +64,7 @@ let
 
       # version control
       git
-      nixpkgs.gitAndTools.delta  # TODO: evaluate 'git d | delta'
+      gitAndTools.delta  # TODO: evaluate 'git d | delta'
       gitAndTools.gitRemoteGcrypt
       gitAndTools.git-filter-repo
       git-lfs
@@ -97,7 +97,6 @@ let
       # cryptocurrencies
       bitcoind
       cointop
-      go-ethereum
       keybase
 
       # build systems
@@ -198,6 +197,7 @@ let
 
       black
       dateutil
+      devtools
       flake8
       jinja2
       jsonschema
