@@ -32,7 +32,7 @@ let
   # Vim with a custom vimrc and set of packages
   vim = import ./vim { inherit nixpkgs python; };
 
-  ycmd = nixpkgs.ycmd.override { inherit gocode godef gotools; rustracerd = null; };
+  ycmd = nixpkgs.ycmd.override { inherit gocode godef gotools; };
 
   # The list of packages to be installed
   homies = [
@@ -98,6 +98,7 @@ let
       bitcoind
       cointop
       keybase
+      openethereum
 
       # build systems
       cmake
