@@ -239,10 +239,13 @@ autocmd filetype javascript,markdown,json,yaml let
 							\ 'yaml': ['prettier'],
 							\ }
 
+nnoremap <Leader>z :ALEFix<CR>
+
+" beancount is a bit different
 autocmd filetype beancount let
 			\ b:ale_linters = {'beancount': []}
-
-nnoremap <Leader>z :ALEFix<CR>
+autocmd filetype beancount nnoremap <Leader>z :%!bean-format<CR>
+autocmd filetype beancount vnoremap <Leader>z :!bean-format<CR>
 
 
 
