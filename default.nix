@@ -1,10 +1,8 @@
 {
-  nixpkgs ? import ((import <nixpkgs> {}).fetchFromGitHub {
-    owner = "siriobalmelli-foss";
-    repo = "nixpkgs";
-    rev = "sirio-2021-10-28";
-    sha256 = "0xlv7j19lf950vi9cxpj17h866xcpbq7iqdmj6dy4fcsz9idg760";
-  }) {}
+  nixpkgs ? import (builtins.fetchGit {
+    url = "https://siriobalmelli@github.com/siriobalmelli-foss/nixpkgs.git";
+    ref = "refs/tags/sirio-2021-10-28";
+    }) { },
 }:
 
 with nixpkgs;
