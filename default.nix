@@ -116,6 +116,7 @@ let
       # visual
       imagemagickBig  # 'convert' utility
       mscgen
+      qrencode
       visidata
 
       # network
