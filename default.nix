@@ -68,8 +68,7 @@ let
       gitAndTools.gitRemoteGcrypt
       gitAndTools.git-filter-repo
       git-lfs
-      gita
-      mr  # TODO: deprecate
+      mr
 
       # compilers and wrappers
       binutils-unwrapped
