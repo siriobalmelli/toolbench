@@ -1,5 +1,5 @@
-#!/bin/bash
 # setup script for macOS Catalina, pre nix-install
+# NOTE that regular nix setup does essentially the same, this is here for reference
 
 set -e
 
@@ -9,10 +9,10 @@ get_pin()
 {
 	while [ -z "$PIN" ]; do
 		echo -n 'Disk Encryption Key:'
-		read -s PIN
+		read -r -s PIN
 		echo
 		echo -en 'repeat key:'
-		read -s CHECK
+		read -r -s CHECK
 		echo
 		if [ "$PIN" != "$CHECK" ]; then
 			PIN=''
@@ -38,7 +38,7 @@ fi
 sudo diskutil enableOwnership /nix
 sudo chmod 755 /nix
 sudo chflags hidden /nix
-sudo chown -R $(whoami) /nix 2>/dev/null
+sudo chown -R "$(whoami)" /nix 2>/dev/null
 
 echo 'You can now install Nix normally by running:'
 echo

@@ -1,4 +1,4 @@
-# impority.sh
+# impurity.sh
 # directives that do post-install, environment-altering, unclean things
 
 # clobber bashrc so it sources *only* our bash config
@@ -10,7 +10,8 @@ ln -sf ~/.bashrc ~/.bash_profile  # macOS
 homies-gitconfig >~/.gitconfig
 
 # brand new world
-source ~/.bashrc
+#shellcheck disable=SC1090
+. ~/.bashrc
 
 echo "you can get a list of all packages and attribute paths with:"
 echo

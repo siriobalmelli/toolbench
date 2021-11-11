@@ -1,4 +1,3 @@
-#!/bin/bash
 #	install.sh
 # install (pin) a top-level Nix derivation as the Nix environment
 # (c) 2018 Sirio Balmelli
@@ -6,13 +5,13 @@
 # recipe mode
 set -e
 
-[[ "$1" ]] && DERIVATION="$1" || DERIVATION="$(dirname "$0")/../default.nix"
+[ "$1" ] && DERIVATION="$1" || DERIVATION="$(dirname "$0")/../default.nix"
 
 # install nix if necessary
 if ! command -v nix-env; then
 	curl https://nixos.org/nix/install | sh
 	# shellcheck source=/Users/sirio/.nix-profile/etc/profile.d/nix.sh
-	source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
 	nix-env -iA "nixpkgs.git"  # some CentOs boxes have git 1.8, no -C flag
 fi
 
@@ -39,5 +38,5 @@ nix-channel --update
 #nix-store --gc
 
 # execute post-install scripting
-[[ -s "$(dirname "$DERIVATION")/impurity.sh" ]] && \
-	( cd "$(dirname "$DERIVATION")" && ./impurity.sh )
+[ -s "$(dirname "$DERIVATION")/impurity.sh" ] \
+	&& ( cd "$(dirname "$DERIVATION")" && ./impurity.sh )

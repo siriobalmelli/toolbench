@@ -1,4 +1,3 @@
-#!/bin/bash
 # convert the icon $0.png to $0.icns
 set -e
 if ! [[ "$1" =~ \.png$ ]]; then

@@ -1,4 +1,3 @@
-#!/bin/bash
 # merge an array of PDFs
 # (c) 2018 Sirio Balmelli
 
@@ -6,12 +5,12 @@
 # $0 : program name
 usage()
 {
-echo '$0 [-v] PDF[,PDF...]
+echo "$0 [-v] PDF[,PDF...]
 
 Merges all PDF files into PDF[0] (the filename given).
 Deletes all other input files.
 Forces .pdf extension to output file.
-' >&2
+" >&2
 }
 
 # verbosity

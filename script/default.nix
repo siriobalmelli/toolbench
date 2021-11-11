@@ -15,8 +15,6 @@
     (builtins.readFile ./mac_tftp.sh);
   tbh_merge_pdf = writeShellScriptBin "tbh_merge_pdf"
     (builtins.readFile ./merge_pdf.sh);
-  tbh_preview = writeShellScriptBin "tbh_preview"
-    (builtins.readFile ./preview.sh);
   tbh_pyenv = writeShellScriptBin "tbh_pyenv"
     (builtins.readFile ./pyenv.sh);
   tbh_syncthing = writeShellScriptBin "tbh_syncthing" ''
