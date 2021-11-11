@@ -32,8 +32,6 @@
 	## checkout a remote pr into a local branch:
 	# git fetch upstream pull/120988/head:pr120988
 
-	initgit = !git init && echo ".DS_Store" >>.gitignore && sort -uo .gitignore .gitignore
-
 	preengit = !git fsck --full && git reflog expire --expire=now --all && git gc --prune=now --aggressive
 
 	graph = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
