@@ -25,6 +25,8 @@
     ${syncthing}/bin/syncthing -logfile="$LOGDIR/log" & >>"$LOGDIR/log" 2>&1
     disown %1
   '';
+  tbh_tarify = writeShellScriptBin "tbh_tarify"
+    (builtins.readFile ./tarify.sh);
   tbh_unixify = writeShellScriptBin "tbh_unixify" ''
     find ./ -type f -exec file --mime-type "{}" \; \
       | sed -nE 's/(.*): text\/.*/\1/p' \

@@ -66,29 +66,6 @@ alias lsusb='[ $(uname) = "Darwin" ] && ioreg -p IOUSB || lsusb'
 
 alias mr='time mr -j$(nproc) --stats'
 
-#	tarify()
-# Archive $1 into a tar.bz2 file and then delete it
-tarify()
-{
-	XZ_OPT="-Csha256 -9 -T0" \
-	nice -n 10 -- tar --xz -cf "$1".tar.xz "$1" && rm -rf "$1"
-}
-untarify()
-{
-	nice -n 10 -- tar --xz -xf "$1" && rm -fv "$1"
-}
-
-gpgify()
-{
-	XZ_OPT="-Csha256 -9 -T0" \
-	nice -n 10 -- gpg --encrypt -o "$1.tar.xz.gpg" <(tar --xz -c "$1") \
-		&& rm -rf "$1"
-}
-ungpgify()
-{
-	nice -n 10 -- tar --xz -xf <(gpg --decrypt "$1") && rm -fv "$1"
-}
-
 alias tmp='cd $(mktemp -d)'
 
 
