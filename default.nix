@@ -93,6 +93,7 @@ let
       pass  # TODO: replace with gopass entirely
       pinentry
       scrypt
+      step-cli
 
       # cryptocurrencies
       bitcoind
