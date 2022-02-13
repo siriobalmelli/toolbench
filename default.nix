@@ -146,6 +146,7 @@ let
       figlet
       findutils
       flock
+      gawk
       gnupatch
       gnused
       gnutar
