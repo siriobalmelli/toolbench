@@ -1,7 +1,7 @@
 {
   nixpkgs ? import (builtins.fetchGit {
     url = "https://siriobalmelli@github.com/siriobalmelli-foss/nixpkgs.git";
-    ref = "refs/tags/sirio-2021-10-28";
+    ref = "refs/tags/sirio-2022-03-18";
     }) { },
 }:
 
