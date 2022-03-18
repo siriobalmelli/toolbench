@@ -16,7 +16,7 @@ rm -rfv \
 	beancount_docverif.egg-info \
 	build dist result \
 
-find . \( -name "__pycache__" -o -name "*.pyc" \) -exec rm -rfv '{}' \;
+find . \( -name "__pycache__" -o -name "*.pyc" \) -exec rm -rfv '{}' \; || true
 
 cat <<EOF
 ##
@@ -28,6 +28,9 @@ python3 -m pytest
 
 # Build both binary and source distributions locally
 python3 setup.py bdist_wheel sdist
+
+# Upload to PyPi test
+twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 # Upload to PyPi
 twine upload dist/*

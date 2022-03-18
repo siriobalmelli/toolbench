@@ -196,8 +196,10 @@ let
       ipython
       ptpython
 
-      #beancount
-      #fava
+      beancount
+      beancount_docverif
+      beancount_payeeverif
+      fava
 
       black
       dateutil
