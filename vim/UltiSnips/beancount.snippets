@@ -13,92 +13,92 @@ from itertools import islice
 
 
 def bufslice():
-	"""
-	Return a slice of the buffer which:
-	- is a lazy iterator
-	- is enough to pick up the first many lines without slowing in big files
-	- avoids an assertion when treating snip.buffer as an iterator
-		(maybe does not implement StopIteration ?)
-	"""
-	return islice(snip.buffer, 0, min(len(snip.buffer), 100))
+  """
+  Return a slice of the buffer which:
+  - is a lazy iterator
+  - is enough to pick up the first many lines without slowing in big files
+  - avoids an assertion when treating snip.buffer as an iterator
+    (maybe does not implement StopIteration ?)
+  """
+  return islice(snip.buffer, 0, min(len(snip.buffer), 100))
 
 def acts():
-	"""
-	Returns an iterator over (account, currency) tuples in the file.
-	"""
-	# include commented-out account names for convenience
-	act_re = re.compile(r'^;?\s*[0-9-]{10}\s+open\s+(\S+)\s*([A-Z_]+)?.*')
-	return (m.groups() for m in (act_re.match(ln) for ln in bufslice()) if m)
+  """
+  Returns an iterator over (account, currency) tuples in the file.
+  """
+  # include commented-out account names for convenience
+  act_re = re.compile(r'^;?\s*[0-9-]{10}\s+open\s+(\S+)\s*([A-Z_]+)?.*')
+  return (m.groups() for m in (act_re.match(ln) for ln in bufslice()) if m)
 
 def act(n):
-	"""
-	Returns the 'n'th account for which there is an opening statement in the file
-	"""
-	return next(islice((a[0] for a in acts() if a[0]), n, n + 1), '')
+  """
+  Returns the 'n'th account for which there is an opening statement in the file
+  """
+  return next(islice((a[0] for a in acts() if a[0]), n, n + 1), '')
 
 def cur(n):
-	"""
-	Returns the 'n'th currency found in account opening statements
-	"""
-	return next(islice((a[1] for a in acts() if a[1]), n, n + 1), '')
+  """
+  Returns the 'n'th currency found in account opening statements
+  """
+  return next(islice((a[1] for a in acts() if a[1]), n, n + 1), '')
 
 
 def last():
-	"""
-	Work backwards and get the date for the first entry preceding this one
-	(if any), otherwise return today's date.
-	"""
-	date_re = re.compile('^([0-9-]{10}).*')
+  """
+  Work backwards and get the date for the first entry preceding this one
+  (if any), otherwise return today's date.
+  """
+  date_re = re.compile('^([0-9-]{10}).*')
 
-	try:
-		buf = reversed(snip.buffer[0:snip.p.start[0]])  # iterator
-		return next((m.group(1) for m in (date_re.match(l) for l in buf) if m),
-					str(datetime.now().date()))
-	except:
-		return str(datetime.now().date())
+  try:
+    buf = reversed(snip.buffer[0:snip.p.start[0]])  # iterator
+    return next((m.group(1) for m in (date_re.match(l) for l in buf) if m),
+          str(datetime.now().date()))
+  except:
+    return str(datetime.now().date())
 
 def hr(var):
-	"""
-	Attempt to parse 'var' into HH:MM time; return 0900 by default
-	"""
-	try:
-		return datetime.strptime(var, '%H%M')
-	except Exception:
-		return datetime.strptime('0900', '%H%M')
+  """
+  Attempt to parse 'var' into HH:MM time; return 0900 by default
+  """
+  try:
+    return datetime.strptime(var, '%H%M')
+  except Exception:
+    return datetime.strptime('0900', '%H%M')
 
 def tmrw(string):
-	"""
-	Parses ISO date in 'string' and returns the date for the next day
-	"""
-	tomorrow = datetime.strptime(string, '%Y-%m-%d') + timedelta(days=1)
-	return str(tomorrow.date())
+  """
+  Parses ISO date in 'string' and returns the date for the next day
+  """
+  tomorrow = datetime.strptime(string, '%Y-%m-%d') + timedelta(days=1)
+  return str(tomorrow.date())
 endglobal
 
 
 
 snippet tr "transaction" b
-${1:`date "+%Y-%m"`}-${2:`date "+%d"`}	*	"${3:payee}"	"${4:narration}"
-	document: "${5:None}"
-	${6:`!p snip.rv = act(0)`}
-	${7:`!p snip.rv = act(1)`} ${8:1} ${9:`!p snip.rv = cur(1) or cur(0)`}
+${1:`date "+%Y-%m"`}-${2:`date "+%d"`}  *  "${3:payee}"  "${4:narration}"
+  document: "${5:None}"
+  ${6:`!p snip.rv = act(0)`}
+  ${7:`!p snip.rv = act(1)`} ${8:1} ${9:`!p snip.rv = cur(1) or cur(0)`}
 $0
 endsnippet
 
 # PDFs which have a 'YYYY-MM-DD.payee - narration.pdf' format,
 # but NOT "- statement.pdf" or "- doc.pdf"
 snippet "^([0-9-]{10})\.(.*?) - (.*)(?<!- [Ss]tatement)(?<!- [Dd]oc)\.pdf$" "pdf -> transaction" r
-${1:`!p snip.rv = match.group(1)`}	*	"${2:`!p snip.rv = match.group(2)`}"	"${3:`!p snip.rv = match.group(3)`}"
-	document: "`!p snip.rv = match.group(0)`"
-	${4:`!p snip.rv = act(0)`}
-	${7:`!p snip.rv = act(1)`} ${8:1} ${9:`!p snip.rv = cur(1) or cur(0)`}
+${1:`!p snip.rv = match.group(1)`}  *  "${2:`!p snip.rv = match.group(2)`}"  "${3:`!p snip.rv = match.group(3)`}"
+  document: "`!p snip.rv = match.group(0)`"
+  ${4:`!p snip.rv = act(0)`}
+  ${7:`!p snip.rv = act(1)`} ${8:1} ${9:`!p snip.rv = cur(1) or cur(0)`}
 $0
 endsnippet
 
 
 
 snippet ba "balance" b
-${1:`!p snip.rv = tmrw(last())`}	balance	${2:`!p snip.rv = act(0)`}	${3:0.00} ${4:`!p snip.rv = cur(0)`}
-	document: "${5:None}"
+${1:`!p snip.rv = tmrw(last())`}  balance  ${2:`!p snip.rv = act(0)`}  ${3:0.00} ${4:`!p snip.rv = cur(0)`}
+  document: "${5:None}"
 $0
 endsnippet
 
@@ -107,8 +107,8 @@ endsnippet
 # - dated the following day
 # - with an associated 'document:' metadata field
 snippet "^([0-9-]{10})\..*- [Ss]tatement\.pdf$" "pdf -> balance" r
-${1:`!p snip.rv = tmrw(match.group(1))`}	balance	${2:`!p snip.rv = act(0)`}	${3:0.00} ${4:`!p snip.rv = cur(0)`}
-	document: "`!p snip.rv = match.group(0)`"
+${1:`!p snip.rv = tmrw(match.group(1))`}  balance  ${2:`!p snip.rv = act(0)`}  ${3:0.00} ${4:`!p snip.rv = cur(0)`}
+  document: "`!p snip.rv = match.group(0)`"
 $0
 endsnippet
 
@@ -116,7 +116,7 @@ endsnippet
 
 # Follow the 'YYYY-MM-DD.payee - narration - doc.pdf' format
 snippet "^([0-9-]{10})\..*- [Dd]oc\.pdf$" "pdf -> document" r
-${1:`!p snip.rv = match.group(1)`}	document	${2:`!p snip.rv = act(0)`}	"`!p snip.rv = match.group(0)`"
+${1:`!p snip.rv = match.group(1)`}  document  ${2:`!p snip.rv = act(0)`}  "`!p snip.rv = match.group(0)`"
 $0
 endsnippet
 
@@ -124,8 +124,8 @@ endsnippet
 
 # Hours entry
 snippet hr "hours log entry" b
-${1:`date "+%Y-%m"`}-${2:`date "+%d"`}	*	"${3:project}"	"${4:0900}-${5:1800}; ${6:actions}"
-	${7:`!p snip.rv = act(0)`}
-	${8:`!p snip.rv = act(1)`}	${9:`!p snip.rv = round((hr(t[5]) + timedelta(days=1) - hr(t[4])).seconds / 3600 % 24, 1)`} ${10:`!p snip.rv = cur(1) or cur(0)`}
+${1:`date "+%Y-%m"`}-${2:`date "+%d"`}  *  "${3:project}"  "${4:0900}-${5:1800}; ${6:actions}"
+  ${7:`!p snip.rv = act(0)`}
+  ${8:`!p snip.rv = act(1)`}  ${9:`!p snip.rv = round((hr(t[5]) + timedelta(days=1) - hr(t[4])).seconds / 3600 % 24, 1)`} ${10:`!p snip.rv = cur(1) or cur(0)`}
 $0
 endsnippet
