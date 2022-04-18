@@ -32,7 +32,8 @@ let
   # Vim with a custom vimrc and set of packages
   vim = import ./vim { inherit nixpkgs python; };
 
-  ycmd = nixpkgs.ycmd.override { inherit gocode godef gotools; };
+  # go ecosystem broken
+  # ycmd = nixpkgs.ycmd.override { inherit gocode godef gotools; };
 
   # The list of packages to be installed
   homies = [
@@ -59,6 +60,7 @@ let
       hyperfine  # preferrable to 'time'
       ripgrep  # replaces earlier 'grepd' alias
       pv  # monitor data progress through a pipe
+      rename  # perl file rename
       watchexec  # execute on file changes
       xjobs  # xargs, but make it a job manager
 
@@ -77,14 +79,16 @@ let
       gcc
       gdb
       llvm
+      poke
       protobuf
       #valgrind
 
-      # go ecosystem
-      go
-      gocode
-      godef
-      hugo
+      # go currently broken
+      # # go ecosystem
+      # go
+      # gocode
+      # godef
+      # hugo
 
       #crypto
       gnupg
@@ -99,7 +103,8 @@ let
       bitcoind
       cointop
       keybase
-      openethereum
+      # openethereum  # 3.2.6 _and_ 3.3.5 refuse to build
+      go-ethereum
 
       # build systems
       cmake
@@ -122,12 +127,11 @@ let
 
       # network
       iftop
+      inetutils  # contains telnet
       ipcalc
       mtr
-      ncat
-      nmap
+      nmap  # contains ncat
       openssh
-      telnet
       wget
 
       # standard packages - query with `nix-env -qaP`

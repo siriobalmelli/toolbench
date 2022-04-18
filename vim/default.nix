@@ -38,11 +38,13 @@ nixpkgs.neovim.override {
     packages.jdaddy-vim.start = [ jdaddy-vim ];
     packages.meson.start = [ meson ];
     packages.vim-beancount.start = [ vim-beancount ];
-    packages.vim-go.start = [ vim-go ];
     packages.vim-markdown.start = [ vim-markdown ];
     packages.vim-nix.start = [ vim-nix ];
     packages.vim-toml.start = [ vim-toml ];
     packages.vim-css-color.start = [ vim-css-color ];  # colorize hex values in css
+
+    # go ecosystem broken
+    # packages.vim-go.start = [ vim-go ];
 
     customRC = (nixpkgs.lib.concatStringsSep "\n"
       [ (builtins.readFile ./vimrc)
