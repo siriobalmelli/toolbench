@@ -17,6 +17,8 @@
     (builtins.readFile ./merge_pdf.sh);
   tbh_pyenv = writeShellScriptBin "tbh_pyenv"
     (builtins.readFile ./pyenv.sh);
+  tbh_rpush = writeShellScriptBin "tbh_rpush"
+    (builtins.readFile ./rpush.sh);
   tbh_syncthing = writeShellScriptBin "tbh_syncthing" ''
     case "$(uname)" in
       Darwin) LOGDIR="$HOME/Library/Application Support/Syncthing" ;;
