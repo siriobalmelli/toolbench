@@ -57,6 +57,7 @@ let
       bc
       fd  # replaces earlier 'findd' alias
       file
+      gomplate  # one templating tool to rule them all
       hyperfine  # preferrable to 'time'
       ripgrep  # replaces earlier 'grepd' alias
       pv  # monitor data progress through a pipe
