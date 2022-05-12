@@ -34,6 +34,8 @@
       | sed -nE 's/(.*): text\/.*/\1/p' \
       | xargs -P$(nproc) -I{} dos2unix -v -s "{}"
   '';
+  tbh_ffytube = writeShellScriptBin "tbh_ffytube"
+    (builtins.readFile ./ffytube.sh);
   tbh_zfsmon = writeShellScriptBin "tbh_zfsmon" ''
     watch -- 'zpool iostat -yl 1 1; echo; zfs get usedbydataset,refcompressratio'
   '';
