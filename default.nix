@@ -92,6 +92,7 @@ let
       # hugo
 
       #crypto
+      certbot
       gnupg
       gopass
       paperkey
