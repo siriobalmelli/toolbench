@@ -70,7 +70,9 @@ let
       gitAndTools.delta  # TODO: evaluate 'git d | delta'
       gitAndTools.gitRemoteGcrypt
       gitAndTools.git-filter-repo
+      git-extras  # eg git summary
       git-lfs
+      git-quick-stats
       mr
 
       # compilers and wrappers
@@ -105,7 +107,7 @@ let
       bitcoind
       cointop
       keybase
-      # openethereum  # 3.2.6 _and_ 3.3.5 refuse to build
+      # openethereum  # 3.2.6 _and_ 3.3.[2-5] refuse to build
       go-ethereum
 
       # build systems
