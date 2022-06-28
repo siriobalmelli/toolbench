@@ -27,6 +27,7 @@
 	rs = reset
 	rsh = reset --hard
 	s = status
+	sl = shortlog -e -s --all
 	t = tag
 
 	## checkout a remote pr into a local branch:
