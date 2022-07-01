@@ -73,6 +73,7 @@ let
       git-extras  # eg git summary
       git-lfs
       git-quick-stats
+      git-town
       mr
 
       # compilers and wrappers
