@@ -46,7 +46,7 @@ let
       bash
       shellcheck
       bashrc
-      irssi  # irc!
+      # irssi  # irc!
       tbh
       tmux
       vim
@@ -87,13 +87,6 @@ let
       protobuf
       #valgrind
 
-      # go currently broken
-      # # go ecosystem
-      # go
-      # gocode
-      # godef
-      # hugo
-
       #crypto
       certbot
       gnupg
@@ -108,8 +101,6 @@ let
       bitcoind
       cointop
       keybase
-      # openethereum  # 3.2.6 _and_ 3.3.[2-5] refuse to build
-      go-ethereum
 
       # build systems
       cmake
