@@ -142,7 +142,7 @@ let
       dosfstools  # mkdosfs
       entr
       fdupes
-      ffmpeg  # ffmpeg-full doesn't build on BigSur, also see https://github.com/NixOS/nixpkgs/issues/15930
+      ffmpeg-full
       figlet
       findutils
       flock
@@ -209,6 +209,7 @@ let
       jsonschema
       markdown
       numpy
+      pdfminer-six
       pexpect
       pip
       ply
