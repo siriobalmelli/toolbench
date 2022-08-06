@@ -50,6 +50,7 @@ let
       tbh
       tmux
       vim
+      wezterm  # finally, a performant cross-platform terminal
       ycmd
 
       # text formatting and alternatives to basic utilities
