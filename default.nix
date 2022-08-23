@@ -1,7 +1,7 @@
 {
   nixpkgs ? import (builtins.fetchGit {
     url = "https://siriobalmelli@github.com/siriobalmelli-foss/nixpkgs.git";
-    ref = "refs/tags/sirio-2022-07-15";
+    ref = "refs/tags/sirio-2022-08-16";
     }) { },
 }:
 
@@ -9,14 +9,16 @@ with nixpkgs;
 
 let
   # single knob for python version everywhere
-  # ... there is also the wrapped 'python35.withPackages' approach (see <https://nixos.org/nixpkgs/manual/#python>)
+  # ... there is also the wrapped 'python3.withPackages' approach (see <https://nixos.org/nixpkgs/manual/#python>)
   # which would obviate having to set PYTHONPATH in bashrc,
   # but would require explicitly reinstalling the wrapped python at every change,
   # as opposed to quickly and painlessly testing things with 'nix-env --install'
   python = python3;
 
   gcc = nixpkgs.gcc.overrideAttrs ( oldAttrs: rec { meta.priority = 5; });
-  clang = nixpkgs.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
+  clang = llvmPackages.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
+  clang-unwrapped = llvmPackages.clang-unwrapped.overrideAttrs ( oldAttrs: rec { meta.priority = 7; });
+  binutils-unwrapped = nixpkgs.binutils-unwrapped.overrideAttrs ( oldAttrs: rec { meta.priority = 8; });
 
   # A custom '.bashrc' (see bashrc/default.nix for details)
   bashrc = callPackage ./bashrc {};
@@ -31,9 +33,6 @@ let
 
   # Vim with a custom vimrc and set of packages
   vim = import ./vim { inherit nixpkgs python; };
-
-  # go ecosystem broken
-  # ycmd = nixpkgs.ycmd.override { inherit gocode godef gotools; };
 
   # The list of packages to be installed
   homies = [
@@ -51,7 +50,6 @@ let
       tmux
       vim
       wezterm  # finally, a performant cross-platform terminal
-      ycmd
 
       # text formatting and alternatives to basic utilities
       bat
@@ -68,27 +66,25 @@ let
 
       # version control
       git
-      gitAndTools.delta  # TODO: evaluate 'git d | delta'
-      gitAndTools.gitRemoteGcrypt
       gitAndTools.git-filter-repo
       git-extras  # eg git summary
       git-lfs
       git-quick-stats
-      git-town
-      mr
+      # git-town  # seems interesting, doesn't build right now
+      mr  # TODO: deprecate
 
       # compilers and wrappers
-      binutils-unwrapped
-      clang
-      clang-tools
+      binutils-unwrapped  # strings
+      llvm.all
+      clang.all  # wrapped, with headers etc
+      clang-unwrapped.all  # clang-format in path
       gcc
       gdb
-      llvm
       poke
-      protobuf
-      #valgrind
 
-      #crypto
+      ##
+      # crypto
+      ##
       certbot
       gnupg
       gopass
@@ -98,32 +94,41 @@ let
       scrypt
       step-cli
 
+      ##
       # cryptocurrencies
+      ##
       bitcoind
       cointop
-      keybase
+      # keybase  # DoA
 
+      ##
       # build systems
+      ##
       cmake
       gnumake
       meson
       ninja
       pkgconfig
 
+      ##
       # data transfer
+      ##
       borgbackup
       rclone
       rsync
       syncthing
 
+      ##
       # visual
+      ##
       imagemagickBig  # 'convert' utility
-      mscgen
+      # mscgen  # not used
       qrencode
       visidata
 
+      ##
       # network
-      iftop
+      ##
       inetutils  # contains telnet
       ipcalc
       mtr
@@ -131,7 +136,9 @@ let
       openssh
       wget
 
-      # standard packages - query with `nix-env -qaP`
+      ##
+      # standard packages
+      ##
       cacert
       cht-sh  # cheat sheet
       cloc
@@ -173,29 +180,38 @@ let
       which
       xorriso
 
-      ## Clouds
-      #awscli
-      google-cloud-sdk
-      #kubectl
+      ##
+      # Clouds
+      ##
+      # awscli
+      # google-cloud-sdk
+      # kubectl
 
-      ## graphical packages, require better config management than currently
-      #alacritty
-
+      ##
       # nix
+      ##
       nixpkgs-review
 
+    ##
     # packages that don't build on Darwin
+    ##
     ] ++ lib.optionals (!stdenv.isDarwin) [
       pahole
+      valgrind
+
       pinentry
 
+    ##
     # python
+    ##
     ] ++ (with python.pkgs; [
       python
 
+      ##
       # REPLs
+      ##
       ipython
-      ptpython
+      # ptpython
 
       beancount
       beancount_docverif
@@ -225,7 +241,9 @@ let
       wheel
       yamllint
 
-  # node
+  ##
+  # node, JSON
+  ##
   ]) ++ (with nodePackages; [
       eslint
       prettier

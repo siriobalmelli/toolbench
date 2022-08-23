@@ -9,12 +9,13 @@ with vimPlugins;
 nixpkgs.neovim.override {
 
   vimAlias = true;
-  withPython = false;
   withPython3 = true;
 
   configure = {
-    ## TODO: better C syntax highlighting with eg chromatica or color_coded
-    ## TODO: move from YCM to coc completion?
+    # netrw expanded
+    packages.vim-vinegar.start = [ vim-vinegar ];
+
+    ## TODO: better C syntax highlighting with eg chromatica or color_coded?
     packages.YouCompleteMe.start = [ YouCompleteMe ];  # autocompletion
     packages.ale.start = [ ale ];  # linting
 

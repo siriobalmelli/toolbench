@@ -13,12 +13,13 @@ set background=dark
 
 "default indent settings
 "see <http://vim.wikia.com/wiki/Converting_tabs_to_spaces>
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-set noexpandtab
-set noautoindent
 set cc=80
+set fileformat=unix
+set noautoindent
+set noexpandtab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 
 "load ftplugins and indent files
 filetype plugin on
@@ -134,6 +135,23 @@ let g:ctrlp_working_path_mode = 'ra'
 
 
 ""
+" Splits: use these with ycm windows
+""
+" \i == close current split (the one currently In)
+map <Leader>i :hide<CR>
+" \o == close Other splits
+map <Leader>o :only<CR>
+
+
+" \h == jumplist BACK
+" \l == jumplist FORWARD
+" \; == jumplist
+map <Leader>h <C-O>
+map <Leader>l <C-I>
+map <Leader>; :jumps<CR>
+
+
+""
 " YCM (YouCompleteMe)
 ""
 let g:ycm_always_populate_location_list = 1
@@ -151,36 +169,41 @@ let g:ycm_key_list_previous_completion = ['<c-k>']
 ""let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>'] " YCM original
 "let g:ycm_key_list_previous_completion = ['<Up>', '<Enter>']
 
-" \r == 'refresh YCM'
-" \t == 'type of token under cursor'
-map <Leader>r :YcmForceCompileAndDiagnostics<CR>
+""
+" YCM mappings listed in the same order as the YCM docs:
+" https://github.com/ycm-core/YouCompleteMe#quick-feature-summary
+"
+" To dump mappings to a file:
+" :redir! > vim_keys.txt
+" :silent verbose map
+" :redir END
+"
+" To draw up a keyboard cheatsheet:
+" http://www.keyboard-layout-editor.com/#/
+" ... see ./vim-leader-layout.json
+""
+map <Leader>g :YcmCompleter GoTo<CR>
+map <Leader>q :YcmCompleter GoToType<CR>
+map <Leader>w :YcmCompleter GoToInclude<CR>
+map <Leader>p :YcmCompleter GoToImplementation<CR>
+map <Leader>y :YcmCompleter GoToSymbol<CR>
+map <Leader>u :YcmCompleter GoToDocumentOutline<CR>
+map <Leader>c :YcmCompleter GetDoc<CR>
 map <Leader>t :YcmCompleter GetType<CR>
+map <Leader>f :YcmCompleter FixIt<CR>
+map <Leader>e :YcmCompleter GoToReferences<CR>
+map <Leader>a :YcmCompleter RefactorRename 
 
-" \i == close current split (the one currently In)
-" \o == close Other splits
-map <Leader>i :hide<CR>
-map <Leader>o :only<CR>
-
+map <Leader>r :YcmForceCompileAndDiagnostics<CR>
 " \s == 'show' (but switch cursor back to main window thanx)
-" \d == 'detailed diagnostics'
-" \f == 'fix it'
-" \g == 'goto'
 map <Leader>s :YcmDiags<CR><C-W><C-W>
 map <Leader>d :YcmShowDetailedDiagnostic<CR>
-map <Leader>f :YcmCompleter FixIt<CR>
-map <Leader>g :YcmCompleter GoTo<CR>
-
-" \h == jumplist BACK
-" \l == jumplist FORWARD
-" \; == jumplist
-map <Leader>h <C-O>
-map <Leader>l <C-I>
-map <Leader>; :jumps<CR>
 
 " NOTE that autoload_cscope-vim exports:
 " ctrl+\g == GOTO
 " ctrl+\s == SEARCH
 " ... so whenever YCM fails simply add CTRL and use cscope instead ;)
+
 
 "UltiSnips
 let g:UltiSnipsExpandTrigger='<S-Tab>'
@@ -240,6 +263,7 @@ autocmd filetype javascript,markdown,json,yaml let
 							\ }
 
 nnoremap <Leader>z :ALEFix<CR>
+nnoremap <Leader>x :ALEInfo<CR>
 
 " beancount is a bit different
 autocmd filetype beancount let
@@ -294,3 +318,18 @@ nnoremap <C-\>q :tabdo q<CR>
 nnoremap <C-\>Q :tabdo q!<CR>
 nnoremap <C-\>w :tabdo w<CR>
 nnoremap <C-\>z :tabdo wq<CR>
+
+" Toggle file navigation (netrw) window:
+" `-` to open file listing
+" `ctrl+shift+6` (aka `ctrl+^`) to go back to the buffer
+"
+" Navigating within netrw:
+" `-` to go up one directory
+" `~` to go home
+"
+" While selecting a file listing:
+" `enter` to open file in new tab
+" `.` to pre-populate file at the end of a :-command line
+" `gh` to toggle file hiding
+" `y.` to yank full path
+let g:netrw_browse_split = 3
