@@ -120,10 +120,6 @@ export PAGER=less
 alias cat=bat
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-# hack Python to see nix
-PYTHONPATH=$(find ~/.nix-profile/lib -type d -path "*/python*/site-packages" | tr '\n' ':')$PYTHONPATH
-export PYTHONPATH
-
 # hack C compilation to see installed libraries
 export PKG_CONFIG_PATH=~/.nix-profile/lib/pkgconfig
 export CPATH=~/.nix-profile/include/

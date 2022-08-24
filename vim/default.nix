@@ -1,5 +1,5 @@
 # somehow passing 'neovim' instead of 'nixpkgs' gives infinite recursion?
-{ nixpkgs, python }:
+{ nixpkgs, pyenv }:
 
 with nixpkgs;
 with vimPlugins;
@@ -8,8 +8,19 @@ with vimPlugins;
 # for how to better/further override neovim
 nixpkgs.neovim.override {
 
+  viAlias = true;
   vimAlias = true;
   withPython3 = true;
+  # TODO: would be nice to pass neovim 'pyenv' but no luck so far
+  extraPython3Packages = (ps: with ps; [
+    black
+    flake8
+    jedi
+    jedi-language-server
+    markdown
+    pyparsing
+    yamllint
+  ]);
 
   configure = {
     # netrw expanded
@@ -34,8 +45,6 @@ nixpkgs.neovim.override {
     packages.vim-localvimrc.start = [ vim-localvimrc ];  # dir and subdir .lvimrc
 
     # language support
-    # TODO: centralize language autocompletion into CoC?
-    # ... see https://octetz.com/docs/2019/2019-04-24-vim-as-a-go-ide/
     packages.jdaddy-vim.start = [ jdaddy-vim ];
     packages.meson.start = [ meson ];
     packages.vim-beancount.start = [ vim-beancount ];
@@ -50,7 +59,9 @@ nixpkgs.neovim.override {
     customRC = (nixpkgs.lib.concatStringsSep "\n"
       [ (builtins.readFile ./vimrc)
         ''
-        let g:ycm_python_binary_path = '${python}/bin/python'
+        let g:ycm_python_binary_path = '${pyenv.interpreter}'
+        let g:ycm_python_interpreter_path = '${pyenv.interpreter}'
+        let g:ycm_python_sys_path = '${pyenv.sitePackages}'
         let g:UltiSnipsSnippetDirectories=['${./UltiSnips}', 'UltiSnips']
         ''
       ]

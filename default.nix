@@ -1,27 +1,59 @@
 {
   nixpkgs ? import (builtins.fetchGit {
     url = "https://siriobalmelli@github.com/siriobalmelli-foss/nixpkgs.git";
-    ref = "refs/tags/sirio-2022-08-16";
+    ref = "refs/tags/sirio-2022-08-24";
     }) { },
 }:
 
 with nixpkgs;
 
 let
-  # single knob for python version everywhere
-  # ... there is also the wrapped 'python3.withPackages' approach (see <https://nixos.org/nixpkgs/manual/#python>)
-  # which would obviate having to set PYTHONPATH in bashrc,
-  # but would require explicitly reinstalling the wrapped python at every change,
-  # as opposed to quickly and painlessly testing things with 'nix-env --install'
-  python = python3;
-
   gcc = nixpkgs.gcc.overrideAttrs ( oldAttrs: rec { meta.priority = 5; });
   clang = llvmPackages.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
   clang-unwrapped = llvmPackages.clang-unwrapped.overrideAttrs ( oldAttrs: rec { meta.priority = 7; });
   binutils-unwrapped = nixpkgs.binutils-unwrapped.overrideAttrs ( oldAttrs: rec { meta.priority = 8; });
 
+  ##
+  # python
+  ##
+  pyenv = python3.withPackages (p: with p; [
+    ##
+    # REPLs
+    ##
+    ipython
+    # ptpython
+
+    beancount
+    beancount_docverif
+    beancount_payeeverif
+    fava
+
+    black
+    dateutil
+    devtools
+    flake8
+    jinja2
+    jsonschema
+    markdown
+    numpy
+    pdfminer-six
+    pexpect
+    pip
+    ply
+    pyparsing
+    requests
+    ruamel_yaml
+    setuptools
+    sh
+    six
+    tabulate
+    twine
+    wheel
+    yamllint
+  ]);
+
   # A custom '.bashrc' (see bashrc/default.nix for details)
-  bashrc = callPackage ./bashrc {};
+  bashrc = callPackage ./bashrc { };
 
   # Git with config baked in
   git = import ./git { inherit nixpkgs symlinkJoin makeWrapper writeScriptBin ; };
@@ -32,7 +64,7 @@ let
   tmux = import ./tmux { inherit nixpkgs symlinkJoin makeWrapper writeText; };
 
   # Vim with a custom vimrc and set of packages
-  vim = import ./vim { inherit nixpkgs python; };
+  vim = import ./vim { inherit nixpkgs pyenv; };
 
   # The list of packages to be installed
   homies = [
@@ -192,59 +224,21 @@ let
       ##
       nixpkgs-review
 
-    ##
-    # packages that don't build on Darwin
-    ##
-    ] ++ lib.optionals (!stdenv.isDarwin) [
-      pahole
-      valgrind
+      pyenv
 
-      pinentry
+  ##
+  # packages that don't build on Darwin
+  ##
+  ] ++ lib.optionals (!stdenv.isDarwin) [
+    pahole
+    valgrind
 
-    ##
-    # python
-    ##
-    ] ++ (with python.pkgs; [
-      python
-
-      ##
-      # REPLs
-      ##
-      ipython
-      # ptpython
-
-      beancount
-      beancount_docverif
-      beancount_payeeverif
-      fava
-
-      black
-      dateutil
-      devtools
-      flake8
-      jinja2
-      jsonschema
-      markdown
-      numpy
-      pdfminer-six
-      pexpect
-      pip
-      ply
-      pyparsing
-      requests
-      ruamel_yaml
-      setuptools
-      sh
-      six
-      tabulate
-      twine
-      wheel
-      yamllint
+    pinentry
 
   ##
   # node, JSON
   ##
-  ]) ++ (with nodePackages; [
+  ] ++ (with nodePackages; [
       eslint
       prettier
 
