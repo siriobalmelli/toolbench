@@ -255,6 +255,10 @@ autocmd filetype python let
 autocmd filetype python let
 			\ b:ale_fixers = {'python': ['black']}
 
+autocmd filetype yaml let
+			\ b:ale_linters = {'yaml': ['yamllint']}
+autocmd filetype yaml let
+			\ b:ale_yaml_yamllint_options = '-d relaxed'
 autocmd filetype javascript,markdown,json,yaml let
 			\ b:ale_fixers = {'javascript': ['prettier'],
 							\ 'markdown': ['prettier'],
