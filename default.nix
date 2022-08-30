@@ -7,6 +7,9 @@
 
 with nixpkgs;
 
+# TODO: install patched hosts file (for when this migrates to HomeManager):
+# https://github.com/StevenBlack/hosts#nixos
+
 let
   gcc = nixpkgs.gcc.overrideAttrs ( oldAttrs: rec { meta.priority = 5; });
   clang = llvmPackages.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
