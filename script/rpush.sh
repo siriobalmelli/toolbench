@@ -1,10 +1,10 @@
 ##
 # rpush : rsync push
 # quick and dirty push script;
-# develop on one machine and building on another
+# develop on one machine and build on another
 #
 # 2022 Sirio Balmelli
 ##
-rsync -avhPe ssh --delete \
-	--exclude=.git --exclude='build_*' --exclude='build-*' \
-	./ "$1":"$(basename "$(realpath .)")"_rpush/
+REMOTE_DIR="$(basename "$(realpath .)")"_rpush
+git ls-files --recurse-submodules \
+	| rsync -avhPe ssh --files-from=- ./ "$1":"$REMOTE_DIR/"
