@@ -186,7 +186,6 @@
     },
     "Z\n\n\n\n\n\nALEFx",
     "X\n\n\n\n\n\nALEInf",
-    "N\n\n\n\n\n\nALENxt",
     {
       "c": "#90e872"
     },
@@ -196,9 +195,22 @@
     },
     "V",
     "B",
+    {
+      "c": "#f2ba4e"
+    },
+    "N\n\n\n\n\n\nALENxt",
+    {
+      "c": "#cccccc"
+    },
     "M",
     "<\n,",
-    ">\n.",
+    {
+      "c": "#ecf584"
+    },
+    "LnRef\n.",
+    {
+      "c": "#cccccc"
+    },
     "?\n/",
     {
       "w": 2.75

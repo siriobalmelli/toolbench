@@ -312,6 +312,12 @@ let g:EasyMotion_smartcase = 1
 noremap <c-s> :Tabularize /\|<CR>
 
 
+" Bookmarking
+" Copy the current 'file :line' to the clipboard.
+" This can later be pasted and used with gF to jump (eg for indexes)
+nnoremap <Leader>. :call setreg('"', @%." :".line('.')."\n")<CR>
+
+
 " NAVIGATION
 " movement shortcuts
 nnoremap <C-h> gT

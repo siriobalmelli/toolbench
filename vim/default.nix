@@ -23,6 +23,7 @@ nixpkgs.neovim.override {
   ]);
 
   configure = {
+    # TODO: replace with nvim-tree-lua or similar?
     # netrw expanded
     packages.vim-vinegar.start = [ vim-vinegar ];
 
