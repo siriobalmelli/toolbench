@@ -10,6 +10,9 @@ with nixpkgs;
 # TODO: install patched hosts file (for when this migrates to HomeManager):
 # https://github.com/StevenBlack/hosts#nixos
 
+# TODO: set 'PreserveJobHistory Off' in /etc/cups/cupsd.conf
+# and then run 'cancel -a -x' to remove all previous print jobs.
+
 let
   gcc = nixpkgs.gcc.overrideAttrs ( oldAttrs: rec { meta.priority = 5; });
   clang = llvmPackages.clang.overrideAttrs ( oldAttrs: rec { meta.priority = 6; });
@@ -81,6 +84,7 @@ let
       shellcheck
       bashrc
       # irssi  # irc!
+      obsidian
       tbh
       tmux
       vim
@@ -168,6 +172,7 @@ let
       inetutils  # contains telnet
       ipcalc
       mtr
+      netdiscover
       nmap  # contains ncat
       openssh
       wget
