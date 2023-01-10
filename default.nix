@@ -112,6 +112,7 @@ let
       git-quick-stats
       # git-town  # seems interesting, doesn't build right now
       mr  # TODO: deprecate
+      tig
 
       # compilers and wrappers
       binutils-unwrapped  # strings
