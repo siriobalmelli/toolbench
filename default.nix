@@ -170,11 +170,17 @@ let
       ##
       # network
       ##
-      inetutils  # contains telnet
       ipcalc
       mtr
       netdiscover
       nmap  # contains ncat
+
+      ##
+      # inet protocols
+      ##
+      curl
+      httpie
+      inetutils  # contains telnet
       openssh
       wget
 
@@ -187,7 +193,6 @@ let
       colordiff
       coreutils
       cscope
-      curl
       dos2unix
       dosfstools  # mkdosfs
       entr
