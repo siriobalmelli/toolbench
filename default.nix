@@ -90,17 +90,25 @@ let
       vim
       wezterm  # finally, a performant cross-platform terminal
 
+      nushell  # the future?
+
+      cmatrix  # why not
+
       # text formatting and alternatives to basic utilities
+      bandwhich  # diagnose network usage
       bat
       bc
+      bottom  # 'btm' replaces 'top'
+      exa  # replace 'ls'
       fd  # replaces earlier 'findd' alias
       file
       gomplate  # one templating tool to rule them all
-      helix  # TODO: replace vim
       hyperfine  # preferrable to 'time'
-      ripgrep  # replaces earlier 'grepd' alias
+      procs  # replace 'ps'
       pv  # monitor data progress through a pipe
+      ripgrep  # replaces earlier 'grepd' alias
       rename  # perl file rename
+      sd  # replacement for sed
       watchexec  # execute on file changes
       xjobs  # xargs, but make it a job manager
 
@@ -171,6 +179,7 @@ let
       # network
       ##
       ipcalc
+      iperf3
       mtr
       netdiscover
       nmap  # contains ncat
@@ -212,7 +221,6 @@ let
       lzip  # .lz files
       lzma  # xz, unxz
       moreutils  # vidir
-      ncdu
       ncurses
       ncurses.dev
       neofetch
