@@ -135,13 +135,17 @@ let
       # crypto
       ##
       certbot
-      gnupg
       gopass
       paperkey
       pass  # TODO: replace with gopass entirely
       pinentry
       scrypt
       step-cli
+
+      gnupg
+      pinentry_mac
+      # TODO: add this default so we don't get prompted for keychain save on pinentry
+      # defaults write org.gpgtools.common UseKeychain NO
 
       ##
       # cryptocurrencies
@@ -215,7 +219,6 @@ let
       gnused
       gnutar
       htop
-      jq
       less
       libarchive  # bsdtar
       lzip  # .lz files
@@ -234,6 +237,9 @@ let
       watch
       which
       xorriso
+
+      jq
+      yq
 
       ##
       # Clouds

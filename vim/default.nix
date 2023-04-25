@@ -8,6 +8,8 @@ with vimPlugins;
 # for how to better/further override neovim
 nixpkgs.neovim.override {
 
+  # TODO: add copilot
+
   viAlias = true;
   vimAlias = true;
   withPython3 = true;
