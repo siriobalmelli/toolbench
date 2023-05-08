@@ -244,7 +244,7 @@ let
       ##
       # Clouds
       ##
-      # awscli
+      awscli2
       # google-cloud-sdk
       # kubectl
 

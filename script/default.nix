@@ -42,9 +42,6 @@
       | sed -nE 's/(.*): text\/.*/\1/p' \
       | xargs -P$(nproc) -I{} dos2unix -v -s "{}"
   '';
-  tbh_wezterm = writeShellScriptBin "tbh_wezterm" ''
-    wezterm & disown
-  '';
   tbh_zfsmon = writeShellScriptBin "tbh_zfsmon" ''
     watch -- 'zpool iostat -yl 1 1; echo; zfs get usedbydataset,refcompressratio'
   '';
