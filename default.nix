@@ -255,6 +255,12 @@ let
 
       pyenv
 
+      # diagrams
+      d2
+
+      ## TODO: tiling WM
+      # amethyst
+
   ##
   # packages that don't build on Darwin
   ##

@@ -58,7 +58,7 @@ I recommend you fork unless you want my workflow preferences overriding yours.
     - As [Nix](https://nixos.org/) continues growing, this will work
       seamlessly on other POSIX systems, with no reconfiguration or fussing.
     - Worst-case scenario for moving to a new kernel+ABI is having to contribute
-      to the so-called [stdnev](https://nixos.org/nixos/nix-pills/fundamentals-of-stdenv.html)
+      to the so-called [stdenv](https://nixos.org/nixos/nix-pills/fundamentals-of-stdenv.html)
       port.
     - The GNU people are on board, with [guix](https://www.gnu.org/software/guix/).
 
