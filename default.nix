@@ -221,6 +221,7 @@ let
       htop
       less
       libarchive  # bsdtar
+      librsvg
       lzip  # .lz files
       lzma  # xz, unxz
       moreutils  # vidir
