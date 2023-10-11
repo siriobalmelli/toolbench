@@ -161,7 +161,7 @@ let
       gnumake
       meson
       ninja
-      pkgconfig
+      pkg-config
 
       ##
       # data transfer

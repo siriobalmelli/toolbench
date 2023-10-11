@@ -121,7 +121,7 @@ alias cat=bat
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # hack C compilation to see installed libraries
-export PKG_CONFIG_PATH=~/.nix-profile/lib/pkgconfig
+export PKG_CONFIG_PATH=~/.nix-profile/lib/pkg-config
 export CPATH=~/.nix-profile/include/
 export LIBRARY_PATH=~/.nix-profile/lib
 
