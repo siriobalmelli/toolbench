@@ -99,7 +99,7 @@ let
       bat
       bc
       bottom  # 'btm' replaces 'top'
-      exa  # replace 'ls'
+      eza  # replace 'ls'
       fd  # replaces earlier 'findd' alias
       file
       gomplate  # one templating tool to rule them all
