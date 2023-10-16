@@ -262,6 +262,7 @@ let
 
       ## TODO: tiling WM
       # amethyst
+      # yabai
 
   ##
   # packages that don't build on Darwin
