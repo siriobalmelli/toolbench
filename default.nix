@@ -174,10 +174,12 @@ let
       ##
       # visual
       ##
+      d2  # diagrams
       imagemagickBig  # 'convert' utility
       # mscgen  # not used
       qrencode
       visidata
+
 
       ##
       # network
@@ -245,19 +247,18 @@ let
       ##
       # Clouds
       ##
-      awscli2
+      # awscli2
       # google-cloud-sdk
       # kubectl
+      # openstackclient
 
       ##
       # nix
       ##
+      alejandra  # nix formatting
       nixpkgs-review
 
       pyenv
-
-      # diagrams
-      d2
 
       ## TODO: tiling WM
       # amethyst

@@ -250,6 +250,9 @@ autocmd filetype c,cpp let
 autocmd filetype c,cpp let
 			\ b:ale_fixers = {'c': ['clang-format'], 'cpp': ['clang-format']}
 
+autocmd filetype nix let
+			\ b:ale_fixers = {'nix': ['alejandra']}
+
 autocmd filetype python let
 			\ b:ale_linters = {'python': ['flake8']}
 autocmd filetype python let
