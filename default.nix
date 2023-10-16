@@ -80,7 +80,7 @@ let
       replacement  # dogfood
 
       # terminals editors and hacks
-      bash
+      bashInteractive
       shellcheck
       bashrc
       # irssi  # irc!
