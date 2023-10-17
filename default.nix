@@ -175,7 +175,6 @@ let
       # visual
       ##
       d2  # diagrams
-      imagemagickBig  # 'convert' utility
       # mscgen  # not used
       qrencode
       visidata
@@ -198,6 +197,14 @@ let
       inetutils  # contains telnet
       openssh
       wget
+
+      ##
+      # document editing
+      ##
+      imagemagickBig  # 'convert' utility
+      ghostscript
+      pandoc
+      texlive.combined.scheme-full
 
       ##
       # standard packages
@@ -230,10 +237,8 @@ let
       ncurses
       ncurses.dev
       neofetch
-      pandoc
       pwgen
       speedtest-cli
-      texlive.combined.scheme-full
       tree
       unzip  # convenient
       vale  # command line linter for prose
