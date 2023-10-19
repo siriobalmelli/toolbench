@@ -138,12 +138,10 @@ let
       gopass
       paperkey
       pass  # TODO: replace with gopass entirely
-      pinentry
       scrypt
       step-cli
 
       gnupg
-      pinentry_mac
       # TODO: add this default so we don't get prompted for keychain save on pinentry
       # defaults write org.gpgtools.common UseKeychain NO
 
@@ -272,11 +270,17 @@ let
   ##
   # packages that don't build on Darwin
   ##
-  ] ++ lib.optionals (!stdenv.isDarwin) [
+  ] ++ lib.optionals (stdenv.isLinux) [
     pahole
     valgrind
 
     pinentry
+
+  ##
+  # packages that don't build on Linux
+  ##
+  ] ++ lib.optionals (stdenv.isDarwin) [
+      pinentry_mac
 
   ##
   # node, JSON
