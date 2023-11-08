@@ -23,7 +23,8 @@
     set -e
     pushd "$HOME/repos/foss/nixpkgs"
     trap popd EXIT
-    GITHUB_TOKEN="$(cat "$HOME/.ssh/github_token")" nix-review pr --post-result --no-shell $1
+    . ~/.ssh/environments/github.sh
+    nix-review pr --post-result --no-shell $1
   '';
   tbh_rpush = writeShellScriptBin "tbh_rpush"
     (builtins.readFile ./rpush.sh);
