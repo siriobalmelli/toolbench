@@ -54,6 +54,10 @@ with nixpkgs;
         twine
         wheel
         yamllint
+
+        # nrf_sniffer
+        psutil
+        pyserial
       ]);
 
     # A custom '.bashrc' (see bashrc/default.nix for details)
