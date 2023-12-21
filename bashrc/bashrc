@@ -48,11 +48,14 @@ alias bch='bean-check'
 alias btcblock='echo $(bitcoin-cli getblockcount 2>&1)/$(wget -O - http://blockchain.info/q/getblockcount 2>/dev/null)'
 alias btcinfo='bitcoin-cli getwalletinfo'
 
-nixpub()
+d2watch()
 {
-	nice -n 10 -- \
-		nix-build --tarball-ttl 0 --max-jobs auto --cores 0 --keep-going "$@" \
-		| cachix push siriobalmelli-nixpkgs
+	INFL="$1"
+	OUTFL="${INFL%.d2}.svg"
+	watchexec -w "$INFL" "\
+		d2 '$INFL' '$OUTFL' \
+		&& open --background -a /Applications/Safari.app/Contents/MacOS/Safari '$OUTFL' \
+	"
 }
 
 alias cht='cht.sh'
@@ -65,6 +68,13 @@ alias ll='ls -lha'
 alias lsusb='[ $(uname) = "Darwin" ] && ioreg -p IOUSB || lsusb'
 
 alias mr='time mr -j$(nproc) --stats'
+
+nixpub()
+{
+	nice -n 10 -- \
+		nix-build --tarball-ttl 0 --max-jobs auto --cores 0 --keep-going "$@" \
+		| cachix push siriobalmelli-nixpkgs
+}
 
 alias tmp='cd $(mktemp -d)'
 
